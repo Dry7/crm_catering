@@ -139,9 +139,12 @@ class AcachaAdminLTELaravelTest extends TestCase
     {
         $user = factory(App\User::class)->create();
 
-        $this->actingAs($user)
-            ->visit('/logout')
-            ->seePageIs('/');
+        $response = $this->actingAs($user)
+            ->call('POST', '/logout', [
+                '_token' => csrf_token()
+            ]);
+
+        $this->assertEquals(302, $response->getStatusCode());
     }
 
     /**

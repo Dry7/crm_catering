@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
+        'Collective\Html\HtmlServiceProvider',
 
         //
 
@@ -228,6 +229,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
+        'Form' => 'Collective\Html\FormFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
 
     ],
 

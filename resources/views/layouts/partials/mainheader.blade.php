@@ -148,7 +148,13 @@
                                     <a href="#" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.signout') }}</a>
+                                    {!! Form::open([
+                                        'url' => 'logout',
+                                        'name' => 'logout-form',
+                                        'id' => 'logout-form'
+                                    ]) !!}
+                                    {!! Form::submit(trans('adminlte_lang::message.signout'), ['class' => 'btn btn-default btn-flat']) !!}
+                                    {!! Form::close() !!}
                                 </div>
                             </li>
                         </ul>
