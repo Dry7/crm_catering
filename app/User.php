@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'surname', 'name', 'patronymic', 'email', 'password', 'job', 'active', 'work_hours'
     ];
 
     /**
@@ -26,4 +26,41 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @brief Return string label for job
+     *
+     * @return string
+     */
+    public function getJobLabelAttribute()
+    {
+        switch ($this->attributes['job']) {
+            case 'admin': return 'Администратор'; break;
+            case 'manager': return 'Менеджер'; break;
+            case 'cook': return 'Повар'; break;
+        }
+
+        return '';
+    }
+
+    /**
+     * @brief Full name
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        $name = [];
+
+        if ($this->attributes['surname']    != '') { $name[] = $this->attributes['surname'];    }
+        if ($this->attributes['name']       != '') { $name[] = $this->attributes['name'];       }
+        if ($this->attributes['patronymic'] != '') { $name[] = $this->attributes['patronymic']; }
+
+        return implode(' ', $name);
+    }
+
+    public function isAdmin()
+    {
+        return $this->job === 'admin';
+    }
 }

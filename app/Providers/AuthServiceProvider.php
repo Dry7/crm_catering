@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        \Auth::provider('plain', function ($app, array $config) {
+            return new PlainUserProvider($app['hash'], $config['model']);
+        });
     }
 }
