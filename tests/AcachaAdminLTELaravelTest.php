@@ -18,9 +18,7 @@ class AcachaAdminLTELaravelTest extends TestCase
     public function testLandingPage()
     {
         $this->visit('/')
-             ->see('Acacha')
-             ->see('adminlte-laravel')
-             ->see('Pratt');
+             ->see('Login');
     }
 
     /**
@@ -58,10 +56,10 @@ class AcachaAdminLTELaravelTest extends TestCase
      */
     public function testLogin()
     {
-        $user = factory(App\User::class)->create(['password' => Hash::make('passw0RD')]);
+        $user = factory(App\User::class)->create(['username' => 'username', 'password' => 'passw0RD']);
 
         $this->visit('/login')
-            ->type($user->email, 'email')
+            ->type('username', 'username')
             ->type('passw0RD', 'password')
             ->press('Sign In')
             ->seePageIs('/home')
@@ -76,10 +74,10 @@ class AcachaAdminLTELaravelTest extends TestCase
     public function testLoginRequiredFields()
     {
         $this->visit('/login')
-            ->type('', 'email')
+            ->type('', 'username')
             ->type('', 'password')
             ->press('Sign In')
-            ->see('The email field is required')
+            ->see('The username field is required')
             ->see('The password field is required');
     }
 

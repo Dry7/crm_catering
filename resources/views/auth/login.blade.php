@@ -27,8 +27,7 @@
     <form action="{{ url('/login') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="email"/>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <input type="text" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="username"/>
         </div>
         <div class="form-group has-feedback">
             <input type="password" class="form-control" placeholder="{{ trans('adminlte_lang::message.password') }}" name="password"/>
@@ -53,21 +52,10 @@
     <a href="{{ url('/password/reset') }}">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
     <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.registermember') }}</a>
 
-</div><!-- /.login-box-body -->
+</div>
 
-</div><!-- /.login-box -->
+</div>
 
-    @include('layouts.partials.scripts_auth')
-
-    <script>
-        $(function () {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' // optional
-            });
-        });
-    </script>
 </body>
 
 @endsection
