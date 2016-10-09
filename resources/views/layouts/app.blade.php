@@ -28,8 +28,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
-    @include('layouts.partials.controlsidebar')
-
 </div><!-- ./wrapper -->
 
 @section('scripts')
