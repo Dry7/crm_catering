@@ -25,5 +25,4 @@ class PlainUserProvider extends BaseUserProvider
 
         return $plain === $user->getAuthPassword();
     }
-
 }

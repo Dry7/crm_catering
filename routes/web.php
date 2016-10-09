@@ -13,5 +13,4 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::resource('staff', 'StaffController');
     Route::post('/staff/save-active', 'StaffController@saveActive')->name('staff.save-active');
 
-
 });
