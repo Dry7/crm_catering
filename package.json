@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "scripts": {
+    "prod": "gulp --production",
+    "dev": "gulp watch"
+  },
+  "devDependencies": {
+    "admin-lte": "^2.3.6",
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.6.3",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-less": "^3.1.0",
+    "gulp-replace": "^0.5.4",
+    "ionicons": "^3.0.0",
+    "jquery": "^3.1.0",
+    "laravel-elixir": "^6.0.0-9",
+    "laravel-elixir-vue-2": "^0.2.0",
+    "laravel-elixir-webpack-official": "^1.0.2",
+    "lodash": "^4.16.2",
+    "merge-stream": "^1.0.0",
+    "vue": "^2.0.1",
+    "vue-resource": "^1.0.3"
+  },
+  "dependencies": {
+    "jquery-mask-plugin": "^1.14.0"
+  }
+}
