@@ -28,7 +28,7 @@ class AcachaAdminLTELaravelTest extends TestCase
      */
     public function testLandingPageWithUserLogged()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(App\User::class)->create(['active' => 1, 'work_hours' => 0]);
 
         $this->actingAs($user)
             ->visit('/')
@@ -121,7 +121,7 @@ class AcachaAdminLTELaravelTest extends TestCase
      */
     public function testHomePageForAuthenticatedUsers()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(App\User::class)->create(['active' => 1, 'work_hours' => 0]);
 
         $this->actingAs($user)
             ->visit('/home')
@@ -155,39 +155,6 @@ class AcachaAdminLTELaravelTest extends TestCase
         $this->get('asdasdjlapmnnk')
             ->seeStatusCode(404)
             ->see('404');
-    }
-
-    /**
-     * Test user registration.
-     *
-     * @return void
-     */
-    public function testNewUserRegistration()
-    {
-        $this->visit('/register')
-            ->type('Sergi Tur Badenas', 'name')
-            ->type('sergiturbadenas@gmail.com', 'email')
-            ->check('terms')
-            ->type('passw0RD', 'password')
-            ->type('passw0RD', 'password_confirmation')
-            ->press('Register')
-            ->seePageIs('/home')
-            ->seeInDatabase('users', ['email' => 'sergiturbadenas@gmail.com',
-                                      'name'  => 'Sergi Tur Badenas', ]);
-    }
-
-    /**
-     * Test required fields on registration page.
-     *
-     * @return void
-     */
-    public function testRequiredFieldsOnRegistrationPage()
-    {
-        $this->visit('/register')
-            ->press('Register')
-            ->see('The name field is required')
-            ->see('The email field is required')
-            ->see('The password field is required');
     }
 
     /**

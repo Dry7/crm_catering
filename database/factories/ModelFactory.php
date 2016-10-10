@@ -17,7 +17,28 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => $password ?: $password = 'secret',
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Models\Client::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+
+            'user_id'      => rand(1, 100),
+            'name'         => $faker->company,
+            'phone_work'   => $faker->phoneNumber,
+            'phone_mobile' => $faker->tollFreePhoneNumber,
+            'fio'          => $faker->name,
+            'job'          => $faker->jobTitle,
+            'birthday'     => $faker->date,
+            'email'        => $faker->email,
+            'events'       => $faker->text,
+            'site'         => $faker->domainName,
+            'address'      => $faker->address,
+            'description'  => $faker->text,
+            'hobby'        => $faker->text
     ];
 });

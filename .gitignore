@@ -6,3 +6,5 @@ Homestead.json
 Homestead.yaml
 .env
 /.vagrant/
+/public/js/scripts.min.js
+/public/css/styles.min.css

@@ -20,9 +20,10 @@
 
         <ul class="sidebar-menu">
             <li class="header">Меню</li>
-            @if(Auth::user()->isAdmin())
-            <li class="active"><a href="{{ url('staff') }}"><i class='fa fa-user'></i> <span>Сотрудники</span></a></li>
+            @if(is_object(Auth::user()) and Auth::user()->isAdmin())
+            <li class="active"><a href="{{ route('staff.index') }}"><i class='fa fa-user'></i> <span>Сотрудники</span></a></li>
             @endif
+            <li><a href="{{ route('clients.index') }}"><i class='fa fa-user'></i> <span>Клиенты</span></a></li>
         </ul>
     </section>
 </aside>

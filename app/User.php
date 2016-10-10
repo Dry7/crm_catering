@@ -52,9 +52,9 @@ class User extends Authenticatable
     {
         $name = [];
 
-        if ($this->attributes['surname']    != '') { $name[] = $this->attributes['surname'];    }
-        if ($this->attributes['name']       != '') { $name[] = $this->attributes['name'];       }
-        if ($this->attributes['patronymic'] != '') { $name[] = $this->attributes['patronymic']; }
+        if (@$this->attributes['surname']    != '') { $name[] = $this->attributes['surname'];    }
+        if (@$this->attributes['name']       != '') { $name[] = $this->attributes['name'];       }
+        if (@$this->attributes['patronymic'] != '') { $name[] = $this->attributes['patronymic']; }
 
         return implode(' ', $name);
     }

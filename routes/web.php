@@ -8,9 +8,13 @@ Route::get('/', function () {
     }
 });
 
-Route::group(['middleware' => ['auth', 'admin']], function() {
-    /** Staff */
-    Route::resource('staff', 'StaffController');
-    Route::post('/staff/save-active', 'StaffController@saveActive')->name('staff.save-active');
+Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => 'admin'], function() {
+        /** Staff */
+        Route::resource('staff', 'StaffController');
+        Route::post('/staff/save-active', 'StaffController@saveActive')->name('staff.save-active');
+    });
 
+    /** Clients */
+    Route::resource('clients', 'ClientController');
 });

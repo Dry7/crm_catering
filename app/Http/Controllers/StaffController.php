@@ -35,7 +35,7 @@ class StaffController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show all users
      *
      * @return string
      */
@@ -82,7 +82,7 @@ class StaffController extends Controller
     {
         $this->users->create($request->except(['_token']));
 
-        return redirect('staff');
+        return redirect()->route('staff.index');
     }
 
     /**
@@ -107,7 +107,7 @@ class StaffController extends Controller
     {
         $this->users->update($request->except(['_token']), $id);
 
-        return redirect('/staff');
+        return redirect()->route('staff.index');
     }
 
     /**
@@ -120,7 +120,7 @@ class StaffController extends Controller
     {
         $this->users->delete($id);
 
-        return redirect('/staff');
+        return redirect()->route('staff.index');
     }
 
     /**
@@ -135,6 +135,6 @@ class StaffController extends Controller
             $this->users->update(['active' => (int)$active], $user_id);
         }
 
-        return redirect('/staff');
+        return redirect()->route('staff.index');
     }
 }

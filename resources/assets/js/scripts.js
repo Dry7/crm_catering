@@ -10,4 +10,14 @@ $(function () {
             url: "plugins/datatables/languages/ru.json"
         }
     });
+
+    $('.datepicker').datepicker({
+        format: 'dd.mm.yyyy',
+        language: 'ru',
+        autoclose: true
+    });
+
+    $('.datepicker').mask("00.00.0000", {
+        placeholder: "__.__.____"
+    });
 });
