@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('birthday', 'День рождения') !!}
-        {!! Form::text('birthday', $client->birthday->format('d.m.Y'), ['class' => 'form-control datepicker', 'id' => 'birthday', 'placeholder' => 'Введите день рождения']) !!}
+        {!! Form::text('birthday', $client->birthday !== null ? $client->birthday->format('d.m.Y') : '', ['class' => 'form-control datepicker', 'id' => 'birthday', 'placeholder' => 'Введите день рождения']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('email', 'E-mail *') !!}

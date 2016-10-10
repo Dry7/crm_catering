@@ -94,7 +94,7 @@ class ClientsTest extends TestCase
             ->type('phone_mobile',  'phone_mobile')
             ->type('fio',           'fio')
             ->type('job',           'job')
-            ->type('1991-07-16',    'birthday')
+            ->type('16.07.1991',    'birthday')
             ->type('email@test.ru', 'email')
             ->type('events',        'events')
             ->type('site',          'site')
@@ -109,7 +109,6 @@ class ClientsTest extends TestCase
                 'phone_mobile' => 'phone_mobile',
                 'fio'          => 'fio',
                 'job'          => 'job',
-                'birthday'     => '1991-07-16',
                 'email'        => 'email@test.ru',
                 'events'       => 'events',
                 'site'         => 'site',
@@ -129,7 +128,7 @@ class ClientsTest extends TestCase
         $this->actingAs($user)->visit('/clients/create')
             ->see('Создать клиента')
             ->type('phone_mobile',  'phone_mobile')
-            ->type('1991-07-16',    'birthday')
+            ->type('16.07.1991',    'birthday')
             ->type('events',        'events')
             ->type('site',          'site')
             ->type('address',       'address')
@@ -138,18 +137,17 @@ class ClientsTest extends TestCase
             ->press('Сохранить')
             ->dontSeeInDatabase('clients', [
                 'phone_mobile' => 'phone_mobile',
-                'birthday'     => '1991-07-16',
                 'events'       => 'events',
                 'site'         => 'site',
                 'address'      => 'address',
                 'description'  => 'description',
                 'hobby'        => 'hobby'
             ])
-            ->see('The name field is required.')
-            ->see('The phone work field is required.')
-            ->see('The fio field is required.')
-            ->see('The job field is required.')
-            ->see('The email field is required.');
+            ->see('Поле name обязательно для заполнения.')
+            ->see('Поле phone work обязательно для заполнения.')
+            ->see('Поле fio обязательно для заполнения.')
+            ->see('Поле job обязательно для заполнения.')
+            ->see('Поле email обязательно для заполнения.');
     }
 
     /**
@@ -177,7 +175,7 @@ class ClientsTest extends TestCase
             'phone_mobile' => 'phone_mobile',
             'fio'          => 'fio',
             'job'          => 'job',
-            'birthday'     => '1991-07-16',
+            'birthday'     => '16.07.1991',
             'email'        => 'email@test.ru',
             'events'       => 'events',
             'site'         => 'site',
@@ -193,7 +191,7 @@ class ClientsTest extends TestCase
             ->see('phone_mobile')
             ->see('fio')
             ->see('job')
-            ->see('1991-07-16')
+            ->see('16.07.1991')
             ->see('email@test.ru')
             ->see('events')
             ->see('site')
@@ -205,7 +203,7 @@ class ClientsTest extends TestCase
             ->type('phone_mobile2',  'phone_mobile')
             ->type('fio2',           'fio')
             ->type('job2',           'job')
-            ->type('1991-07-17',     'birthday')
+            ->type('17.07.1991',     'birthday')
             ->type('email@test.ru2', 'email')
             ->type('events2',        'events')
             ->type('site2',          'site')
@@ -221,7 +219,6 @@ class ClientsTest extends TestCase
                 'phone_mobile' => 'phone_mobile2',
                 'fio'          => 'fio2',
                 'job'          => 'job2',
-                'birthday'     => '1991-07-17',
                 'email'        => 'email@test.ru2',
                 'events'       => 'events2',
                 'site'         => 'site2',
@@ -246,7 +243,7 @@ class ClientsTest extends TestCase
             'phone_mobile' => 'phone_mobile',
             'fio'          => 'fio',
             'job'          => 'job',
-            'birthday'     => '1991-07-16',
+            'birthday'     => '16.07.1991',
             'email'        => 'email@test.ru',
             'events'       => 'events',
             'site'         => 'site',
@@ -271,11 +268,11 @@ class ClientsTest extends TestCase
                 'job'        => '',
                 'email'      => ''
             ])
-            ->see('The name field is required.')
-            ->see('The phone work field is required.')
-            ->see('The fio field is required.')
-            ->see('The job field is required.')
-            ->see('The email field is required.');
+            ->see('Поле name обязательно для заполнения.')
+            ->see('Поле phone work обязательно для заполнения.')
+            ->see('Поле fio обязательно для заполнения.')
+            ->see('Поле job обязательно для заполнения.')
+            ->see('Поле email обязательно для заполнения.');
     }
 
 
@@ -330,7 +327,7 @@ class ClientsTest extends TestCase
             'phone_mobile' => 'phone_mobile',
             'fio'          => 'fio',
             'job'          => 'job',
-            'birthday'     => '1991-07-16',
+            'birthday'     => '16.07.1991',
             'email'        => 'email@test.ru',
             'events'       => 'events',
             'site'         => 'site',

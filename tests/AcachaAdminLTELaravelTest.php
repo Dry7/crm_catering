@@ -46,7 +46,7 @@ class AcachaAdminLTELaravelTest extends TestCase
     public function testLoginPage()
     {
         $this->visit('/login')
-            ->see('Sign in to start your session');
+            ->see('Войти');
     }
 
     /**
@@ -61,7 +61,7 @@ class AcachaAdminLTELaravelTest extends TestCase
         $this->visit('/login')
             ->type('username', 'username')
             ->type('passw0RD', 'password')
-            ->press('Sign In')
+            ->press('Войти')
             ->seePageIs('/home')
             ->see($user->name);
     }
@@ -76,9 +76,9 @@ class AcachaAdminLTELaravelTest extends TestCase
         $this->visit('/login')
             ->type('', 'username')
             ->type('', 'password')
-            ->press('Sign In')
-            ->see('The username field is required')
-            ->see('The password field is required');
+            ->press('Войти')
+            ->see('Поле username обязательно для заполнения.')
+            ->see('Поле password обязательно для заполнения.');
     }
 
     /**
@@ -89,7 +89,7 @@ class AcachaAdminLTELaravelTest extends TestCase
     public function testRegisterPage()
     {
         $this->visit('/register')
-            ->see('Register a new membership');
+            ->seePageIs('/login');
     }
 
     /**
@@ -100,7 +100,7 @@ class AcachaAdminLTELaravelTest extends TestCase
     public function testPasswordResetPage()
     {
         $this->visit('/password/reset')
-            ->see('Reset Password');
+            ->seePageIs('/login');
     }
 
     /**
@@ -155,33 +155,5 @@ class AcachaAdminLTELaravelTest extends TestCase
         $this->get('asdasdjlapmnnk')
             ->seeStatusCode(404)
             ->see('404');
-    }
-
-    /**
-     * Test send password reset.
-     *
-     * @return void
-     */
-    public function testSendPasswordReset()
-    {
-        $user = factory(App\User::class)->create();
-
-        $this->visit('password/reset')
-            ->type($user->email, 'email')
-            ->press('Send Password Reset Link')
-            ->see('We have e-mailed your password reset link!');
-    }
-
-    /**
-     * Test send password reset user not exists.
-     *
-     * @return void
-     */
-    public function testSendPasswordResetUserNotExists()
-    {
-        $this->visit('password/reset')
-            ->type('notexistingemail@gmail.com', 'email')
-            ->press('Send Password Reset Link')
-            ->see('There were some problems with your input');
     }
 }

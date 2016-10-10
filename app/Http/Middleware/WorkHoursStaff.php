@@ -38,7 +38,7 @@ class WorkHoursStaff
     {
         if (Carbon::now()->hour < 10) {
             return false;
-        } elseif (Carbon::now()->hour < 18) {
+        } elseif (Carbon::now()->hour >= 18) {
             return false;
         } elseif (Carbon::now()->dayOfWeek == Carbon::SATURDAY) {
             return false;

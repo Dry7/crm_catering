@@ -129,8 +129,8 @@ class StaffTest extends TestCase
                 'active'     => 1,
                 'work_hours' => 1
             ])
-            ->see('The username field is required.')
-            ->see('The password field is required.');
+            ->see('Поле username обязательно для заполнения.')
+            ->see('Поле password обязательно для заполнения.');
     }
 
     /**
@@ -257,8 +257,8 @@ class StaffTest extends TestCase
                 'username' => '',
                 'password' => ''
             ])
-            ->see('The username field is required.')
-            ->see('The password field is required.');
+            ->see('Поле username обязательно для заполнения.')
+            ->see('Поле password обязательно для заполнения.');
     }
 
 
