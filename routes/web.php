@@ -18,3 +18,11 @@ Route::group(['middleware' => ['auth']], function() {
     /** Clients */
     Route::resource('clients', 'ClientController');
 });
+
+/**
+ * Redirect auth routes
+ */
+Route::any('register',               function () { return redirect()->route('login'); });
+Route::any('password/reset',         function () { return redirect()->route('login'); });
+Route::any('password/email',         function () { return redirect()->route('login'); });
+Route::any('password/reset/{token}', function () { return redirect()->route('login'); });
