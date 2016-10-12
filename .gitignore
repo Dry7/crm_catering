@@ -9,3 +9,4 @@ Homestead.yaml
 /public/js/scripts.min.js
 /public/css/styles.min.css
 /storage/id_rsa
+/log/
