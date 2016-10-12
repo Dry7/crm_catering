@@ -19,7 +19,7 @@
         @endif
 
         <ul class="sidebar-menu">
-            <li class="header">Меню {{ \Request::route()->getName() }}</li>
+            <li class="header">Меню</li>
             @if(is_object(Auth::user()) and Auth::user()->isAdmin())
             <li{!! \Request::route()->getName() == 'staff.index' ? ' class="active"' : '' !!}><a href="{{ route('staff.index') }}"><i class='fa fa-user'></i> <span>Сотрудники</span></a></li>
             @endif
