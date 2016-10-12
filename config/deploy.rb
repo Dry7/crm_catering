@@ -54,9 +54,21 @@ namespace :laravel do
     end
 end
 
+namespace :phpunit do
+    desc "Run tests"
+    task :run do
+        on roles(:app), in: :sequence, wait: 5 do
+            within release_path do
+                execute "phpunit"
+            end
+        end
+    end
+end
+
 namespace :deploy do
     before :updated, 'gulp'
     before "deploy:updated", "deploy:set_permissions:chmod"
 
     after :published, "laravel:migrate"
+    after :published, "phpunit:run"
 end
