@@ -29,6 +29,6 @@ class Client extends Model
 
     public function setBirthdayAttribute($value)
     {
-        $this->attributes['birthday'] = Carbon::createFromFormat('d.m.Y', $value);
+        $this->attributes['birthday'] = (string)$value != '' ? Carbon::createFromFormat('d.m.Y', $value) : null;
     }
 }
