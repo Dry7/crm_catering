@@ -15,7 +15,7 @@ class BladeServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('weight', function ($expression) {
-            return '<?= ' . $expression . '; ?> гр.';
+            return '<?= number_format((int)' . $expression . ', 0, \'.\', \' \') ; ?> гр.';
         });
 
         Blade::directive('price', function ($expression) {

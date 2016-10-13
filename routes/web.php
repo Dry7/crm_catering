@@ -20,6 +20,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     /** Services */
     Route::resource('services', 'ServiceController');
+
+    /** Products */
+    Route::resource('products', 'ProductController');
 });
 
 /**
