@@ -12,8 +12,6 @@
 */
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
-
     return [
         'name' => $faker->firstName,
         'email' => $faker->unique()->safeEmail,
@@ -29,8 +27,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Models\Client::class, function (Faker\Generator $faker) {
-    static $password;
-
     return [
 
             'user_id'      => rand(1, 100),
@@ -46,5 +42,13 @@ $factory->define(App\Models\Client::class, function (Faker\Generator $faker) {
             'address'      => $faker->address,
             'description'  => $faker->text,
             'hobby'        => $faker->text
+    ];
+});
+
+$factory->define(App\Models\Service::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->company,
+        'weight' => $faker->numberBetween(200, 1000),
+        'price'  => $faker->randomFloat(2, 100, 2000)
     ];
 });
