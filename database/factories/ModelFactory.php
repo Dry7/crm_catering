@@ -52,3 +52,20 @@ $factory->define(App\Models\Service::class, function (Faker\Generator $faker) {
         'price'  => $faker->randomFloat(2, 100, 2000)
     ];
 });
+
+$factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
+    return [
+        'id'         => $faker->numberBetween(1, 1000),
+        'source'     => ['file', 'hand'][rand(0, 1)],
+        'section1'   => $faker->numberBetween(1, 5),
+        'section2'   => $faker->numberBetween(1, 5),
+        'section3'   => $faker->numberBetween(1, 5),
+        'section4'   => $faker->numberBetween(1, 5),
+        'kitchen_id' => $faker->numberBetween(1, 3),
+        'type_id'    => $faker->numberBetween(1, 4),
+        'name'       => $faker->firstName,
+        'name_en'    => $faker->firstName,
+        'weight'     => $faker->numberBetween(200, 1000),
+        'price'      => $faker->randomFloat(2, 100, 2000)
+    ];
+});

@@ -15,9 +15,14 @@
                     <div class="input-box">
                         <a href="{{ route('staff.create') }}" class="btn btn-success">Добавить сотрудника</a>
                     </div>
+                    <div class="pull-right">
+                        {{ Form::select('filter_active', [0 => '- Активность -', 1 => 'Только активные', 2 => 'Только неактивные'], 0, ['id' => 'filter_active', 'class' => 'form-control']) }}
+                        <br />
+                        {{ Form::select('filter_work hours', [0 => '- Доступ в рабочее время -', 1 => 'Есть доступ только в рабочее время', 2 => 'Доступ не ограничен по времени'], 0, ['id' => 'filter_work_hours', 'class' => 'form-control']) }}
+                    </div>
                 </div>
                 <div class="box-body">
-                    <table class="table table-hover datatable">
+                    <table class="table table-hover datatable" id="staff">
                         <thead>
                         <tr>
                             <th>Должность</th>
@@ -38,7 +43,7 @@
                             <td>{{ $user->patronymic }}</td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->password }}</td>
-                            <td>
+                            <td data-order="{{ $user->active }}" data-active="{{ $user->active }}" data-work-hours="{{ $user->work_hours }}">
                                 {{ Form::hidden('active[' . $user->id . ']', 0) }}
                                 {{ Form::checkbox('active[' . $user->id . ']', 1, $user->active == 1) }}
                             </td>
