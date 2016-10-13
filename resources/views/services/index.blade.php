@@ -28,8 +28,8 @@
                         @foreach($services as $service)
                         <tr>
                             <td><a href="{{ route('services.edit', $service->id) }}">{{ $service->name }}</a></td>
-                            <td>@weight($service->weight)</td>
-                            <td>@price($service->price)</td>
+                            <td data-order="{{ $service->weight }}">@weight($service->weight)</td>
+                            <td data-order="{{ $service->price }}">@price($service->price)</td>
                         </tr>
                         @endforeach
                     </table>
