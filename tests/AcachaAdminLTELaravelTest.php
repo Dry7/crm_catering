@@ -56,7 +56,7 @@ class AcachaAdminLTELaravelTest extends TestCase
      */
     public function testLogin()
     {
-        $user = factory(App\User::class)->create(['username' => 'username', 'password' => 'passw0RD']);
+        $user = factory(App\User::class)->create(['username' => 'username', 'password' => 'passw0RD', 'active' => 1, 'work_hours' => 0]);
 
         $this->visit('/login')
             ->type('username', 'username')

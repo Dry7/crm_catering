@@ -15,10 +15,16 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
+        'name' => $faker->firstName,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = 'secret',
+        'password' => $faker->word,
         'remember_token' => str_random(10),
+        'surname' => $faker->lastName,
+        'patronymic' => $faker->firstName,
+        'job' => 'manager',
+        'username' => $faker->word,
+        'active' => rand(0, 1),
+        'work_hours' => rand(0, 1)
     ];
 });
 
