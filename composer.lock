@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "43becd9fc675b0f55af167484718a800",
-    "content-hash": "e5c060bb96c80a3fb17ad66b7e6f0a7c",
+    "hash": "9ce1f59e742509be9229fa5defd642e1",
+    "content-hash": "b926e7c14919c9c1b6e547721e0d3a33",
     "packages": [
         {
             "name": "acacha/admin-lte-template-laravel",
@@ -1511,16 +1511,16 @@
         },
         {
             "name": "prettus/l5-repository",
-            "version": "2.6.6",
+            "version": "2.6.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/andersao/l5-repository.git",
-                "reference": "05945e652bfdacd456128d69bcae91701ccc9e32"
+                "url": "https://github.com/Dry7/l5-repository.git",
+                "reference": "8ffa0e19f6ea1235c1626e9eba9ff1f9e9e9b4c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andersao/l5-repository/zipball/05945e652bfdacd456128d69bcae91701ccc9e32",
-                "reference": "05945e652bfdacd456128d69bcae91701ccc9e32",
+                "url": "https://api.github.com/repos/Dry7/l5-repository/zipball/8ffa0e19f6ea1235c1626e9eba9ff1f9e9e9b4c9",
+                "reference": "8ffa0e19f6ea1235c1626e9eba9ff1f9e9e9b4c9",
                 "shasum": ""
             },
             "require": {
@@ -1548,7 +1548,6 @@
                     "Prettus\\Repository\\": "src/Prettus/Repository/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1567,7 +1566,13 @@
                 "model",
                 "repository"
             ],
-            "time": "2016-06-27 10:43:22"
+            "support": {
+                "email": "contato@andersonandra.de",
+                "issues": "https://github.com/andersao/l5-repository/issues",
+                "wiki": "https://github.com/andersao/l5-repository",
+                "source": "https://github.com/andersao/l5-repository"
+            },
+            "time": "2016-10-14 20:21:33"
         },
         {
             "name": "prettus/laravel-validation",

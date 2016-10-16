@@ -9,8 +9,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Client;
+use App\Repository\KitchenRepository;
 use App\Repository\ProductRepository;
+use App\Repository\TypeRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class ProductController
@@ -19,18 +22,24 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     private $products;
+    private $kitchens;
+    private $types;
 
     /**
      * Create a new controller instance.
      *
      * @param ProductRepository $products
+     * @param KitchenRepository $kitchens
+     * @param TypeRepository $types
      */
-    public function __construct(ProductRepository $products)
+    public function __construct(ProductRepository $products, KitchenRepository $kitchens, TypeRepository $types)
     {
         $this->middleware('auth');
         $this->middleware('admin');
 
         $this->products = $products;
+        $this->kitchens = $kitchens;
+        $this->types    = $types;
     }
 
     /**
@@ -40,9 +49,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->products->all();
+        $products = $this->products->with('kitchen')->with('type')->all();
 
-        return view('products.index')->with('products', $products);
+        return view('products.index')
+            ->with('products', $products)
+            ->with('kitchens', $this->kitchens->all())
+            ->with('types', $this->types->all());
     }
 
     /**
@@ -54,7 +66,10 @@ class ProductController extends Controller
     {
         $product = new Client();
 
-        return view('products.create')->with('product', $product);
+        return view('products.create')
+            ->with('product', $product)
+            ->with('kitchens', $this->kitchens->lists('name'))
+            ->with('types', $this->types->lists('name'));
     }
 
     /**
@@ -66,7 +81,15 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $this->products->create($request->except(['_token']));
+        if ($request->file('photography')) {
+            $request['photo'] = $request->file('photography')->store('public/products');
+        }
+
+        $this->products->create(
+            array_where($request->except(['_token', 'photography']), function ($value) {
+                return (string)$value !== '';
+            })
+        );
 
         return redirect()->route('products.index');
     }
@@ -92,19 +115,33 @@ class ProductController extends Controller
     {
         $product = $this->products->find($id);
 
-        return view('products.update')->with('product', $product);
+        return view('products.update')
+            ->with('product', $product)
+            ->with('kitchens', $this->kitchens->lists('name'))
+            ->with('types', $this->types->lists('name'));
     }
 
     /**
      * Save user
      *
      * @param ProductRequest $request
+     * @param integer $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProductRequest $request, $id)
     {
-        $this->products->update($request->except(['_token']), $id);
+        if ($request->file('photography')) {
+            $this->products->find($id)->photoDelete();
+            $request['photo'] = $request->file('photography')->store('public/products');
+        }
+
+        $this->products->update(
+            array_where($request->except(['_token', 'photography']), function ($value) {
+                return (string)$value !== '';
+            }),
+            $id
+        );
 
         return redirect()->route('products.index');
     }

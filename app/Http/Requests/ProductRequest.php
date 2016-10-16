@@ -24,17 +24,17 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'source'     => ['file', 'hand'][rand(0, 1)],
-            'section1'   => 'required|integer',
-            'section2'   => 'integer',
-            'section3'   => 'integer',
-            'section4'   => 'integer',
-            'kitchen_id' => 'required|integer',
-            'type_id'    => 'required|integer',
-            'name'       => 'required|string|max:255',
-            'name_en'    => 'required|string|max:255',
-            'weight'     => 'required|integer|min:0',
-            'price'      => 'numeric'
+            'source'      => 'in:file,hand',
+            'section1'    => 'integer',
+            'section2'    => 'integer',
+            'section3'    => 'integer',
+            'section4'    => 'integer',
+            'kitchen_id'  => 'integer',
+            'type_id'     => 'integer',
+            'name'        => 'required|string|max:255',
+            'weight'      => 'required|integer|min:0',
+            'price'       => 'numeric',
+            'photography' => 'image'
         ];
     }
 }

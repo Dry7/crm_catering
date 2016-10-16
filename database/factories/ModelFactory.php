@@ -69,3 +69,21 @@ $factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
         'price'      => $faker->randomFloat(2, 100, 2000)
     ];
 });
+
+$factory->define(App\Models\Kitchen::class, function (Faker\Generator $faker) {
+    static $sort = 1;
+    return [
+        'name'   => $faker->word,
+        'active' => 1,
+        'sort'   => $sort++
+    ];
+});
+
+$factory->define(App\Models\Type::class, function (Faker\Generator $faker) {
+    static $sort = 1;
+    return [
+        'name'   => $faker->word,
+        'active' => 1,
+        'sort'   => $sort++
+    ];
+});

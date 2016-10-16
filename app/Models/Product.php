@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Repository\KitchenRepository;
+use App\Repository\TypeRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -17,24 +20,28 @@ class Product extends Model
         'name', 'name_en', 'weight', 'price', 'photo'
     ];
 
-    public function getKitchenAttribute()
+    public function kitchen()
     {
-        switch ($this->attributes['kitchen_id']) {
-            case 1: return 'Японская'; break;
-            case 2: return 'Русская'; break;
-            case 3: return 'Итальянская'; break;
-        }
-        return '';
+        return $this->belongsTo('App\Models\Kitchen');
     }
 
-    public function getTypeAttribute()
+    public function type()
     {
-        switch ($this->attributes['kitchen_id']) {
-            case 1: return 'Закуска'; break;
-            case 2: return 'Основное'; break;
-            case 3: return 'Десерт'; break;
-            case 4: return 'Напитки'; break;
-        }
-        return '';
+        return $this->belongsTo('App\Models\Type');
+    }
+
+    public function getPhotoHasAttribute()
+    {
+        return Storage::exists($this->attributes['photo']);
+    }
+
+    public function getPhotoUrlAttribute()
+    {
+        return Storage::url($this->attributes['photo']);
+    }
+
+    public function photoDelete()
+    {
+        return Storage::delete($this->attributes['photo']);
     }
 }

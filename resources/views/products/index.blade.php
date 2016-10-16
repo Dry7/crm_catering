@@ -14,12 +14,20 @@
                     <div class="input-box">
                         <a href="{{ route('products.create') }}" class="btn btn-success">Добавить блюдо</a>
                     </div>
-                    <div>
-                        <div style="float: left; padding-right: 10px;">Кухня:</div>
-                        <ul>
-                            <li style="float: left; list-style-type: none; padding-right: 10px;"><a href="javascript:void(0);" style="text-decoration: none; border-bottom: 1px dashed #3c8dbc;">японская</a></li>
-                            <li style="float: left; list-style-type: none; padding-right: 10px;"><a href="javascript:void(0);" style="text-decoration: none; border-bottom: 1px dashed #3c8dbc;">русская</a></li>
-                            <li style="float: left; list-style-type: none;"><a href="javascript:void(0);" style="text-decoration: none; border-bottom: 1px dashed #3c8dbc;">итальянская</a></li>
+                    <div class="filter">
+                        <div>Кухня:</div>
+                        <ul id="filter_kitchen">
+                            @foreach($kitchens as $kitchen)
+                            <li><a href="javascript:void(0);" onClick="setFilter(this);" data-value="{{ $kitchen->name }}">{{ $kitchen->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="filter">
+                        <div>Тип блюда:</div>
+                        <ul id="filter_type">
+                            @foreach($types as $type)
+                            <li><a href="javascript:void(0);" onClick="setFilter(this);" data-value="{{ $type->name }}">{{ $type->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -40,8 +48,8 @@
                             <td><a href="{{ route('products.edit', $product->id) }}">{{ $product->name }}</a></td>
                             <td data-order="{{ $product->weight }}">@weight($product->weight)</td>
                             <td data-order="{{ $product->price }}">@price($product->price)</td>
-                            <td>{{ $product->kitchen }}</td>
-                            <td>{{ $product->type }}</td>
+                            <td>{{ is_object($product->kitchen) ? $product->kitchen->name : '' }}</td>
+                            <td>{{ is_object($product->type) ? $product->type->name : '' }}</td>
                         </tr>
                         @endforeach
                     </table>

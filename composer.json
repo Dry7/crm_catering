@@ -10,8 +10,8 @@
         "acacha/admin-lte-template-laravel": "3.*",
         "laravelcollective/html": "5.3.*",
         "barryvdh/laravel-debugbar": "^2.3",
-        "prettus/l5-repository": "^2.6",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "prettus/l5-repository": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -51,5 +51,11 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/Dry7/l5-repository"
+      }
+    ]
 }
