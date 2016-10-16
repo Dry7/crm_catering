@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('services', 'ServiceController');
 
     /** Products */
+    Route::any('/products/import', 'ProductController@import')->name('products.import');
     Route::resource('products', 'ProductController');
 });
 

@@ -11,11 +11,8 @@ class ProductRepository extends BaseRepository
         return 'App\\Models\\Product';
     }
 
-    public function create(array $attributes)
+    public function getModel()
     {
-        $attributes = array_where($attributes, function ($value) {
-            return (string)$value !== '';
-        });
-        return parent::create($attributes);
+        return $this->model;
     }
 }

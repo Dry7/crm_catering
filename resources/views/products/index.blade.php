@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <table class="table table-hover datatable" id="products">
+                    <table class="table table-hover datatable" id="products" data-page-length="50">
                         <thead>
                         <tr>
                             <th>Название</th>

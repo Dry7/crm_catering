@@ -7,13 +7,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductImportRequest;
 use App\Http\Requests\ProductRequest;
 use App\Models\Client;
+use App\Models\Product;
+use App\Repository\CategoryRepository;
 use App\Repository\KitchenRepository;
 use App\Repository\ProductRepository;
 use App\Repository\TypeRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Class ProductController
@@ -22,6 +26,7 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     private $products;
+    private $categories;
     private $kitchens;
     private $types;
 
@@ -29,15 +34,17 @@ class ProductController extends Controller
      * Create a new controller instance.
      *
      * @param ProductRepository $products
+     * @param CategoryRepository $categories
      * @param KitchenRepository $kitchens
      * @param TypeRepository $types
      */
-    public function __construct(ProductRepository $products, KitchenRepository $kitchens, TypeRepository $types)
+    public function __construct(ProductRepository $products, CategoryRepository $categories, KitchenRepository $kitchens, TypeRepository $types)
     {
         $this->middleware('auth');
         $this->middleware('admin');
 
         $this->products = $products;
+        $this->categories = $categories;
         $this->kitchens = $kitchens;
         $this->types    = $types;
     }
@@ -157,5 +164,54 @@ class ProductController extends Controller
         $this->products->delete($id);
 
         return redirect()->route('products.index');
+    }
+
+    public function import(ProductImportRequest $request)
+    {
+        $message = false;
+
+        if ($request->file('file')) {
+            $products = $this->products->lists('id', 'name')->toArray();
+            $categories = $this->categories->lists('name', 'code')->toArray();
+
+            Excel::selectSheetsByIndex(1)->load($request->file('file')->getPathname(), function ($reader) use ($products, $categories) {
+                foreach ($reader->all() as $i => $item) {
+                    /** Categories */
+                    if (((string)trim($item->nazvanie_tovara) == '') and ((string)trim($item->gruppa) !== '') and ((string)trim($item->nazvanie_gruppy) !== '')) {
+                        $data = [
+                            'code' => $item->gruppa,
+                            'name' => strlen(trim($item->nazvanie_gruppy)) > 255 ? substr(trim($item->nazvanie_gruppy), 0, 255) : trim($item->nazvanie_gruppy),
+                            'section1' => $this->products->getModel()->getSection($item->gruppa, 1),
+                            'section2' => $this->products->getModel()->getSection($item->gruppa, 2),
+                            'section3' => $this->products->getModel()->getSection($item->gruppa, 3),
+                            'section4' => $this->products->getModel()->getSection($item->gruppa, 4)
+                        ];
+                        $this->categories->updateOrCreate(['code' => $item->gruppa], $data);
+                    } elseif ((string)trim($item->nazvanie_tovara) !== '') {
+                        /** Products */
+                        if ((string)$item->gruppa == '') {
+                            $item->gruppa = @$reader->all()[$i-1]->gruppa;
+                        }
+                        $data = [
+                            'source' => 'file',
+                            'section1' => $this->products->getModel()->getSection($item->gruppa, 1),
+                            'section2' => $this->products->getModel()->getSection($item->gruppa, 2),
+                            'section3' => $this->products->getModel()->getSection($item->gruppa, 3),
+                            'section4' => $this->products->getModel()->getSection($item->gruppa, 4),
+                            'name' => strlen(trim($item->nazvanie_tovara)) > 255 ? substr(trim($item->nazvanie_tovara), 0, 255) : trim($item->nazvanie_tovara),
+                            'weight' => (int)$item->nominalnyy_ves_portsii_g,
+                            'cost' => $item->sebestoimost_za_edinitsu_izmereniya_rub,
+                            'markup' => $item->natsenka,
+                            'price' => $item->tsena_prodazhi > 0 ? $item->tsena_prodazhi : $item->sebestoimost_za_edinitsu_izmereniya_rub * ($item->natsenka/100),
+                            'type_id' => $this->products->getModel()->getType($item->gruppa)
+                        ];
+                        $this->products->updateOrCreate(['name' => @$data['name']], $data);
+                    }
+                }
+            });
+            $message = true;
+        }
+
+        return view('products.import')->with('message', $message);
     }
 }
