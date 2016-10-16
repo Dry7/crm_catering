@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ServiceRequest;
 use App\Models\Client;
+use App\Models\Service;
 use App\Repository\ServiceRepository;
 use Illuminate\Http\Request;
 
@@ -52,7 +53,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $service = new Client();
+        $service = new Service();
 
         return view('services.create')->with('service', $service);
     }

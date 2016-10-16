@@ -87,3 +87,10 @@ $factory->define(App\Models\Type::class, function (Faker\Generator $faker) {
         'sort'   => $sort++
     ];
 });
+
+$factory->define(App\Models\Place::class, function (Faker\Generator $faker) {
+    static $sort = 1;
+    return [
+        'name'   => $faker->address
+    ];
+});
