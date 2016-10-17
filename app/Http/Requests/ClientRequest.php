@@ -28,6 +28,8 @@ class ClientRequest extends FormRequest
             'name' => 'required|string|max:255',
             'phone_work' => 'required|string|max:255',
             'phone_mobile' => 'string|max:255',
+            'phone_other' => 'string|max:255',
+            'phone_other2' => 'string|max:255',
             'fio' => 'required|string|max:255',
             'job' => 'required|string|max:255',
             'birthday' => 'date',

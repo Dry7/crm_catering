@@ -33,6 +33,8 @@ $factory->define(App\Models\Client::class, function (Faker\Generator $faker) {
             'name'         => $faker->company,
             'phone_work'   => $faker->phoneNumber,
             'phone_mobile' => $faker->tollFreePhoneNumber,
+            'phone_other'  => $faker->tollFreePhoneNumber,
+            'phone_other2' => $faker->tollFreePhoneNumber,
             'fio'          => $faker->name,
             'job'          => $faker->jobTitle,
             'birthday'     => $faker->date('d.m.Y'),

@@ -90,8 +90,10 @@ class ClientsTest extends TestCase
         $this->actingAs($user)->visit('/clients/create')
             ->see('Создать клиента')
             ->type('name',          'name')
-            ->type('phone_work',    'phone_work')
-            ->type('phone_mobile',  'phone_mobile')
+            ->type('+7 (999) 999-99-99', 'phone_work')
+            ->type('+7 (888) 888-88-88',  'phone_mobile')
+            ->type('phone_other',   'phone_other')
+            ->type('phone_other2',  'phone_other2')
             ->type('fio',           'fio')
             ->type('job',           'job')
             ->type('16.07.1991',    'birthday')
@@ -105,8 +107,10 @@ class ClientsTest extends TestCase
             ->seeInDatabase('clients', [
                 'user_id'      => 1,
                 'name'         => 'name',
-                'phone_work'   => 'phone_work',
-                'phone_mobile' => 'phone_mobile',
+                'phone_work'   => '+7 (999) 999-99-99',
+                'phone_mobile' => '+7 (888) 888-88-88',
+                'phone_other'  => 'phone_other',
+                'phone_other2' => 'phone_other2',
                 'fio'          => 'fio',
                 'job'          => 'job',
                 'email'        => 'email@test.ru',
@@ -127,16 +131,20 @@ class ClientsTest extends TestCase
 
         $this->actingAs($user)->visit('/clients/create')
             ->see('Создать клиента')
-            ->type('phone_mobile',  'phone_mobile')
-            ->type('16.07.1991',    'birthday')
-            ->type('events',        'events')
-            ->type('site',          'site')
-            ->type('address',       'address')
-            ->type('description',   'description')
-            ->type('hobby',         'hobby')
+            ->type('phone_mobile', 'phone_mobile')
+            ->type('phone_other',  'phone_other')
+            ->type('phone_other2', 'phone_other2')
+            ->type('16.07.1991',   'birthday')
+            ->type('events',       'events')
+            ->type('site',         'site')
+            ->type('address',      'address')
+            ->type('description',  'description')
+            ->type('hobby',        'hobby')
             ->press('Сохранить')
             ->dontSeeInDatabase('clients', [
                 'phone_mobile' => 'phone_mobile',
+                'phone_other'  => 'phone_other',
+                'phone_other2' => 'phone_other2',
                 'events'       => 'events',
                 'site'         => 'site',
                 'address'      => 'address',
@@ -173,6 +181,8 @@ class ClientsTest extends TestCase
             'name'         => 'name',
             'phone_work'   => 'phone_work',
             'phone_mobile' => 'phone_mobile',
+            'phone_other'  => 'phone_other',
+            'phone_other2' => 'phone_other2',
             'fio'          => 'fio',
             'job'          => 'job',
             'birthday'     => '16.07.1991',
@@ -189,6 +199,8 @@ class ClientsTest extends TestCase
             ->see('name')
             ->see('phone_work')
             ->see('phone_mobile')
+            ->see('phone_other')
+            ->see('phone_other2')
             ->see('fio')
             ->see('job')
             ->see('16.07.1991')
@@ -201,6 +213,8 @@ class ClientsTest extends TestCase
             ->type('name2',          'name')
             ->type('phone_work2',    'phone_work')
             ->type('phone_mobile2',  'phone_mobile')
+            ->type('phone_other',    'phone_other')
+            ->type('phone_other2',   'phone_other2')
             ->type('fio2',           'fio')
             ->type('job2',           'job')
             ->type('17.07.1991',     'birthday')
@@ -217,6 +231,8 @@ class ClientsTest extends TestCase
                 'name'         => 'name2',
                 'phone_work'   => 'phone_work2',
                 'phone_mobile' => 'phone_mobile2',
+                'phone_other'  => 'phone_other',
+                'phone_other2' => 'phone_other2',
                 'fio'          => 'fio2',
                 'job'          => 'job2',
                 'email'        => 'email@test.ru2',
@@ -241,6 +257,8 @@ class ClientsTest extends TestCase
             'name'         => 'name',
             'phone_work'   => 'phone_work',
             'phone_mobile' => 'phone_mobile',
+            'phone_other'  => 'phone_other',
+            'phone_other2' => 'phone_other2',
             'fio'          => 'fio',
             'job'          => 'job',
             'birthday'     => '16.07.1991',
@@ -320,11 +338,13 @@ class ClientsTest extends TestCase
         $user = factory(\App\User::class)->create(['id' => 1, 'job' => 'admin']);
 
         factory(\App\Models\Client::class)->create([
-            'id'         => 2,
-            'user_id'    => 2,
+            'id'           => 2,
+            'user_id'      => 2,
             'name'         => 'name',
             'phone_work'   => 'phone_work',
             'phone_mobile' => 'phone_mobile',
+            'phone_other'  => 'phone_other',
+            'phone_other2' => 'phone_other2',
             'fio'          => 'fio',
             'job'          => 'job',
             'birthday'     => '16.07.1991',

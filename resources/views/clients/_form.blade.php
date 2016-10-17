@@ -6,11 +6,19 @@
     </div>
     <div class="form-group">
         {!! Form::label('phone_work', 'Телефон (рабочий) *') !!}
-        {!! Form::text('phone_work', $client->phone_work, ['class' => 'form-control', 'id' => 'phone_work', 'placeholder' => 'Введите рабочий телефон', 'require' => 'require']) !!}
+        {!! Form::text('phone_work', $client->phone_work, ['class' => 'form-control phone', 'id' => 'phone_work', 'placeholder' => 'Введите рабочий телефон', 'require' => 'require']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('phone_mobile', 'Телефон (мобильный)') !!}
-        {!! Form::text('phone_mobile', $client->phone_mobile, ['class' => 'form-control', 'id' => 'phone_mobile', 'placeholder' => 'Введите мобильный телефон']) !!}
+        {!! Form::text('phone_mobile', $client->phone_mobile, ['class' => 'form-control phone', 'id' => 'phone_mobile', 'placeholder' => 'Введите мобильный телефон']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('phone_other', 'Дополнительный телефон') !!}
+        {!! Form::text('phone_other', $client->phone_other, ['class' => 'form-control', 'id' => 'phone_other', 'placeholder' => 'Введите дополнительный телефон']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('phone_other2', 'Дополнительный телефон 2') !!}
+        {!! Form::text('phone_other2', $client->phone_other2, ['class' => 'form-control', 'id' => 'phone_other2', 'placeholder' => 'Введите дополнительный телефон 2']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('address', 'Адрес') !!}
