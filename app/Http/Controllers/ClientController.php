@@ -65,7 +65,7 @@ class ClientController extends Controller
 
         return view('clients.create')
             ->with('client', $client)
-            ->with('staff', $this->staff->lists('username'))
+            ->with('staff', $this->staff->lists('username', 'id'))
             ->with('is_admin', \Auth::user()->isAdmin());
     }
 
@@ -110,7 +110,7 @@ class ClientController extends Controller
 
         return view('clients.update')
             ->with('client', $client)
-            ->with('staff', $this->staff->lists('username'))
+            ->with('staff', $this->staff->lists('username', 'id'))
             ->with('is_admin', \Auth::user()->isAdmin());
     }
 
