@@ -293,7 +293,6 @@ class ClientsTest extends TestCase
             ->see('Поле email обязательно для заполнения.');
     }
 
-
     /**
      * Delete as guest
      */

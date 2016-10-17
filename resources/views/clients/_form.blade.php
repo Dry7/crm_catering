@@ -1,5 +1,11 @@
 <div class="box-body">
     @include('common.errors')
+    @if($is_admin)
+    <div class="form-group">
+        {!! Form::label('user_id', 'Сотрудник') !!}
+        {!! Form::select('user_id', $staff, $client->user_id, ['class' => 'form-control', 'id' => 'user_id', 'placeholder' => 'Выберите сотрудника']) !!}
+    </div>
+    @endif
     <div class="form-group">
         {!! Form::label('name', 'Название компании *') !!}
         {!! Form::text('name', $client->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Введите название компании', 'require' => 'require']) !!}

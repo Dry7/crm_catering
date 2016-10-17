@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 {!! Form::open(['route' => 'clients.store']) !!}
-                    @include('clients._form', ['client' => $client])
+                    @include('clients._form', ['client' => $client, 'is_admin' => $is_admin, 'staff' => $staff])
                 {!! Form::close() !!}
             </div>
         </div>

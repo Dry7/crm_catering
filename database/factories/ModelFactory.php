@@ -29,7 +29,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Models\Client::class, function (Faker\Generator $faker) {
     return [
 
-            'user_id'      => rand(1, 100),
+            'user_id'      => rand(1, 22),
             'name'         => $faker->company,
             'phone_work'   => $faker->phoneNumber,
             'phone_mobile' => $faker->tollFreePhoneNumber,
