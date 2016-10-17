@@ -17,6 +17,11 @@ $(function () {
             var filter_work_hours = Number($('#filter_work_hours').val());
             var filter_kitchen = $('#filter_kitchen li a.active');
             var filter_type = $('#filter_type li a.active');
+            var filter_status_id = $('#filter_status_id :selected');
+            var filter_client_id = $('#filter_client_id :selected');
+            var filter_format_id = $('#filter_format_id :selected');
+            var filter_place_id = $('#filter_place_id :selected');
+            var values = [];
             var row = $('#' + settings.sTableId).DataTable().row(dataIndex).node().innerHTML;
             if (filter_active > 0) {
                 /** Filter active staff */
@@ -72,12 +77,52 @@ $(function () {
                 }
             }
 
+            if (filter_status_id.length > 0) {
+                values = [];
+                filter_status_id.each(function (i, selected) {
+                    values.push($(selected).text());
+                });
+                if ($.inArray(data[0], values) == -1) {
+                    return false;
+                }
+            }
+
+            if (filter_client_id.length > 0) {
+                values = [];
+                filter_client_id.each(function (i, selected) {
+                    values.push($(selected).text());
+                });
+                if ($.inArray(data[1], values) == -1) {
+                    return false;
+                }
+            }
+
+            if (filter_format_id.length > 0) {
+                values = [];
+                filter_format_id.each(function (i, selected) {
+                    values.push($(selected).text());
+                });
+                if ($.inArray(data[3], values) == -1) {
+                    return false;
+                }
+            }
+
+            if (filter_place_id.length > 0) {
+                values = [];
+                filter_place_id.each(function (i, selected) {
+                    values.push($(selected).text());
+                });
+                if ($.inArray(data[6], values) == -1) {
+                    return false;
+                }
+            }
+
             return true;
         }
     );
 
-    $('#filter_active, #filter_work_hours').on('change', function () {
-        $('#staff').DataTable().draw();
+    $('#filter_active, #filter_work_hours, .filter').on('change', function () {
+        $('.datatable').DataTable().draw();
     });
 
     $('.datepicker').datepicker({

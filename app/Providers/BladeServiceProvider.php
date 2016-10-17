@@ -21,6 +21,10 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('price', function ($expression) {
             return '<?= number_format(' . $expression . ', 2, \'.\', \' \'); ?> р.';
         });
+
+        Blade::directive('date', function ($expression) {
+            return '<?= ' . $expression . '->format(\'d.m.Y\'); ?>';
+        });
     }
 
     /**

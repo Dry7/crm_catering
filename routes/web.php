@@ -27,6 +27,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     /** Places */
     Route::resource('places', 'PlaceController');
+
+    /** Events */
+    Route::resource('events', 'EventController');
 });
 
 /**

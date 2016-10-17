@@ -94,3 +94,23 @@ $factory->define(App\Models\Place::class, function (Faker\Generator $faker) {
         'name'   => $faker->address
     ];
 });
+
+$factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
+    return [
+        'user_id'    => $faker->numberBetween(1, 20),
+        'status_id'  => $faker->numberBetween(1, 4),
+        'client_id'  => $faker->numberBetween(1, 20),
+        'date'       => $faker->date,
+        'format_id'  => $faker->numberBetween(1, 3),
+        'persons'    => $faker->numberBetween(1, 100),
+        'tables'     => $faker->numberBetween(1, 25),
+        'place_id'   => $faker->numberBetween(1, 4),
+        'staff'      => $faker->numberBetween(1, 15),
+        'meeting'    => $faker->time('H:i:s', '12:00:00'),
+        'main'       => $faker->time('H:i:s', '13:00:00'),
+        'hot_snacks' => $faker->time('H:i:s', '14:00:00'),
+        'sorbet'     => $faker->time('H:i:s', '15:00:00'),
+        'hot'        => $faker->time('H:i:s', '16:00:00'),
+        'dessert'    => $faker->time('H:i:s', '17:00:00')
+    ];
+});
