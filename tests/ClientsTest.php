@@ -105,7 +105,6 @@ class ClientsTest extends TestCase
             ->type('hobby',         'hobby')
             ->press('Сохранить')
             ->seeInDatabase('clients', [
-                'user_id'      => 1,
                 'name'         => 'name',
                 'phone_work'   => '+7 (999) 999-99-99',
                 'phone_mobile' => '+7 (888) 888-88-88',
@@ -213,8 +212,8 @@ class ClientsTest extends TestCase
             ->type('name2',          'name')
             ->type('phone_work2',    'phone_work')
             ->type('phone_mobile2',  'phone_mobile')
-            ->type('phone_other',    'phone_other')
-            ->type('phone_other2',   'phone_other2')
+            ->type('phone_other2',    'phone_other')
+            ->type('phone_other22',   'phone_other2')
             ->type('fio2',           'fio')
             ->type('job2',           'job')
             ->type('17.07.1991',     'birthday')
@@ -227,12 +226,11 @@ class ClientsTest extends TestCase
             ->press('Сохранить')
             ->seeInDatabase('clients', [
                 'id'           => 2,
-                'user_id'      => 1,
                 'name'         => 'name2',
                 'phone_work'   => 'phone_work2',
                 'phone_mobile' => 'phone_mobile2',
-                'phone_other'  => 'phone_other',
-                'phone_other2' => 'phone_other2',
+                'phone_other'  => 'phone_other2',
+                'phone_other2' => 'phone_other22',
                 'fio'          => 'fio2',
                 'job'          => 'job2',
                 'email'        => 'email@test.ru2',
