@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "acacha/admin-lte-template-laravel",
-            "version": "3.1.4",
+            "version": "3.1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/acacha/adminlte-laravel.git",
-                "reference": "6cd42a2f4d2a88c46da9bc9ea4e38426ff7661ee"
+                "reference": "a571c2232265b314e702aba66503c41b289194de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acacha/adminlte-laravel/zipball/6cd42a2f4d2a88c46da9bc9ea4e38426ff7661ee",
-                "reference": "6cd42a2f4d2a88c46da9bc9ea4e38426ff7661ee",
+                "url": "https://api.github.com/repos/acacha/adminlte-laravel/zipball/a571c2232265b314e702aba66503c41b289194de",
+                "reference": "a571c2232265b314e702aba66503c41b289194de",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
                 "template",
                 "theme"
             ],
-            "time": "2016-10-05 11:41:32"
+            "time": "2016-10-17 15:12:55"
         },
         {
             "name": "acacha/user",
@@ -917,16 +917,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.3.18",
+            "version": "v5.3.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "9bee167d173857c25966c19afdaa66f127ca6784"
+                "reference": "f1a5bb417b3e0d1949fe84617eacd1a14d75d7f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/9bee167d173857c25966c19afdaa66f127ca6784",
-                "reference": "9bee167d173857c25966c19afdaa66f127ca6784",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f1a5bb417b3e0d1949fe84617eacd1a14d75d7f1",
+                "reference": "f1a5bb417b3e0d1949fe84617eacd1a14d75d7f1",
                 "shasum": ""
             },
             "require": {
@@ -1008,7 +1008,7 @@
                 "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0).",
                 "symfony/css-selector": "Required to use some of the crawler integration testing tools (3.1.*).",
                 "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (3.1.*).",
-                "symfony/psr-http-message-bridge": "Required to psr7 bridging features (0.2.*)."
+                "symfony/psr-http-message-bridge": "Required to use psr7 bridging features (0.2.*)."
             },
             "type": "library",
             "extra": {
@@ -1041,7 +1041,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-10-08 01:51:20"
+            "time": "2016-10-17 19:35:14"
         },
         {
             "name": "laravelcollective/html",
@@ -1099,20 +1099,20 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.28",
+            "version": "1.0.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a9663643ff2d16d7f66ed1e0d3212c5491bc9044"
+                "reference": "b732cc946c48cf102ddffd41ffcd54901a28ccdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a9663643ff2d16d7f66ed1e0d3212c5491bc9044",
-                "reference": "a9663643ff2d16d7f66ed1e0d3212c5491bc9044",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/b732cc946c48cf102ddffd41ffcd54901a28ccdb",
+                "reference": "b732cc946c48cf102ddffd41ffcd54901a28ccdb",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": ">=5.6.0"
             },
             "conflict": {
                 "league/flysystem-sftp": "<1.0.6"
@@ -1178,7 +1178,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-10-07 12:20:37"
+            "time": "2016-10-17 23:14:19"
         },
         {
             "name": "maatwebsite/excel",
@@ -1530,16 +1530,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
+                "reference": "c0125896dbb151380ab47e96c621741e79623beb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/088c04e2f261c33bed6ca5245491cfca69195ccf",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/c0125896dbb151380ab47e96c621741e79623beb",
+                "reference": "c0125896dbb151380ab47e96c621741e79623beb",
                 "shasum": ""
             },
             "require": {
@@ -1574,7 +1574,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03 06:00:07"
+            "time": "2016-10-17 15:23:22"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -1635,16 +1635,16 @@
         },
         {
             "name": "prettus/l5-repository",
-            "version": "2.6.7",
+            "version": "2.6.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dry7/l5-repository.git",
-                "reference": "8ffa0e19f6ea1235c1626e9eba9ff1f9e9e9b4c9"
+                "reference": "ce0dc02b7e8cc3cfd6681befd97d62f95e017ea2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dry7/l5-repository/zipball/8ffa0e19f6ea1235c1626e9eba9ff1f9e9e9b4c9",
-                "reference": "8ffa0e19f6ea1235c1626e9eba9ff1f9e9e9b4c9",
+                "url": "https://api.github.com/repos/Dry7/l5-repository/zipball/ce0dc02b7e8cc3cfd6681befd97d62f95e017ea2",
+                "reference": "ce0dc02b7e8cc3cfd6681befd97d62f95e017ea2",
                 "shasum": ""
             },
             "require": {
@@ -1696,7 +1696,7 @@
                 "wiki": "https://github.com/andersao/l5-repository",
                 "source": "https://github.com/andersao/l5-repository"
             },
-            "time": "2016-10-14 20:21:33"
+            "time": "2016-10-18 16:16:03"
         },
         {
             "name": "prettus/laravel-validation",
