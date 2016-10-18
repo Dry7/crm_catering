@@ -9,20 +9,21 @@ var uglify = require('gulp-uglify');
 gulp.task('css', function() {
     return gulp.src([
         'node_modules/bootstrap/less/bootstrap.less',
-        'node_modules/admin-lte/build/less/AdminLTE.less',
         'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
-        'vendor/acacha/admin-lte-template-laravel/resources/assets/less/adminlte-app.less',
         'node_modules/toastr/toastr.less',
         'node_modules/font-awesome/less/font-awesome.less',
         'node_modules/ionicons/dist/css/ionicons.css',
         'node_modules/bootstrap-datepicker/build/build3.less',
-        'vendor/acacha/admin-lte-template-laravel/public/css/app.css',
         'node_modules/admin-lte/dist/css/skins/_all-skins.css',
-        'vendor/acacha/admin-lte-template-laravel/public/css/adminlte-less.css',
-        'vendor/acacha/admin-lte-template-laravel/public/css/adminlte-app.css',
         'node_modules/icheck/skins/square/blue.css',
         'vendor/acacha/admin-lte-template-laravel/public/css/toastr.css',
         'vendor/acacha/admin-lte-template-laravel/public/plugins/datatables/dataTables.bootstrap.css',
+        'vendor/acacha/admin-lte-template-laravel/public/plugins/select2/select2.css',
+        'node_modules/admin-lte/build/less/AdminLTE.less',
+        'vendor/acacha/admin-lte-template-laravel/resources/assets/less/adminlte-app.less',
+        'vendor/acacha/admin-lte-template-laravel/public/css/app.css',
+        'vendor/acacha/admin-lte-template-laravel/public/css/adminlte-less.css',
+        'vendor/acacha/admin-lte-template-laravel/public/css/adminlte-app.css',
         'resources/assets/less/styles.less'
     ])
         .pipe(replace('@import "node_modules/bootstrap-less/bootstrap/bootstrap.less";', '@import "node_modules/bootstrap/less/bootstrap.less";'))
@@ -39,6 +40,7 @@ gulp.task('js', function() {
         'node_modules/bootstrap/dist/js/bootstrap.js',
         'node_modules/admin-lte/plugins/datatables/jquery.dataTables.js',
         'node_modules/admin-lte/plugins/datatables/dataTables.bootstrap.js',
+        'node_modules/admin-lte/plugins/select2/select2.full.js',
         'node_modules/bootstrap-datepicker/js/bootstrap-datepicker.js',
         'node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.ru.js',
         'node_modules/jquery-mask-plugin/dist/jquery.mask.js',

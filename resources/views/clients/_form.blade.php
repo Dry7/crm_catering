@@ -3,7 +3,7 @@
     @if($is_admin)
     <div class="form-group">
         {!! Form::label('user_id', 'Сотрудник') !!}
-        {!! Form::select('user_id', $staff, $client->user_id, ['class' => 'form-control', 'id' => 'user_id', 'placeholder' => 'Выберите сотрудника']) !!}
+        {!! Form::select('user_id', $staff, $client->user_id, ['class' => 'form-control select2', 'id' => 'user_id', 'placeholder' => 'Выберите сотрудника']) !!}
     </div>
     @endif
     <div class="form-group">

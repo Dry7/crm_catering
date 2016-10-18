@@ -310,4 +310,51 @@ class StaffTest extends TestCase
             ->press('Удалить')
             ->dontSeeInDatabase('users', [ 'id' => 2 ]);
     }
+
+    public function testFullName()
+    {
+        $user = factory(\App\User::class)->create(['surname' => 'a', 'name' => 'b', 'patronymic' => 'c', 'username' => 'd']);
+
+        $this->assertEquals($user->full_name, "a b c (d)");
+    }
+
+    public function testFullNameWithoutSurname()
+    {
+        $user = factory(\App\User::class)->create(['surname' => null, 'name' => 'b', 'patronymic' => 'c', 'username' => 'd']);
+
+        $this->assertEquals($user->full_name, "b c (d)");
+    }
+
+    public function testFullNameWithoutName()
+    {
+        $user = factory(\App\User::class)->create(['surname' => 'a', 'patronymic' => 'c', 'username' => 'd']);
+        $user->name = null;
+
+        $this->assertEquals($user->full_name, "a c (d)");
+    }
+
+    public function testFullNameWithoutPatronymic()
+    {
+        $user = factory(\App\User::class)->create(['surname' => 'a', 'name' => 'b', 'patronymic' => null, 'username' => 'd']);
+
+        $this->assertEquals($user->full_name, "a b (d)");
+    }
+
+    public function testFullNameWithoutUsername()
+    {
+        $user = factory(\App\User::class)->create(['surname' => 'a', 'name' => 'b', 'patronymic' => 'c', 'username' => null]);
+
+        $this->assertEquals($user->full_name, "a b c");
+    }
+
+    public function testFullNameEmpty()
+    {
+        $user = factory(\App\User::class)->create();
+        $user->surname    = null;
+        $user->name       = null;
+        $user->patronymic = null;
+        $user->username   = null;
+
+        $this->assertEquals($user->full_name, "");
+    }
 }

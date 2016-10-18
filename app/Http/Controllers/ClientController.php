@@ -110,7 +110,7 @@ class ClientController extends Controller
 
         return view('clients.update')
             ->with('client', $client)
-            ->with('staff', $this->staff->lists('username', 'id'))
+            ->with('staff', $this->staff->orderBy('surname')->orderBy('name')->orderBy('patronymic')->orderBy('username')->lists('full_name', 'id'))
             ->with('is_admin', \Auth::user()->isAdmin());
     }
 
