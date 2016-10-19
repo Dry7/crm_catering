@@ -24,6 +24,7 @@ gulp.task('css', function() {
         'vendor/acacha/admin-lte-template-laravel/public/css/app.css',
         'vendor/acacha/admin-lte-template-laravel/public/css/adminlte-less.css',
         'vendor/acacha/admin-lte-template-laravel/public/css/adminlte-app.css',
+        'node_modules/X-editable/dist/bootstrap3-editable/css/bootstrap-editable.css',
         'resources/assets/less/styles.less'
     ])
         .pipe(replace('@import "node_modules/bootstrap-less/bootstrap/bootstrap.less";', '@import "node_modules/bootstrap/less/bootstrap.less";'))
@@ -44,6 +45,7 @@ gulp.task('js', function() {
         'node_modules/bootstrap-datepicker/js/bootstrap-datepicker.js',
         'node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.ru.js',
         'node_modules/jquery-mask-plugin/dist/jquery.mask.js',
+        'node_modules/X-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
         'public/js/app.js',
         'resources/assets/js/scripts.js'
     ])
@@ -59,6 +61,7 @@ gulp.task('copy', function () {
     gulp.src('node_modules/admin-lte/dist/css/skins/*.*').pipe(gulp.dest('public/css/skins'));
     gulp.src('node_modules/admin-lte/dist/img/*.*').pipe(gulp.dest('public/img'));
     gulp.src('node_modules/icheck/skins/square/blue.png').pipe(gulp.dest('public/css'));
+    gulp.src('node_modules/X-editable/dist/bootstrap3-editable/img/*').pipe(gulp.dest('public/img'));
 });
 
 gulp.task('default', ['css', 'copy', 'js']);

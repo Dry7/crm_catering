@@ -32,7 +32,6 @@ class EventController extends Controller
     public function __construct(EventRepository $events, ClientRepository $clients, PlaceRepository $places)
     {
         $this->middleware('auth');
-        $this->middleware('admin');
 
         $this->events = $events;
         $this->clients = $clients;

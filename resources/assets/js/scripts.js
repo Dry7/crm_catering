@@ -140,6 +140,13 @@ $(function () {
     });
 
     $(".select2").select2();
+
+    $("#events a[data-name=\"status_id\"]").editable({ source: "/api/v1/events/statuses", url: "/api/v1/events/save" });
+    $("#events a[data-name=\"client_id\"]").editable({ source: "/api/v1/events/clients",  url: "/api/v1/events/save" });
+    $("#events a[data-name=\"format_id\"]").editable({ source: "/api/v1/events/formats",  url: "/api/v1/events/save" });
+    $("#events a[data-name=\"persons\"]").editable({                                      url: "/api/v1/events/save" });
+    $("#events a[data-name=\"tables\"]").editable({                                       url: "/api/v1/events/save" });
+    $("#events a[data-name=\"place_id\"]").editable({  source: "/api/v1/events/places",   url: "/api/v1/events/save" });
 });
 
 /**

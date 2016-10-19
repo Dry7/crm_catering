@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::group(['prefix' => 'events'], function () {
+    Route::get('/statuses', 'ApiController@statuses');
+    Route::get('/formats',  'ApiController@formats');
+    Route::get('/clients',  'ApiController@clients');
+    Route::get('/places',   'ApiController@places');
+    Route::post('/save',    'ApiController@save');
+});
