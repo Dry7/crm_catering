@@ -125,22 +125,51 @@ $(function () {
         $('.datatable').DataTable().draw();
     });
 
+    /**
+     * Date picker
+     */
     $('.datepicker').datepicker({
         format: 'dd.mm.yyyy',
         language: 'ru',
         autoclose: true
     });
 
+    /**
+     * Date picker jQuery version fix
+     *
+     * @returns {*}
+     */
+    Object.getPrototypeOf($('.datepicker')).size = function() { return this.length; };
+
+    /**
+     * Date mask
+     */
     $('.datepicker').mask("00.00.0000", {
         placeholder: "__.__.____"
     });
 
+    /**
+     * Phone mask
+     */
     $('.phone').mask("+7 (000) 000-00-00", {
         placeholder: "+7 (___) ___-__-__"
     });
 
+    /**
+     * Time mask
+     */
+    $('.time').mask("00:00", {
+        placeholder: "00:00"
+    });
+
+    /**
+     * Select2
+     */
     $(".select2").select2();
 
+    /**
+     * Edit column
+     */
     $("#events a[data-name=\"status_id\"]").editable({ source: "/api/v1/events/statuses", url: "/api/v1/events/save" });
     $("#events a[data-name=\"client_id\"]").editable({ source: "/api/v1/events/clients",  url: "/api/v1/events/save" });
     $("#events a[data-name=\"format_id\"]").editable({ source: "/api/v1/events/formats",  url: "/api/v1/events/save" });

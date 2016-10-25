@@ -7,10 +7,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use App\Repository\CategoryRepository;
 use App\Repository\ClientRepository;
 use App\Repository\EventRepository;
 use App\Repository\PlaceRepository;
+use App\Repository\ProductRepository;
+use App\Repository\UserRepository;
 
 /**
  * Class EventsController
@@ -21,6 +25,9 @@ class EventController extends Controller
     private $events;
     private $clients;
     private $places;
+    private $products;
+    private $categories;
+    private $staff;
 
     /**
      * Create a new controller instance.
@@ -28,14 +35,27 @@ class EventController extends Controller
      * @param EventRepository $events
      * @param ClientRepository $clients
      * @param PlaceRepository $places
+     * @param ProductRepository $products
+     * @param CategoryRepository $categories
+     * @param UserRepository $staff
      */
-    public function __construct(EventRepository $events, ClientRepository $clients, PlaceRepository $places)
+    public function __construct(
+        EventRepository $events,
+        ClientRepository $clients,
+        PlaceRepository $places,
+        ProductRepository $products,
+        CategoryRepository $categories,
+        UserRepository $staff
+    )
     {
         $this->middleware('auth');
 
         $this->events = $events;
         $this->clients = $clients;
         $this->places = $places;
+        $this->products = $products;
+        $this->categories = $categories;
+        $this->staff = $staff;
     }
 
     /**
@@ -51,9 +71,8 @@ class EventController extends Controller
             ->with('events', $events)
             ->with('statuses', $this->events->getModel()->getStatuses())
             ->with('formats', $this->events->getModel()->getFormats())
-            ->with('clients', $this->clients->lists('name'))
-            ->with('places', $this->places->lists('name'))
-            ;
+            ->with('clients', $this->clients->lists('name', 'id'))
+            ->with('places', $this->places->lists('name', 'id'));
     }
 
     /**
@@ -63,20 +82,42 @@ class EventController extends Controller
      */
     public function create()
     {
-        $event = new Event();
+        $event = new Event(['sections' => json_encode([
+            [
+                'category' => "",
+                'rows' => [
+                    ['product' => "", 'amount' => null]
+                ]
+            ]
+        ])]);
 
-        return view('events.create')->with('event', $event);
+        return view('events.create')
+            ->with('event', $event)
+            ->with('staff', $this->staff->orderBy('surname')->orderBy('name')->orderBy('patronymic')->orderBy('username')->lists('full_name', 'id'))
+            ->with('is_admin', \Auth::user()->isAdmin())
+            ->with('statuses', $this->events->getModel()->getStatuses())
+            ->with('formats', $this->events->getModel()->getFormats())
+            ->with('taxes', $this->events->getModel()->getTaxes())
+            ->with('templates', $this->events->getModel()->getTemplates())
+            ->with('clients', $this->clients->lists('name', 'id'))
+            ->with('places', $this->places->lists('name', 'id'))
+            ->with('products', $this->products->all())
+            ->with('categories', $this->categories->all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  EventRepository  $request
+     * @param  EventRequest  $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(EventRepository $request)
+    public function store(EventRequest $request)
     {
+        if (!\Auth::user()->isAdmin()) {
+            $request['user_id'] = \Auth::user()->id;
+        }
+
         $this->events->create($request->except(['_token']));
 
         return redirect()->route('events.index');
@@ -103,21 +144,41 @@ class EventController extends Controller
     {
         $event = $this->events->find($id);
 
-        return view('events.update')->with('event', $event);
+        return view('events.update')
+            ->with('event', $event)
+            ->with('staff', $this->staff->orderBy('surname')->orderBy('name')->orderBy('patronymic')->orderBy('username')->lists('full_name', 'id'))
+            ->with('is_admin', \Auth::user()->isAdmin())
+            ->with('statuses', $this->events->getModel()->getStatuses())
+            ->with('formats', $this->events->getModel()->getFormats())
+            ->with('taxes', $this->events->getModel()->getTaxes())
+            ->with('templates', $this->events->getModel()->getTemplates())
+            ->with('clients', $this->clients->lists('name', 'id'))
+            ->with('places', $this->places->lists('name', 'id'))
+            ->with('products', $this->products->all())
+            ->with('categories', $this->categories->all());
     }
 
     /**
      * Save user
      *
-     * @param EventRepository $request
+     * @param EventRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(EventRepository $request, $id)
+    public function update(EventRequest $request, $id)
     {
         $this->events->update($request->except(['_token']), $id);
 
-        return redirect()->route('events.index');
+        if ($request->has('xls')) {
+            return $this->xls($id);
+        } else {
+            return redirect()->route('events.index');
+        }
+    }
+
+    public function xls($id)
+    {
+        $event = $this->events->find($id);
     }
 
     /**

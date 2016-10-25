@@ -17,7 +17,16 @@ class Product extends Model
      */
     protected $fillable = [
         'id', 'source', 'section1', 'section2', 'section3', 'section4', 'kitchen_id', 'type_id',
-        'name', 'name_en', 'weight', 'price', 'photo'
+        'name', 'name_en', 'weight', 'price', 'photo', 'cost', 'markup'
+    ];
+
+    /**
+     * Hide fields in json
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'source', 'name_en', 'created_at', 'updated_at', 'cost', 'markup', 'photo'
     ];
 
     public function kitchen()

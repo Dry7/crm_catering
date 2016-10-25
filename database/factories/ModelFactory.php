@@ -102,7 +102,7 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
         'user_id'    => $faker->numberBetween(1, 20),
         'status_id'  => $faker->numberBetween(1, 4),
         'client_id'  => $faker->numberBetween(1, 20),
-        'date'       => $faker->date,
+        'date'       => $faker->date('d.m.Y'),
         'format_id'  => $faker->numberBetween(1, 3),
         'persons'    => $faker->numberBetween(1, 100),
         'tables'     => $faker->numberBetween(1, 25),
@@ -113,6 +113,14 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
         'hot_snacks' => $faker->time('H:i:s', '14:00:00'),
         'sorbet'     => $faker->time('H:i:s', '15:00:00'),
         'hot'        => $faker->time('H:i:s', '16:00:00'),
-        'dessert'    => $faker->time('H:i:s', '17:00:00')
+        'dessert'    => $faker->time('H:i:s', '17:00:00'),
+        'sections'   => json_encode([
+            [
+                'category' => "",
+                'rows' => [
+                    ['product' => "", 'amount' => null]
+                ]
+            ]
+        ])
     ];
 });

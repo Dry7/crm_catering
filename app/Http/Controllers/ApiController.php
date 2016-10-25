@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClientRequest;
 use App\Http\Requests\SaveColumnRequest;
 use App\Models\Client;
+use App\Repository\CategoryRepository;
 use App\Repository\ClientRepository;
 use App\Repository\EventRepository;
 use App\Repository\PlaceRepository;

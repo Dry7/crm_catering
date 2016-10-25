@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -19,6 +20,12 @@ class Event extends Model
         3 => 'Кофе-брейк'
     ];
 
+    private static $taxes = [
+        1 => 'НДС входит в стоимость',
+        2 => 'Стоимость без учета НДС +18%',
+        3 => 'Стоимость без НДС'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +33,7 @@ class Event extends Model
      */
     protected $fillable = [
         'id', 'user_id', 'status_id', 'client_id', 'date', 'format_id', 'persons', 'tables',
-        'place_id', 'staff', 'meeting', 'main', 'hot_snacks', 'sorbet', 'hot', 'dessert'
+        'place_id', 'staff', 'meeting', 'main', 'hot_snacks', 'sorbet', 'hot', 'dessert', 'sections'
     ];
 
     /**
@@ -66,5 +73,22 @@ class Event extends Model
     public function getFormats()
     {
         return self::$formats;
+    }
+
+    public function getTaxes()
+    {
+        return self::$taxes;
+    }
+
+    public function getTemplates()
+    {
+        return [
+            'default'
+        ];
+    }
+
+    public function setDateAttribute($value)
+    {
+        $this->attributes['date'] = (string)$value != '' ? Carbon::createFromFormat('d.m.Y', $value) : null;
     }
 }

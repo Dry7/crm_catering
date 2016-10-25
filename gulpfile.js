@@ -9,7 +9,6 @@ var uglify = require('gulp-uglify');
 gulp.task('css', function() {
     return gulp.src([
         'node_modules/bootstrap/less/bootstrap.less',
-        'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
         'node_modules/toastr/toastr.less',
         'node_modules/font-awesome/less/font-awesome.less',
         'node_modules/ionicons/dist/css/ionicons.css',
@@ -42,14 +41,23 @@ gulp.task('js', function() {
         'node_modules/admin-lte/plugins/datatables/jquery.dataTables.js',
         'node_modules/admin-lte/plugins/datatables/dataTables.bootstrap.js',
         'node_modules/admin-lte/plugins/select2/select2.full.js',
-        'node_modules/bootstrap-datepicker/js/bootstrap-datepicker.js',
-        'node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.ru.js',
         'node_modules/jquery-mask-plugin/dist/jquery.mask.js',
         'node_modules/X-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
+        'node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.ru.js',
         'public/js/app.js',
         'resources/assets/js/scripts.js'
     ])
         .pipe(concat('scripts.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('public/js'));
+});
+
+gulp.task('vue', function() {
+    gulp.src([
+        'node_modules/vue/dist/vue.js',
+        'resources/assets/js/components/menu.js'
+    ])
+        .pipe(concat('vue.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('public/js'));
 });
@@ -64,4 +72,4 @@ gulp.task('copy', function () {
     gulp.src('node_modules/X-editable/dist/bootstrap3-editable/img/*').pipe(gulp.dest('public/img'));
 });
 
-gulp.task('default', ['css', 'copy', 'js']);
+gulp.task('default', ['css', 'copy', 'js', 'vue']);

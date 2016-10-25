@@ -12,7 +12,7 @@
             <div class="box">
                 <div class="box-header">
                     <div class="input-box">
-                        <a href="{{ route('products.create') }}" class="btn btn-success">Добавить мероприятие</a>
+                        <a href="{{ route('events.create') }}" class="btn btn-success">Добавить мероприятие</a>
                     </div>
                     <br />
                     <div class="row">

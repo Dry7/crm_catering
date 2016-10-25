@@ -24,7 +24,7 @@ class EventRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|integer|min:1',
+            'user_id' => 'integer|min:1',
             'status_id' => 'required|integer|min:1',
             'client_id' => 'required|integer|min:1',
             'date' => 'required|date',
@@ -38,7 +38,8 @@ class EventRequest extends FormRequest
             'hot_snacks' => 'date_format:H:i',
             'sorbet' => 'date_format:H:i',
             'hot' => 'date_format:H:i',
-            'dessert' => 'date_format:H:i'
+            'dessert' => 'date_format:H:i',
+            'sections' => 'string'
         ];
     }
 }
