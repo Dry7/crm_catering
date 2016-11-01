@@ -12,6 +12,6 @@ class EventSeeder extends Seeder
     public function run()
     {
         \DB::table('events')->truncate();
-        factory(\App\Models\Event::class, 1000)->create();
+        factory(\App\Models\Event::class, 30)->create();
     }
 }
