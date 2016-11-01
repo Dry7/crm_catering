@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "prod": "gulp --production",
-    "dev": "gulp watch"
+    "prodold": "gulp --production",
+    "devold": "gulp watch"
   },
   "devDependencies": {
     "admin-lte": "^2.3.6",
@@ -10,6 +10,7 @@
     "bootstrap-sass": "^3.3.7",
     "font-awesome": "^4.6.3",
     "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",
     "gulp-cssmin": "^0.1.7",
     "gulp-less": "^3.1.0",
@@ -23,6 +24,7 @@
     "vue-resource": "^1.0.3"
   },
   "dependencies": {
+    "X-editable": "^1.5.1",
     "bootstrap-datepicker": "^1.6.4",
     "jquery-mask-plugin": "^1.14.0"
   }

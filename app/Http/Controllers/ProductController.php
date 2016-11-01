@@ -75,8 +75,8 @@ class ProductController extends Controller
 
         return view('products.create')
             ->with('product', $product)
-            ->with('kitchens', $this->kitchens->lists('name'))
-            ->with('types', $this->types->lists('name'));
+            ->with('kitchens', $this->kitchens->lists('name', 'id'))
+            ->with('types', $this->types->lists('name', 'id'));
     }
 
     /**
@@ -124,8 +124,8 @@ class ProductController extends Controller
 
         return view('products.update')
             ->with('product', $product)
-            ->with('kitchens', $this->kitchens->lists('name'))
-            ->with('types', $this->types->lists('name'));
+            ->with('kitchens', $this->kitchens->lists('name', 'id'))
+            ->with('types', $this->types->lists('name', 'id'));
     }
 
     /**
@@ -177,7 +177,7 @@ class ProductController extends Controller
             Excel::selectSheetsByIndex(1)->load($request->file('file')->getPathname(), function ($reader) use ($products, $categories) {
                 foreach ($reader->all() as $i => $item) {
                     /** Categories */
-                    if (((string)trim($item->nazvanie_tovara) == '') and ((string)trim($item->gruppa) !== '') and ((string)trim($item->nazvanie_gruppy) !== '')) {
+                    if (((string)trim($item->gruppa) !== '') and ((string)trim($item->nazvanie_gruppy) !== '')) {
                         $data = [
                             'code' => $item->gruppa,
                             'name' => strlen(trim($item->nazvanie_gruppy)) > 255 ? substr(trim($item->nazvanie_gruppy), 0, 255) : trim($item->nazvanie_gruppy),
@@ -187,7 +187,8 @@ class ProductController extends Controller
                             'section4' => $this->products->getModel()->getSection($item->gruppa, 4)
                         ];
                         $this->categories->updateOrCreate(['code' => $item->gruppa], $data);
-                    } elseif ((string)trim($item->nazvanie_tovara) !== '') {
+                    }
+                    if ((string)trim($item->nazvanie_tovara) !== '') {
                         /** Products */
                         if ((string)$item->gruppa == '') {
                             $item->gruppa = @$reader->all()[$i-1]->gruppa;
@@ -199,6 +200,7 @@ class ProductController extends Controller
                             'section3' => $this->products->getModel()->getSection($item->gruppa, 3),
                             'section4' => $this->products->getModel()->getSection($item->gruppa, 4),
                             'name' => strlen(trim($item->nazvanie_tovara)) > 255 ? substr(trim($item->nazvanie_tovara), 0, 255) : trim($item->nazvanie_tovara),
+                            'name_en' => strlen(trim($item->angliyskoe_nazvanie_tovara)) > 255 ? substr(trim($item->angliyskoe_nazvanie_tovara), 0, 255) : trim($item->angliyskoe_nazvanie_tovara),
                             'weight' => (int)$item->nominalnyy_ves_portsii_g,
                             'cost' => $item->sebestoimost_za_edinitsu_izmereniya_rub,
                             'markup' => $item->natsenka,

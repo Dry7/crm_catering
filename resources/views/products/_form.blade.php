@@ -5,6 +5,10 @@
         {!! Form::text('name', $product->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Введите название', 'require' => 'require']) !!}
     </div>
     <div class="form-group">
+        {!! Form::label('name_en', 'Название на английском') !!}
+        {!! Form::text('name_en', $product->name_en, ['id' => 'name_en', 'class' => 'form-control', 'placeholder' => 'Введите название на английском']) !!}
+    </div>
+    <div class="form-group">
         {!! Form::label('weight', 'Выход, гр. за порцию *') !!}
         {!! Form::number('weight', $product->weight, ['class' => 'form-control', 'id' => 'weight', 'placeholder' => 'Введите выход, гр. за порцию']) !!}
     </div>
