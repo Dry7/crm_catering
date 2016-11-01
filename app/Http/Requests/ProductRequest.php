@@ -32,6 +32,7 @@ class ProductRequest extends FormRequest
             'kitchen_id'  => 'integer',
             'type_id'     => 'integer',
             'name'        => 'required|string|max:255',
+            'name_ут'     => 'string|max:255',
             'weight'      => 'required|integer|min:0',
             'price'       => 'numeric',
             'photography' => 'image'
