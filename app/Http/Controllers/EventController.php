@@ -15,6 +15,7 @@ use App\Repository\EventRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
+use Illuminate\Support\Facades\View;
 
 /**
  * Class EventsController
@@ -159,11 +160,11 @@ class EventController extends Controller
     }
 
     /**
-     * Save user
-     *
      * @param EventRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @param $id
+     *
+     * @return $this|\Illuminate\Http\RedirectResponse|void
      */
     public function update(EventRequest $request, $id)
     {
@@ -171,14 +172,36 @@ class EventController extends Controller
 
         if ($request->has('xls')) {
             return $this->xls($id);
+        } elseif ($request->has('word')) {
+            return $this->word($id);
         } else {
             return redirect()->route('events.index');
         }
     }
 
+    public function word($id)
+    {
+        $event = $this->events->find($id);
+
+        $template = 'events.' . $event->template . '.doc';
+
+        if (!View::exists('events.' . $event->template . '.doc')) {
+            $template = 'events.default.doc';
+        }
+
+        return response()->
+            view($template, ['event' => $event, 'sections' => $event->getSectionsList()])
+                    ->header('Content-type', 'application/msword;')
+                    ->header('Content-Transfer-Encoding', 'Binary')
+                    ->header('Content-disposition', 'attachment; filename=test.doc');
+    }
+
     public function xls($id)
     {
         $event = $this->events->find($id);
+
+        echo '<pre>';
+        print_r($event->getSectionsList());
     }
 
     /**

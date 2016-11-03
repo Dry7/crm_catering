@@ -33,7 +33,8 @@ class Event extends Model
      */
     protected $fillable = [
         'id', 'user_id', 'status_id', 'client_id', 'date', 'format_id', 'persons', 'tables',
-        'place_id', 'staff', 'meeting', 'main', 'hot_snacks', 'sorbet', 'hot', 'dessert', 'sections'
+        'place_id', 'staff', 'meeting', 'main', 'hot_snacks', 'sorbet', 'hot', 'dessert', 'sections',
+        'weight_person', 'tax_id', 'template'
     ];
 
     /**
@@ -65,6 +66,46 @@ class Event extends Model
         return @self::$formats[$this->attributes['format_id']];
     }
 
+    private function time($value)
+    {
+        return Carbon::createFromFormat('H:i:s', $value)->format('H:i');
+    }
+
+    public function getMeetingAttribute()
+    {
+        return $this->time($this->attributes['meeting']);
+    }
+
+    public function getMainAttribute()
+    {
+        return $this->time($this->attributes['main']);
+    }
+
+    public function getHotSnacksAttribute()
+    {
+        return $this->time($this->attributes['hot_snacks']);
+    }
+
+    public function getSorbetAttribute()
+    {
+        return $this->time($this->attributes['sorbet']);
+    }
+
+    public function getHotAttribute()
+    {
+        return $this->time($this->attributes['hot']);
+    }
+
+    public function getDessertAttribute()
+    {
+        return $this->time($this->attributes['dessert']);
+    }
+
+    public function getTaxAttribute()
+    {
+        return @self::$taxes[$this->attributes['tax_id']];
+    }
+
     public function getStatuses()
     {
         return self::$statuses;
@@ -83,12 +124,58 @@ class Event extends Model
     public function getTemplates()
     {
         return [
-            'default'
+            'default' => 'default'
         ];
     }
 
     public function setDateAttribute($value)
     {
         $this->attributes['date'] = (string)$value != '' ? Carbon::createFromFormat('d.m.Y', $value) : null;
+    }
+
+    public function getSectionsListqsqsxcq()
+    {
+        return json_decode($this->sections);
+    }
+
+    public function getSectionsList($person = true)
+    {
+        $sections = json_decode($this->sections);
+
+        for ($i = 0, $sizeof = sizeof($sections); $i < $sizeof; $i++) {
+            if (!is_object($sections[$i]->category)) {
+                $sections[$i]->category = (object)['code' => '', 'name' => '', 'section1' => '', 'section2' => '', 'section3' => '', 'section4' => ''];
+            }
+            $sections[$i]->category->total = 0;
+            $sections[$i]->category->total_weight = 0;
+            for ($j = 0, $sizeof2 = sizeof($sections[$i]->rows); $j < $sizeof2; $j++) {
+                $sections[$i]->rows[$j]->total = @$sections[$i]->rows[$j]->product->price * $sections[$i]->rows[$j]->amount;
+                $sections[$i]->rows[$j]->total_weight = @$sections[$i]->rows[$j]->product->weight * $sections[$i]->rows[$j]->amount;
+                $sections[$i]->category->total += $sections[$i]->rows[$j]->total;
+                $sections[$i]->category->total_weight = @$sections[$i]->rows[$j]->product->weight* $sections[$i]->rows[$j]->amount;
+            }
+        }
+
+        return $sections;
+    }
+
+    /**
+     * Total price
+     *
+     * @param boolean $person By person
+     *
+     * @return int
+     */
+    public function getTotal($person = false)
+    {
+        $total = 0;
+
+        $sections = $this->getSectionsList();
+
+        foreach ($sections as $section) {
+            $total += $section->category->total;
+        }
+
+        return $person ? (int)($total/$this->persons) : $total;
     }
 }

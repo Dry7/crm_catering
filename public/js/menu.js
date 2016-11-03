@@ -5,12 +5,13 @@ Vue.component('menu-grid', {
         products: Array,
         sections: Array,
         categories: Array,
-        init: Array
+        init: Array,
+        persons: Number,
+        weight_person: Boolean,
+        tax: Number,
+        template: String
     },
     created: function () {
-        console.log('created');
-        console.log(this.categories);
-        console.log('created');
         this.sections = this.init;
     },
     computed: {
@@ -111,6 +112,9 @@ Vue.component('menu-grid', {
                 var item = row.product != null ? parseInt(row.product.price)*parseInt(row.amount) : 0;
                 return total + (item > 0 ? item : 0);
             }, 0);
+        },
+        weightPerson: function (weight, amount) {
+            return Math.ceil(Number(weight) * Number(amount) / this.persons);
         }
     }
 });
@@ -127,6 +131,10 @@ var demo = new Vue({
                     {product: "", amount: null}
                 ]
             }
-        ]
+        ],
+        persons: 1,
+        weight_person: false,
+        tax: 1,
+        template: 'default'
     }
 });

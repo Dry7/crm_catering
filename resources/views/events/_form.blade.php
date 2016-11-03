@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('persons', 'Количество персон') !!}
-                {!! Form::number('persons', $event->persons, ['class' => 'form-control', 'id' => 'persons', 'placeholder' => 'Введите количество персон']) !!}
+                {!! Form::number('persons', $event->persons, ['class' => 'form-control', 'id' => 'persons', 'placeholder' => 'Введите количество персон', 'onChange' => 'demo.persons = Number(this.value)']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('tables', 'Количество столов') !!}
@@ -102,7 +102,7 @@
                             <input type="number" v-model.number="row.amount" class="form-control">
                         </td>
                         <td>@{{ row.product != "" ? row.product.weight : '' | weight }}</td>
-                        <td>@{{ row.product != "" ? row.product.weight : '' | weight }}</td>
+                        <td>@{{ row.product != "" ? weightPerson(row.product.weight, row.amount) : '' | weight }}</td>
                         <td>@{{ row.product != "" ? row.product.price : '' | price}}</td>
                         <td>@{{ row.product != "" ? row.product.price*row.amount : '' | total | price}}</td>
                         <td><a href="javascript:void(0);" @click="deleteRow(section, index)" class="btn btn-danger">Удалить</a></td>
@@ -127,20 +127,21 @@
             <a @click="addSection()" class="btn btn-sm btn-success">Добавить подраздел</a>
             <input type="hidden" name="sections" :value="sectionsJSON">
 
+            <br /><br />
             <div class="form-group">
-                <input type="hidden" name="price_person" value="0">
+                <input type="hidden" name="weight_person" value="0">
                 <label>
-                    <input type="checkbox" name="price_person" value="1">
+                    {{ Form::checkbox('weight_person', 1, $event->weight_person) }}
                     Указывать выход на персону
                 </label>
             </div>
             <div class="form-group">
-                {!! Form::label('tax', 'Цена') !!}
-                {!! Form::select('tax', $taxes, 1, ['class' => 'form-control', 'id' => 'taxes']) !!}
+                {!! Form::label('tax_id', 'Цена') !!}
+                {!! Form::select('tax_id', $taxes, $event->tax_id, ['class' => 'form-control', 'id' => 'tax_id']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('template', 'Шаблон') !!}
-                {!! Form::select('template', $templates, 'default', ['class' => 'form-control', 'id' => 'template']) !!}
+                {!! Form::select('template', $templates, $event->template, ['class' => 'form-control', 'id' => 'template']) !!}
             </div>
         </div>
     </script>
@@ -151,6 +152,10 @@
                 :categories='{{ $categories->toJson() }}'
                 :sections="sections"
                 :init="{{ $event->sections }}"
+                :persons="{{ $event->persons }}"
+                :weight_person="{{ (int)$event->weight_person ? 'true' : 'false' }}"
+                :tax="{{ (int)$event->tax_id }}"
+                :template="'{{ (string)$event->template }}'"
         >
         </menu-grid>
     </div>

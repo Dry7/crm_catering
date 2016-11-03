@@ -39,7 +39,10 @@ class EventRequest extends FormRequest
             'sorbet' => 'date_format:H:i',
             'hot' => 'date_format:H:i',
             'dessert' => 'date_format:H:i',
-            'sections' => 'string'
+            'sections' => 'string',
+            'weight_person' => 'boolean',
+            'tax_id' => 'integer',
+            'template' => 'string'
         ];
     }
 }
