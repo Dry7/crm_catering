@@ -176,6 +176,15 @@ $(function () {
     $("#events a[data-name=\"persons\"]").editable({                                      url: "/api/v1/events/save" });
     $("#events a[data-name=\"tables\"]").editable({                                       url: "/api/v1/events/save" });
     $("#events a[data-name=\"place_id\"]").editable({  source: "/api/v1/events/places",   url: "/api/v1/events/save" });
+
+    $('input#cost, input#markup').on('keyup', function () {
+        $('input#price').val(
+            Math.round(
+                Number($('input#cost').val()) +
+                Number($('input#cost').val()) / 100 * Number($('input#markup').val())
+            )
+        );
+    });
 });
 
 /**
