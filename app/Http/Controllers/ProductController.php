@@ -204,7 +204,7 @@ class ProductController extends Controller
                             'weight' => (int)$item->nominalnyy_ves_portsii_g,
                             'cost' => $item->sebestoimost_za_edinitsu_izmereniya_rub,
                             'markup' => $item->natsenka,
-                            'price' => $item->tsena_prodazhi > 0 ? $item->tsena_prodazhi : $item->sebestoimost_za_edinitsu_izmereniya_rub * ($item->natsenka/100),
+                            'price' => $item->tsena_prodazhi > 0 ? $item->tsena_prodazhi : $item->sebestoimost_za_edinitsu_izmereniya_rub + $item->sebestoimost_za_edinitsu_izmereniya_rub / 100 * $item->natsenka,
                             'type_id' => $this->products->getModel()->getType($item->gruppa)
                         ];
                         $this->products->updateOrCreate(['name' => @$data['name']], $data);
