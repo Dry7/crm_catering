@@ -183,7 +183,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
+//        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class
     ],
 
     /*
@@ -237,7 +238,8 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
+//        'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
 
     ],
 

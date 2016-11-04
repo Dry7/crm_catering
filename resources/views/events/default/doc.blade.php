@@ -1636,6 +1636,10 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
   @cp1251($event->tax)
 </p>
 
+<p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
+  @cp1251($copyright)
+</p>
+
 </div>
 
 </body>

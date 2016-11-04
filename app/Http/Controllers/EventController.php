@@ -15,6 +15,8 @@ use App\Repository\EventRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
+use Illuminate\Support\Facades\Auth;
+use PDF;
 use Illuminate\Support\Facades\View;
 
 /**
@@ -174,6 +176,8 @@ class EventController extends Controller
             return $this->xls($id);
         } elseif ($request->has('word')) {
             return $this->word($id);
+        } elseif ($request->has('pdf')) {
+            return $this->pdf($id);
         } else {
             return redirect()->route('events.index');
         }
@@ -190,10 +194,31 @@ class EventController extends Controller
         }
 
         return response()->
-            view($template, ['event' => $event, 'sections' => $event->getSectionsList()])
+            view($template, [
+                'event' => $event,
+                'sections' => $event->getSectionsList(),
+                'copyright' => Auth::user()->copyright
+                ])
                     ->header('Content-type', 'application/msword;')
                     ->header('Content-Transfer-Encoding', 'Binary')
-                    ->header('Content-disposition', 'attachment; filename=test.doc');
+                    ->header('Content-disposition', 'attachment; filename="' . $event->name . '.doc"');
+    }
+
+    public function pdf($id)
+    {
+        $event = $this->events->find($id);
+
+        $template = 'events.' . $event->template . '.pdf';
+
+        if (!View::exists('events.' . $event->template . '.pdf')) {
+            $template = 'events.default.pdf';
+        }
+
+        return PDF::loadView($template, [
+            'event' => $event,
+            'sections' => $event->getSectionsList(),
+            'copyright' => Auth::user()->copyright
+        ])->download($event->name . '.pdf');
     }
 
     public function xls($id)

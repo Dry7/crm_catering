@@ -46,18 +46,30 @@ class User extends Authenticatable
     /**
      * @brief Full name
      *
+     * @param boolean $login
+     *
      * @return string
      */
-    public function getFullNameAttribute()
+    public function getFullNameAttribute($login = true)
     {
         $name = [];
 
         if (@$this->attributes['surname']    != '') { $name[] = $this->attributes['surname'];    }
         if (@$this->attributes['name']       != '') { $name[] = $this->attributes['name'];       }
         if (@$this->attributes['patronymic'] != '') { $name[] = $this->attributes['patronymic']; }
-        if (@$this->attributes['username']   != '') { $name[] = '(' . $this->attributes['username'] . ')'; }
+        if ($login and (@$this->attributes['username']   != '')) { $name[] = '(' . $this->attributes['username'] . ')'; }
 
         return implode(' ', $name);
+    }
+
+    public function getCopyrightAttribute()
+    {
+        return 'С уважением, ' . $this->getFullNameAttribute(false) . '<br />' .
+            'Ведущий менеджер проекта<br />' .
+            'Компания «Fusion Service»<br />' .
+            'Тел: +7 (812) 602 05 20<br />' .
+            'e-mail: office@fusion-service.com<br />' .
+            'КЕЙТЕРИНГ.РФ';
     }
 
     public function isAdmin()

@@ -165,7 +165,7 @@
     {!! Form::submit('Сохранить', ['class' => 'btn btn-primary']) !!}
     {!! Form::submit('Word', ['class' => 'btn btn-primary', 'name' => 'word']) !!}
     {!! Form::submit('XLS', ['class' => 'btn btn-primary', 'name' => 'xls']) !!}
-    {!! Form::submit('PDF', ['class' => 'btn btn-primary', 'pdf' => 'pdf']) !!}
+    {!! Form::submit('PDF', ['class' => 'btn btn-primary', 'name' => 'pdf']) !!}
 </div>
 {!! Html::script('https://vuejs.org/js/vue.js') !!}
 {!! Html::script('js/menu.js') !!}

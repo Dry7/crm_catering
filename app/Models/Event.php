@@ -178,4 +178,18 @@ class Event extends Model
 
         return $person ? (int)($total/$this->persons) : $total;
     }
+
+    /**
+     * Name of event
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return implode(' - ', [
+            @$this->client->name,
+            @$this->place->name,
+            @$this->date->format('d.m.Y')
+        ]);
+    }
 }
