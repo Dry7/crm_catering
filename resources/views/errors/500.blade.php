@@ -12,7 +12,19 @@
 @endsection
 
 @section('main-content')
+    @unless(empty($sentryID))
+        <!-- Sentry JS SDK 2.1.+ required -->
+        <script src="https://cdn.ravenjs.com/3.3.0/raven.min.js"></script>
 
+        <script>
+            Raven.showReportDialog({
+                eventId: '{{ $sentryID }}',
+
+                // use the public DSN (dont include your secret!)
+                dsn: 'https://2b57059cb73f46af8268f515a0f761a5@sentry.io/111449'
+            });
+        </script>
+    @endunless
     <div class="error-page">
         <h2 class="headline text-red">500</h2>
         <div class="error-content">
