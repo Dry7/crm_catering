@@ -13,8 +13,16 @@
         {!! Form::number('weight', $product->weight, ['class' => 'form-control', 'id' => 'weight', 'placeholder' => 'Введите выход, гр. за порцию']) !!}
     </div>
     <div class="form-group">
+        {!! Form::label('cost', 'Себестоимость за порцию, RUB') !!}
+        {!! Form::number('cost', $product->cost, ['class' => 'form-control', 'id' => 'cost', 'placeholder' => 'Введите себестоимость за порцию, RUB']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('markup', 'Наценка') !!}
+        {!! Form::number('markup', $product->markup, ['class' => 'form-control', 'id' => 'markup', 'placeholder' => 'Введите наценку, %']) !!}
+    </div>
+    <div class="form-group">
         {!! Form::label('price', 'Цена за порцию, RUB') !!}
-        {!! Form::number('price', $product->price, ['class' => 'form-control', 'id' => 'price', 'placeholder' => 'Введите цена за порцию, RUB']) !!}
+        {!! Form::number('price', $product->price, ['class' => 'form-control', 'id' => 'price', 'placeholder' => 'Введите цену за порцию, RUB']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('kitchen_id', 'Кухня') !!}
