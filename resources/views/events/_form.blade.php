@@ -163,9 +163,9 @@
 
 <div class="box-footer">
     {!! Form::submit('Сохранить', ['class' => 'btn btn-primary']) !!}
-    {!! Form::submit('Word', ['class' => 'btn btn-primary', 'name' => 'word']) !!}
-    {!! Form::submit('XLS', ['class' => 'btn btn-primary', 'name' => 'xls']) !!}
-    {!! Form::submit('PDF', ['class' => 'btn btn-primary', 'name' => 'pdf']) !!}
+    <button class="btn btn-primary" name="word" type="submit"><i class="fa fa-file-word-o"> Word</i></button>
+    <button class="btn btn-success" name="xls" type="submit"><i class="fa fa-file-excel-o"> XLS</i></button>
+    <button class="btn btn-danger" name="pdf" type="submit"><i class="fa fa-file-pdf-o"> PDF</i></button>
 </div>
 {!! Html::script('https://vuejs.org/js/vue.js') !!}
 {!! Html::script('js/menu.js') !!}

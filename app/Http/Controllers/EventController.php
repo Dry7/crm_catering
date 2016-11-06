@@ -15,6 +15,7 @@ use App\Repository\EventRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 use Illuminate\Support\Facades\View;
@@ -172,17 +173,24 @@ class EventController extends Controller
     {
         $this->events->update($request->except(['_token']), $id);
 
-        if ($request->has('xls')) {
+        if ($request->exists('xls')) {
             return $this->xls($id);
-        } elseif ($request->has('word')) {
+        } elseif ($request->exists('word')) {
             return $this->word($id);
-        } elseif ($request->has('pdf')) {
+        } elseif ($request->exists('pdf')) {
             return $this->pdf($id);
         } else {
             return redirect()->route('events.index');
         }
     }
 
+    /**
+     * Download event in Microsoft Word format
+     *
+     * @param $id
+     *
+     * @return Response
+     */
     public function word($id)
     {
         $event = $this->events->find($id);
@@ -204,6 +212,13 @@ class EventController extends Controller
                     ->header('Content-disposition', 'attachment; filename="' . $event->name . '.doc"');
     }
 
+    /**
+     * Download event in PDF format
+     *
+     * @param $id
+     *
+     * @return Response
+     */
     public function pdf($id)
     {
         $event = $this->events->find($id);
@@ -221,6 +236,13 @@ class EventController extends Controller
         ])->download($event->name . '.pdf');
     }
 
+    /**
+     * Download event in Microsoft Excel format
+     *
+     * @param $id
+     *
+     * @return Response
+     */
     public function xls($id)
     {
         $event = $this->events->find($id);
