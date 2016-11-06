@@ -106,7 +106,7 @@ return array(
     |
     */
 
-    'creator'    => 'Maatwebsite',
+    'creator'    => 'Fusion Service',
 
     'csv'        => array(
         /*
@@ -439,7 +439,7 @@ return array(
         |
         */
 
-        'calculate'               => true,
+        'calculate'               => false,
 
         /*
         |--------------------------------------------------------------------------

@@ -85,7 +85,7 @@ class Product extends Model
         if (preg_match('/^0205/i', $category)) { return 5; }
         if (preg_match('/^0206/i', $category)) { return 6; }
         if (preg_match('/^03/i', $category))   { return 7; }
-        if (preg_match('/^04/i', $category))   { return 7; }
+        if (preg_match('/^04/i', $category))   { return 8; }
 
         return null;
     }

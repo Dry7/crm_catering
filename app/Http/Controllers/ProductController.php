@@ -203,8 +203,8 @@ class ProductController extends Controller
                             'name_en' => strlen(trim($item->angliyskoe_nazvanie_tovara)) > 255 ? substr(trim($item->angliyskoe_nazvanie_tovara), 0, 255) : trim($item->angliyskoe_nazvanie_tovara),
                             'weight' => (int)$item->nominalnyy_ves_portsii_g,
                             'cost' => $item->sebestoimost_za_edinitsu_izmereniya_rub,
-                            'markup' => $item->natsenka,
-                            'price' => $item->tsena_prodazhi > 0 ? $item->tsena_prodazhi : $item->sebestoimost_za_edinitsu_izmereniya_rub + $item->sebestoimost_za_edinitsu_izmereniya_rub / 100 * $item->natsenka,
+                            'markup' => $item->natsenka*100,
+                            'price' => $item->tsena_prodazhi > 0 ? $item->tsena_prodazhi : $item->sebestoimost_za_edinitsu_izmereniya_rub + $item->sebestoimost_za_edinitsu_izmereniya_rub * $item->natsenka,
                             'type_id' => $this->products->getModel()->getType($item->gruppa)
                         ];
                         $this->products->updateOrCreate(['name' => @$data['name']], $data);
