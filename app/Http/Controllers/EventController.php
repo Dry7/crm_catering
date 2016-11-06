@@ -17,6 +17,7 @@ use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Illuminate\Support\Facades\View;
 
@@ -246,9 +247,70 @@ class EventController extends Controller
     public function xls($id)
     {
         $event = $this->events->find($id);
+        $sections = $event->getSectionsList();
 
-        echo '<pre>';
-        print_r($event->getSectionsList());
+        Excel::create($event->name . '.xls', function ($excel) use ($event, $sections){
+            $excel->sheet('Меню', function($sheet) use ($event, $sections) {
+
+                $time_index = 2;
+
+                $sheet->cell('H' . $time_index++, function ($cell) { $cell->setValue('Информация о мероприятии'); $cell->setFontWeight('bold'); });
+
+                $sheet->cell('H' . $time_index, function ($cell) { $cell->setValue('Дата'); });
+                $sheet->cell('I' . $time_index++, function ($cell) use ($event) { $cell->setValue($event->date->format('d.m.Y')); });
+
+                if ($event->meeting) {
+                    $sheet->cell('H' . $time_index, function ($cell) { $cell->setValue('Время встречи гостей'); });
+                    $sheet->cell('I' . $time_index++, function ($cell) use ($event) { $cell->setValue($event->meeting); });
+                }
+
+                if ($event->main) {
+                    $sheet->cell('H' . $time_index, function ($cell) { $cell->setValue('Время основного проекта'); });
+                    $sheet->cell('I' . $time_index++, function ($cell) use ($event) { $cell->setValue($event->main); });
+                }
+
+                if ($event->hot_snacks) {
+                    $sheet->cell('H' . $time_index, function ($cell) { $cell->setValue('Время горячей закуски'); });
+                    $sheet->cell('I' . $time_index++, function ($cell) use ($event) { $cell->setValue($event->hot_snacks); });
+                }
+
+                if ($event->sorbet) {
+                    $sheet->cell('H' . $time_index, function ($cell) { $cell->setValue('Время сорбет'); });
+                    $sheet->cell('I' . $time_index++, function ($cell) use ($event) { $cell->setValue($event->sorbet); });
+                }
+
+                if ($event->hot) {
+                    $sheet->cell('H' . $time_index, function ($cell) { $cell->setValue('Время горячего'); });
+                    $sheet->cell('I' . $time_index++, function ($cell) use ($event) { $cell->setValue($event->hot); });
+                }
+
+                if ($event->dessert) {
+                    $sheet->cell('H' . $time_index, function ($cell) { $cell->setValue('Время десерта'); });
+                    $sheet->cell('I' . $time_index, function ($cell) use ($event) { $cell->setValue($event->dessert); });
+                }
+
+                $sheet->row(1, ['Название', 'Количество', 'Вес порции', 'Общий вес']);
+                $row_index = 2;
+
+                foreach ($sections as $section) {
+                    if (@$section->category->name != '') {
+                        $sheet->cell('A' . $row_index++, function ($cell) use ($section) {
+                            $cell->setValue(@$section->category->name);
+                            $cell->setFontWeight('bold');
+                        });
+                    }
+                    foreach ($section->rows as $row) {
+                        $sheet->row($row_index++, [
+                            $row->product->name,
+                            $row->amount . ' шт.',
+                            $row->product->weight . ' гр.',
+                            $row->total_weight . ' гр.'
+                        ]);
+                    }
+                    $row_index++;
+                }
+            });
+        })->download('xls');
     }
 
     /**
