@@ -99,7 +99,6 @@ Vue.component('menu-grid', {
 
             return data;
         },
-
         totalAmount: function (section) {
             console.log(JSON.stringify(this.sections));
             return section.rows.reduce(function (total, row) {
@@ -115,6 +114,12 @@ Vue.component('menu-grid', {
         },
         weightPerson: function (weight, amount) {
             return Math.ceil(Number(weight) * Number(amount) / this.persons);
+        },
+        changeProduct: function (row, event) {
+            console.log('changeProduct');
+            console.log(this.products[event.target.selectedIndex-1]);
+            console.log(event);
+            row.product = this.products[event.target.selectedIndex-1];
         }
     }
 });

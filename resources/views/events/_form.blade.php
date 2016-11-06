@@ -93,9 +93,9 @@
                     <tbody>
                     <tr v-for="(row, index) in section.rows">
                         <td class="product">
-                            <select v-model="row.product" class="form-control">
+                            <select class="form-control" @change="changeProduct(row, $event)">
                                 <option value="">Выберите блюдо</option>
-                                <option v-for="product in filteredData(section.category)" v-bind:value="product">@{{ product.name }}</option>
+                                <option v-for="product in filteredData(section.category)" v-bind:value="product" :key="product.id" :selected="row.product.id == product.id">@{{ product.name }}</option>
                             </select>
                         </td>
                         <td class="amount">
