@@ -1603,7 +1603,8 @@ e-height:
 
     @foreach($section->rows as $row)
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
-@cp1251($row->product->name)
+  @cp1251($row->product->name)
+  @image_doc($row->product->id)
 </p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>

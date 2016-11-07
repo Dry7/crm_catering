@@ -45,6 +45,18 @@ class BladeServiceProvider extends ServiceProvider
 
             return '<?= ceil(' . $row . '->product->weight*' . $row . '->amount / ' . $persons . '); ?>';
         });
+
+        Blade::directive('image', function ($expression) {
+            return '<?php $product = App\Models\Product::find(' . $expression . '); if ($product->photo_has) { echo \'<img src="\' . $product->photo_base64 . \'" />\'; } ?>';
+        });
+
+        Blade::directive('image_doc', function ($expression) {
+            return '<?php $product = App\Models\Product::find(' . $expression . '); ' .
+            'if ($product->photo_has) { ' .
+              '$size = $product->getPhotoSizeAttribute(680); ' .
+              'echo \'<img src=3D"http://catering\' . $product->photo_url . \'" width=3D\' . $size->width . \' height=3D\' . $size->height . \' />\'; ' .
+            '} ?>';
+        });
     }
 
     /**

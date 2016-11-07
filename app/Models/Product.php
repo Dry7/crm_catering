@@ -59,6 +59,41 @@ class Product extends Model
     }
 
     /**
+     * Get base64 code of photo
+     *
+     * @return string
+     */
+    public function getPhotoBase64Attribute()
+    {
+        return 'data:image/jpeg;base64,' . base64_encode(Storage::get($this->attributes['photo']));
+    }
+
+    /**
+     * Get image size
+     *
+     * @param integet $max_width
+     *
+     * @return object
+     */
+    public function getPhotoSizeAttribute($max_width = null)
+    {
+        $size = getimagesizefromstring(Storage::get($this->attributes['photo']));
+
+        if ($max_width == null) {
+            $width = $size[0];
+            $height = $size[1];
+        } else {
+            $width = $max_width;
+            $height = $size[1]/$size[0]*$width;
+        }
+
+        return (object)[
+            'width' => $width,
+            'height' => $height
+        ];
+    }
+
+    /**
      * Delete photo
      *
      * @return mixed

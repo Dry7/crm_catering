@@ -130,7 +130,10 @@ h4 {
 
     @foreach($section->rows as $row)
 <div class="product">
-    <p align="center">{{ $row->product->name }}</p>
+    <p align="center">
+        {{ $row->product->name }}
+        @image($row->product->id)
+    </p>
     <p align="center">
 @if($event->weight_person)
         Стоимость с персоны – @price_person($row, $event->persons) рублей @weight_person($row, $event->persons) гр
