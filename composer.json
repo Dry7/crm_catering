@@ -13,7 +13,6 @@
         "doctrine/dbal": "^2.5",
         "prettus/l5-repository": "^2.6",
         "maatwebsite/excel": "~2.1.0",
-        "sentry/sentry-laravel": "^0.4.1",
         "niklasravnsborg/laravel-pdf": "^1.1",
         "phpoffice/phpword": "v0.13.*"
     },

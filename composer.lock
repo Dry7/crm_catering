@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c15e98440482f5849a277eec7532b427",
-    "content-hash": "7d6050e83e3d7cd19ffd9a5da62eb026",
+    "hash": "c53f67df05e96e403f815061351df59a",
+    "content-hash": "1ea9025a487dc6854f1d3aad59adfa1f",
     "packages": [
         {
             "name": "acacha/admin-lte-template-laravel",
@@ -1617,16 +1617,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "c0125896dbb151380ab47e96c621741e79623beb"
+                "reference": "a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/c0125896dbb151380ab47e96c621741e79623beb",
-                "reference": "c0125896dbb151380ab47e96c621741e79623beb",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e",
+                "reference": "a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e",
                 "shasum": ""
             },
             "require": {
@@ -1661,7 +1661,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-10-17 15:23:22"
+            "time": "2016-11-07 23:38:38"
         },
         {
             "name": "pclzip/pclzip",
@@ -2215,118 +2215,6 @@
                 "uuid"
             ],
             "time": "2016-10-02 15:51:17"
-        },
-        {
-            "name": "sentry/sentry",
-            "version": "1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "be326f6a8eacacd86598af2a82bd37e93d9126d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/be326f6a8eacacd86598af2a82bd37e93d9126d2",
-                "reference": "be326f6a8eacacd86598af2a82bd37e93d9126d2",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "monolog/monolog": "*",
-                "php": ">=5.2.4"
-            },
-            "conflict": {
-                "raven/raven": "*"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.8.0",
-                "phpunit/phpunit": "^4.6.6"
-            },
-            "bin": [
-                "bin/sentry"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Raven_": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "David Cramer",
-                    "email": "dcramer@gmail.com"
-                }
-            ],
-            "description": "A PHP client for Sentry (http://getsentry.com)",
-            "homepage": "http://getsentry.com",
-            "keywords": [
-                "log",
-                "logging"
-            ],
-            "time": "2016-09-29 21:31:50"
-        },
-        {
-            "name": "sentry/sentry-laravel",
-            "version": "0.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/getsentry/sentry-laravel.git",
-                "reference": "34e4f5d800ce8db087272df4e244bdf565fce4e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-laravel/zipball/34e4f5d800ce8db087272df4e244bdf565fce4e1",
-                "reference": "34e4f5d800ce8db087272df4e244bdf565fce4e1",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "4.*|5.*",
-                "php": ">=5.2.4",
-                "sentry/sentry": ">=1.5.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.8.0",
-                "phpunit/phpunit": "^4.6.6"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.4.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Sentry\\SentryLaravel\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Cramer",
-                    "email": "dcramer@gmail.com"
-                }
-            ],
-            "description": "Laravel integration for Sentry (http://getsentry.com)",
-            "homepage": "http://getsentry.com",
-            "keywords": [
-                "errors",
-                "laravel",
-                "logging",
-                "sentry"
-            ],
-            "time": "2016-09-30 07:13:57"
         },
         {
             "name": "setasign/fpdi",
