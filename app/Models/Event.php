@@ -68,37 +68,37 @@ class Event extends Model
 
     private function time($value)
     {
-        return Carbon::createFromFormat('H:i:s', $value)->format('H:i');
+        return $value != '' ? Carbon::parse('01.01.2016 ' . $value)->format('H:i') : '';
     }
 
     public function getMeetingAttribute()
     {
-        return $this->time($this->attributes['meeting']);
+        return $this->time(@$this->attributes['meeting']);
     }
 
     public function getMainAttribute()
     {
-        return $this->time($this->attributes['main']);
+        return $this->time(@$this->attributes['main']);
     }
 
     public function getHotSnacksAttribute()
     {
-        return $this->time($this->attributes['hot_snacks']);
+        return $this->time(@$this->attributes['hot_snacks']);
     }
 
     public function getSorbetAttribute()
     {
-        return $this->time($this->attributes['sorbet']);
+        return $this->time(@$this->attributes['sorbet']);
     }
 
     public function getHotAttribute()
     {
-        return $this->time($this->attributes['hot']);
+        return $this->time(@$this->attributes['hot']);
     }
 
     public function getDessertAttribute()
     {
-        return $this->time($this->attributes['dessert']);
+        return $this->time(@$this->attributes['dessert']);
     }
 
     public function getTaxAttribute()
