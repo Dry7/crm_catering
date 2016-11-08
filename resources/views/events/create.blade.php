@@ -14,7 +14,7 @@
                     @include('events._form', [
                         'event' => $event, 'statuses' => $statuses, 'clients' => $clients, 'formats' => $formats, 'places' => $places,
                         'products' => $products, 'categories' => $categories, 'staff' => $staff, 'is_admin' => $is_admin, 'taxes' => $taxes,
-                        'templates' => $templates
+                        'templates' => $templates, 'max_discount' => $max_discount
                     ])
                 {!! Form::close() !!}
             </div>

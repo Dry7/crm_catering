@@ -149,9 +149,17 @@ h4 {
 <p align="center" class="total">Итого:</p>
 <p align="center">
   @if($event->weight_person)
-  Стоимость с персоны – {{ $event->getTotal(true) }} руб
+  Стоимость с персоны – {{ $total }} руб
+      @if($event->discount > 0)
+          <br />Скидка - {{ $event->discount }}%
+          <br />Стоимость со скидкой - @discount($total, $event->discount) руб
+      @endif
   @else
-  Стоимость – {{ $event->getTotal() }} руб
+  Стоимость – {{ $total }} руб
+        @if($event->discount > 0)
+            <br />Скидка - {{ $event->discount }}%
+            <br />Стоимость со скидкой - @discount($total, $event->discount) руб
+        @endif
   @endif
 </p>
 

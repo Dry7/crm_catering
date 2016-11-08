@@ -1627,9 +1627,17 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
   @if($event->weight_person)
-  Стоимость с персоны – {{ $event->getTotal(true) }} <span class=3DSpellE>руб</span>
+  Стоимость с персоны – {{ $total }} <span class=3DSpellE>руб</span>
+      @if($event->discount > 0)
+          <br />Скидка - {{ $event->discount }}%
+          <br />Стоимость со скидкой - @discount($total, $event->discount) руб
+      @endif
   @else
-  Стоимость – {{ $event->getTotal() }} <span class=3DSpellE>руб</span>
+  Стоимость – {{ $total }} <span class=3DSpellE>руб</span>
+        @if($event->discount > 0)
+            <br />Скидка - {{ $event->discount }}%
+            <br />Стоимость со скидкой - @discount($total, $event->discount) руб
+        @endif
   @endif
 </p>
 

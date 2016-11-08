@@ -76,4 +76,14 @@ class User extends Authenticatable
     {
         return $this->job === 'admin';
     }
+
+    /**
+     * Get max discount
+     * 
+     * @return int
+     */
+    public function getMaxDiscountAttribute()
+    {
+        return $this->isAdmin() ? 100 : 10;
+    }
 }

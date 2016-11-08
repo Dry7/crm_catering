@@ -57,6 +57,12 @@ class BladeServiceProvider extends ServiceProvider
               'echo \'<img src=3D"http://catering\' . $product->photo_url . \'" width=3D\' . $size->width . \' height=3D\' . $size->height . \' />\'; ' .
             '} ?>';
         });
+
+        Blade::directive('discount', function ($expression) {
+            list($price, $discount) = explode(',', str_replace(['(', ')', ' '], '', $expression));
+
+            return '<?= ceil(' . $price . ' - ' . $price . '/100*' . $discount . '); ?>';
+        });
     }
 
     /**

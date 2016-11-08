@@ -185,6 +185,19 @@ $(function () {
             )
         );
     });
+
+    /**
+     * Set maximum discount
+     */
+    $('input#discount').on('keyup', function () {
+        console.log($(this).val());
+        if (Number($(this).val()) > Number($(this).data('max'))) {
+//            $(this).val($(this).data('max'));
+        }
+        if (Number($(this).val()) < 0) {
+            $(this).val(0);
+        }
+    })
 });
 
 /**

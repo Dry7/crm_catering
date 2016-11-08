@@ -102,6 +102,7 @@ class EventController extends Controller
             ->with('event', $event)
             ->with('staff', $this->staff->orderBy('surname')->orderBy('name')->orderBy('patronymic')->orderBy('username')->lists('full_name', 'id'))
             ->with('is_admin', \Auth::user()->isAdmin())
+            ->with('max_discount', \Auth::user()->max_discount)
             ->with('statuses', $this->events->getModel()->getStatuses())
             ->with('formats', $this->events->getModel()->getFormats())
             ->with('taxes', $this->events->getModel()->getTaxes())
@@ -155,6 +156,7 @@ class EventController extends Controller
             ->with('event', $event)
             ->with('staff', $this->staff->orderBy('surname')->orderBy('name')->orderBy('patronymic')->orderBy('username')->lists('full_name', 'id'))
             ->with('is_admin', \Auth::user()->isAdmin())
+            ->with('max_discount', \Auth::user()->max_discount)
             ->with('statuses', $this->events->getModel()->getStatuses())
             ->with('formats', $this->events->getModel()->getFormats())
             ->with('taxes', $this->events->getModel()->getTaxes())
@@ -204,43 +206,12 @@ class EventController extends Controller
             $template = 'events.default.doc';
         }
 
-//        $phpWord = new \PhpOffice\PhpWord\PhpWord();
-//        $section = $phpWord->createSection();
-//
-//        $eventsCellNameWidth = 3000;
-//        $eventsCellName = ['bgColor' => '243D66', 'color' => 'FFFFFF', 'cellMargin' => 80, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::START];
-//        $eventsCellValue = ['cellMargin' => 80, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::START];
-//        $table = $section->addTable(['width' => 100]);
-//        $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Тип мероприятия'); $table->addCell(null, $eventsCellValue)->addText($event->format);
-//        $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Количество персон'); $table->addCell(null, $eventsCellValue)->addText($event->persons);
-//        $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Количество столов'); $table->addCell(null, $eventsCellValue)->addText($event->tables);
-//        $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Место проведения'); $table->addCell(null, $eventsCellValue)->addText($event->place->name);
-//        $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Количество STAF питания'); $table->addCell(null, $eventsCellValue)->addText($event->staff);
-//        if ($event->meeting) { $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Время встречи гостей'); $table->addCell(null, $eventsCellValue)->addText($event->meeting); }
-//        if ($event->main) { $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Время основного проекта'); $table->addCell(null, $eventsCellValue)->addText($event->main); }
-//        if ($event->hot_snacks) { $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Время горячей закуски'); $table->addCell(null, $eventsCellValue)->addText($event->hot_snacks); }
-//        if ($event->sorbet) { $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Время сорбет'); $table->addCell(null, $eventsCellValue)->addText($event->sorbet); }
-//        if ($event->hot) { $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Время горячего'); $table->addCell(null, $eventsCellValue)->addText($event->hot); }
-//        if ($event->dessert) { $table->addRow(); $table->addCell($eventsCellNameWidth, $eventsCellName)->addText('Время десерта'); $table->addCell(null, $eventsCellValue)->addText($event->dessert); }
-
-
-//        $html = view($template, [
-//                'event' => $event,
-//                'sections' => $event->getSectionsList(),
-//                'copyright' => Auth::user()->copyright
-//                ]);
-//        \PhpOffice\PhpWord\Shared\Html::addHtml($section, $html);
-//        $section->addImage('http://ic.pics.livejournal.com/evo_lutio/43573826/76961/76961_original.jpg');
-
-
-//        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-//        $objWriter->save('helloWorld.docx');
-
         return response()->
                     view($template, [
                         'event' => $event,
                         'sections' => $event->getSectionsList(),
-                        'copyright' => Auth::user()->copyright
+                        'copyright' => Auth::user()->copyright,
+                        'total' => $event->weight_person ? $event->getTotal(true) : $event->getTotal()
                     ])
                     ->header('Content-type', 'application/msword;')
                     ->header('Content-Transfer-Encoding', 'Binary')
@@ -267,7 +238,8 @@ class EventController extends Controller
         return PDF::loadView($template, [
             'event' => $event,
             'sections' => $event->getSectionsList(),
-            'copyright' => Auth::user()->copyright
+            'copyright' => Auth::user()->copyright,
+            'total' => $event->weight_person ? $event->getTotal(true) : $event->getTotal()
         ])->download($event->name . '.pdf');
     }
 

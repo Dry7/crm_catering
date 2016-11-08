@@ -140,6 +140,10 @@
                 {!! Form::select('tax_id', $taxes, $event->tax_id, ['class' => 'form-control', 'id' => 'tax_id']) !!}
             </div>
             <div class="form-group">
+                {!! Form::label('discount', 'Скидка') !!}
+                {!! Form::number('discount', $event->discount, ['class' => 'form-control', 'id' => 'discount', 'data-max' => $max_discount]) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('template', 'Шаблон') !!}
                 {!! Form::select('template', $templates, $event->template, ['class' => 'form-control', 'id' => 'template']) !!}
             </div>
