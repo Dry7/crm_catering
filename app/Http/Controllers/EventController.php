@@ -206,7 +206,7 @@ class EventController extends Controller
             $template = 'events.default.doc';
         }
 
-        return response(preg_replace('/\n/', '\r\n', view($template, [
+        return response(preg_replace('/\n/', ' ', view($template, [
             'event' => $event,
             'sections' => $event->getSectionsList(),
             'copyright' => Auth::user()->copyright,
