@@ -54,7 +54,7 @@ class BladeServiceProvider extends ServiceProvider
             return '<?php $product = App\Models\Product::find(' . $expression . '); ' .
             'if ($product->photo_has) { ' .
               '$size = $product->getPhotoSizeAttribute(680); ' .
-              'echo \'<img src=3D"http://catering\' . $product->photo_url . \'" width=3D\' . $size->width . \' height=3D\' . $size->height . \' />\'; ' .
+              'echo \'<img src=3D"\' . env(\'APP_URL\') . $product->photo_url . \'" width=3D\' . $size->width . \' height=3D\' . $size->height . \' />\'; ' .
             '} ?>';
         });
 
