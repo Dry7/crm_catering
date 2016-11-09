@@ -28,7 +28,7 @@ set :pty, true
 append :linked_files, '.env'
 
 # Default value for linked_dirs is []
-# append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
+append :linked_dirs, 'storage/app/public', 'public/storage'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -40,7 +40,7 @@ set :composer_install_flags, '--no-interaction --quiet --optimize-autoloader'
 
 set :npm_flags, ''
 
-set :file_permissions_paths, ["bootstrap/cache", "storage"]
+set :file_permissions_paths, ["bootstrap/cache", "storage", "vendor/niklasravnsborg/mpdf/ttfontdata"]
 set :file_permissions_chmod_mode, "0777"
 
 namespace :laravel do
@@ -70,5 +70,4 @@ namespace :deploy do
     before "deploy:updated", "deploy:set_permissions:chmod"
 
     after :published, "laravel:migrate"
-    after :published, "phpunit:run"
 end
