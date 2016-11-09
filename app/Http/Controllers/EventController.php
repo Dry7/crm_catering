@@ -206,13 +206,12 @@ class EventController extends Controller
             $template = 'events.default.doc';
         }
 
-        return response()->
-                    view($template, [
-                        'event' => $event,
-                        'sections' => $event->getSectionsList(),
-                        'copyright' => Auth::user()->copyright,
-                        'total' => $event->weight_person ? $event->getTotal(true) : $event->getTotal()
-                    ])
+        return response(preg_replace('/\n/', '\r\n', view($template, [
+            'event' => $event,
+            'sections' => $event->getSectionsList(),
+            'copyright' => Auth::user()->copyright,
+            'total' => $event->weight_person ? $event->getTotal(true) : $event->getTotal()
+        ])))
                     ->header('Content-type', 'application/msword;')
                     ->header('Content-Transfer-Encoding', 'Binary')
                     ->header('Content-disposition', 'attachment; filename="' . $event->name . '.doc"');
