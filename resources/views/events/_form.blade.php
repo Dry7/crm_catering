@@ -76,7 +76,7 @@
             <div v-for="section in sections" class="section">
                 <select v-model="section.category" class="form-control">
                     <option value="">Выберите категорию</option>
-                    <option v-for="category in categories" v-bind:value="category">@{{ category.name }}</option>
+                    <option v-for="category in categories" v-bind:value="category">@{{ categoryList(category) + category.name }}</option>
                 </select>
                 <table v-if="true" class="table table-bordered">
                     <thead>
@@ -171,5 +171,5 @@
     <button class="btn btn-success" name="xls" type="submit"><i class="fa fa-file-excel-o"> XLS</i></button>
     <button class="btn btn-danger" name="pdf" type="submit"><i class="fa fa-file-pdf-o"> PDF</i></button>
 </div>
-{!! Html::script('https://vuejs.org/js/vue.js') !!}
+{!! Html::script('js/vue.min.js') !!}
 {!! Html::script('js/menu.js') !!}

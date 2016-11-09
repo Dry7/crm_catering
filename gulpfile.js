@@ -54,8 +54,7 @@ gulp.task('js', function() {
 
 gulp.task('vue', function() {
     gulp.src([
-        'node_modules/vue/dist/vue.js',
-        'resources/assets/js/components/menu.js'
+        'node_modules/vue/dist/vue.js'
     ])
         .pipe(concat('vue.min.js'))
         .pipe(uglify())

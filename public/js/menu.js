@@ -119,6 +119,21 @@ Vue.component('menu-grid', {
             row.product = this.products.filter(function (product) {
                 return Number(product.id) == Number(event.target.value);
             })[0];
+        },
+        categoryList: function (category) {
+            var level = 0;
+            if (category.section2 !== null) { level++; }
+            if (category.section3 !== null) { level++; }
+            if (category.section4 !== null) { level++; }
+
+            var r = '';
+
+            while (level > 0) {
+                r += '--';
+                level--;
+            }
+
+            return r;
         }
     }
 });
