@@ -29,7 +29,7 @@ class EventRepository extends BaseRepository
     public function create(array $attributes)
     {
         if (!Auth::user()->isAdmin()) {
-            if ($attributes['discount'] > 10) {
+            if (@$attributes['discount'] > 10) {
                 $attributes['discount'] = 10;
             }
         }
@@ -47,7 +47,7 @@ class EventRepository extends BaseRepository
     public function update(array $attributes, $id)
     {
         if (!Auth::user()->isAdmin()) {
-            if ($attributes['discount'] > 10) {
+            if (@$attributes['discount'] > 10) {
                 $attributes['discount'] = 10;
             }
         }

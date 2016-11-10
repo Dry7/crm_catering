@@ -121,6 +121,10 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
                     ['product' => "", 'amount' => null]
                 ]
             ]
-        ])
+        ]),
+        'weight_person' => $faker->numberBetween(0, 1),
+        'tax_id' => $faker->numberBetween(1, 3),
+        'template' => 'default',
+        'discount' => $faker->numberBetween(0, 10)
     ];
 });

@@ -16,11 +16,18 @@
                 center: 'title',
                 right: 'month,basicWeek,basicDay'
             },
-            navLinks: true, // can click day/week names to navigate views
+            navLinks: true,
             editable: false,
-            eventLimit: false, // allow "more" link when too many events
+            eventLimit: false,
             locale: 'ru',
-            events: '/api/v1/calendar/events'
+            events: '/api/v1/calendar/events',
+            loading: function (isLoading, view) {
+                if (isLoading) {
+                    $('#calendar_loading').show();
+                } else {
+                    $('#calendar_loading').hide();
+                }
+            }
         });
     </script>
 @endsection
@@ -36,6 +43,9 @@
                 </div>
                 <div class="box-body">
                     <div id="calendar"></div>
+                </div>
+                <div class="overlay" id="calendar_loading" style="display: none;">
+                    <i class="fa fa-refresh fa-spin"></i>
                 </div>
             </div>
         </div>
