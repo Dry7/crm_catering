@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Criteria\UserIDCriteria;
-use Prettus\Repository\Eloquent\BaseRepository;
 
 class ClientRepository extends BaseRepository
 {

@@ -10,3 +10,4 @@ Homestead.yaml
 /public/css/styles.min.css
 /storage/id_rsa
 /log/
+/storage/app/public

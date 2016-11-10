@@ -22,7 +22,7 @@ class UserIDCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        if (Auth::user()->isAdmin()) {
+        if (is_object(Auth::user()) and Auth::user()->isAdmin()) {
             return $model;
         } else {
             return $model->where('user_id', '=', Auth::user()->id);

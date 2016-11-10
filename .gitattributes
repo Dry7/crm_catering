@@ -1,3 +1,4 @@
 * text=auto
 *.css linguist-vendored
 *.scss linguist-vendored
+resources/views/events/default/doc.blade.php text eol=crlf

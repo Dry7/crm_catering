@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use App\Repository\ClientRepository;
+use App\Repository\UserRepository;
 use Illuminate\Http\Request;
 
 /**
@@ -19,27 +20,36 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     private $clients;
+    private $staff;
 
     /**
      * Create a new controller instance.
      *
      * @param ClientRepository $clients
+     * @param UserRepository $staff
      */
-    public function __construct(ClientRepository $clients)
+    public function __construct(ClientRepository $clients, UserRepository $staff)
     {
         $this->middleware('auth');
 
         $this->clients = $clients;
+        $this->staff = $staff;
     }
 
     /**
      * Show all clients
      *
+     * @param Request $request
+     *
      * @return string
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = $this->clients->all();
+        if ($request->input('user_id', 0) > 0) {
+            $clients = $this->clients->findWhere(['user_id' => $request->input('user_id')]);
+        } else {
+            $clients = $this->clients->all();
+        }
 
         return view('clients.index')->with('clients', $clients);
     }
@@ -53,7 +63,10 @@ class ClientController extends Controller
     {
         $client = new Client();
 
-        return view('clients.create')->with('client', $client);
+        return view('clients.create')
+            ->with('client', $client)
+            ->with('staff', $this->staff->lists('username', 'id'))
+            ->with('is_admin', \Auth::user()->isAdmin());
     }
 
     /**
@@ -65,7 +78,9 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        $request['user_id'] = \Auth::user()->id;
+        if (!\Auth::user()->isAdmin()) {
+            $request['user_id'] = \Auth::user()->id;
+        }
 
         $this->clients->create($request->except(['_token']));
 
@@ -93,7 +108,10 @@ class ClientController extends Controller
     {
         $client = $this->clients->find($id);
 
-        return view('clients.update')->with('client', $client);
+        return view('clients.update')
+            ->with('client', $client)
+            ->with('staff', $this->staff->orderBy('surname')->orderBy('name')->orderBy('patronymic')->orderBy('username')->lists('full_name', 'id'))
+            ->with('is_admin', \Auth::user()->isAdmin());
     }
 
     /**

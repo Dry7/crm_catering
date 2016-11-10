@@ -47,7 +47,7 @@
                                         'name' => 'logout-form',
                                         'id' => 'logout-form'
                                     ]) !!}
-                                    {!! Form::submit(trans('adminlte_lang::message.signout'), ['class' => 'btn btn-default btn-flat']) !!}
+                                    {!! Form::submit('Выйти', ['class' => 'btn btn-default btn-flat']) !!}
                                     {!! Form::close() !!}
                                 </div>
                             </li>

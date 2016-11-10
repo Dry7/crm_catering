@@ -13,10 +13,23 @@ Route::group(['middleware' => ['auth']], function() {
         /** Staff */
         Route::resource('staff', 'StaffController');
         Route::post('/staff/save-active', 'StaffController@saveActive')->name('staff.save-active');
+
+        /** Services */
+        Route::resource('services', 'ServiceController');
+
+        /** Products */
+        Route::any('/products/import', 'ProductController@import')->name('products.import');
+        Route::resource('products', 'ProductController');
+
+        /** Places */
+        Route::resource('places', 'PlaceController');
     });
 
     /** Clients */
     Route::resource('clients', 'ClientController');
+
+    /** Events */
+    Route::resource('events', 'EventController');
 });
 
 /**

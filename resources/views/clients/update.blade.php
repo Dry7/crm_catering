@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 {!! Form::open(['route' => ['clients.update', $client->id], 'method' => 'PUT']) !!}
-                    @include('clients._form', ['client' => $client])
+                    @include('clients._form', ['client' => $client, 'is_admin' => $is_admin, 'staff' => $staff])
                 {!! Form::hidden('id', $client->id) !!}
                 {!! Form::close() !!}
                 <div class="box-footer">

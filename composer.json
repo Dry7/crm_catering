@@ -10,8 +10,11 @@
         "acacha/admin-lte-template-laravel": "3.*",
         "laravelcollective/html": "5.3.*",
         "barryvdh/laravel-debugbar": "^2.3",
+        "doctrine/dbal": "^2.5",
         "prettus/l5-repository": "^2.6",
-        "doctrine/dbal": "^2.5"
+        "maatwebsite/excel": "~2.1.0",
+        "niklasravnsborg/laravel-pdf": "^1.1",
+        "phpoffice/phpword": "v0.13.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -51,5 +54,11 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/Dry7/l5-repository"
+      }
+    ]
 }
