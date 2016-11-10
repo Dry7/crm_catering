@@ -11,7 +11,8 @@ class Event extends Model
         1 => 'Черновик',
         2 => 'Выслано КП',
         3 => 'Утвержден',
-        4 => 'В работе'
+        4 => 'В работе',
+        5 => 'Отменен'
     ];
 
     private static $formats = [
@@ -191,5 +192,27 @@ class Event extends Model
             @$this->place->name,
             @$this->date->format('d.m.Y')
         ]);
+    }
+
+    /**
+     * Get color of event status
+     *
+     * @return string
+     */
+    public function getColorAttribute()
+    {
+        switch ($this->attributes['status_id']) {
+            case 3:
+                return '#ff0000';
+                break;
+            case 2:
+            case 4:
+                return '#0000ff';
+                break;
+            case 1:
+            case 5:
+            default:
+                return '#808080';
+        }
     }
 }

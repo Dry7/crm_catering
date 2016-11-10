@@ -37,6 +37,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
     gulp.src([
         'node_modules/jquery/dist/jquery.js',
+        'node_modules/moment/min/moment.min.js',
         'node_modules/bootstrap/dist/js/bootstrap.js',
         'node_modules/admin-lte/plugins/datatables/jquery.dataTables.js',
         'node_modules/admin-lte/plugins/datatables/dataTables.bootstrap.js',
@@ -61,6 +62,16 @@ gulp.task('vue', function() {
         .pipe(gulp.dest('public/js'));
 });
 
+gulp.task('fullcalendar', function() {
+    gulp.src([
+        'node_modules/fullcalendar/dist/fullcalendar.min.js',
+        'node_modules/fullcalendar/dist/locale/ru.js'
+    ])
+        .pipe(concat('fullcalendar.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('public/js'));
+});
+
 gulp.task('copy', function () {
     gulp.src('node_modules/font-awesome/fonts/*').pipe(gulp.dest('public/fonts'));
     gulp.src('node_modules/ionicons/dist/fonts/*.*').pipe(gulp.dest('public/fonts'));
@@ -69,6 +80,7 @@ gulp.task('copy', function () {
     gulp.src('node_modules/admin-lte/dist/img/*.*').pipe(gulp.dest('public/img'));
     gulp.src('node_modules/icheck/skins/square/blue.png').pipe(gulp.dest('public/css'));
     gulp.src('node_modules/X-editable/dist/bootstrap3-editable/img/*').pipe(gulp.dest('public/img'));
+    gulp.src('node_modules/fullcalendar/dist/fullcalendar.min.css').pipe(gulp.dest('public/css'));
 });
 
-gulp.task('default', ['css', 'copy', 'js', 'vue']);
+gulp.task('default', ['css', 'copy', 'js', 'vue', 'fullcalendar']);

@@ -92,4 +92,30 @@ class ApiController extends Controller
     {
         $this->events->update([$request->input('name') => $request->input('value')], $request->input('pk'));
     }
+
+    /**
+     * Get calendar events
+     *
+     * @param $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function events(Request $request)
+    {
+        $events = $this->events->with('client')->findWhere([
+            ['date', '>=', $request->input('start')],
+            ['date', '<=', $request->input('end')]]
+        )->map(function ($item, $key) {
+            return (object)[
+                'id' => $item->id,
+                'title' => $item->name,
+                'start' => $item->date->toDateString(),
+                'end' => $item->date->toDateString(),
+                'color' => $item->color,
+                'url' => route('events.edit', $item->id)
+            ];
+        });
+
+        return response()->json($events);
+    }
 }

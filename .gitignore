@@ -11,3 +11,5 @@ Homestead.yaml
 /storage/id_rsa
 /log/
 /storage/app/public
+/public/js/fullcalendar.min.js
+/public/css/fullcalendar.min.css
