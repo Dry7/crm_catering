@@ -14,7 +14,8 @@
         "prettus/l5-repository": "^2.6",
         "maatwebsite/excel": "~2.1.0",
         "niklasravnsborg/laravel-pdf": "^1.1",
-        "phpoffice/phpword": "v0.13.*"
+        "phpoffice/phpword": "v0.13.*",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
