@@ -24,10 +24,10 @@ class ReportTest extends TestCase
         factory(\App\User::class)->create(['job' => 'manager', 'surname' => null, 'name' => 'name4', 'patronymic' => null, 'username' => 'manager4', 'lastvisit_at' => Carbon::create(2016, 10, 11, 9, 0)]);
 
         $this->assertEquals([
-            (object)['name' => 'name1 (manager1)', 'time' => '10:13'],
+            (object)['name' => 'name1 (manager1)', 'time' => '08:13'],
             (object)['name' => 'name2 (manager2)', 'time' => 'Не входил'],
             (object)['name' => 'name3 (manager3)', 'time' => 'Не входил'],
-            (object)['name' => 'name4 (manager4)', 'time' => '11:00'],
+            (object)['name' => 'name4 (manager4)', 'time' => '09:00'],
         ], \App\Models\Report::lastVisit());
     }
 
