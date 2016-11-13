@@ -94,9 +94,9 @@ class EventController extends Controller
                 'category' => "",
                 'rows' => [
                     ['product' => "", 'amount' => null]
-                ]
+                ],
             ]
-        ])]);
+        ]), 'persons' => 1, 'template' => 'default', 'discount' => 0]);
 
         return view('events.create')
             ->with('event', $event)
@@ -126,9 +126,9 @@ class EventController extends Controller
             $request['user_id'] = \Auth::user()->id;
         }
 
-        $this->events->create($request->except(['_token']));
+        $event = $this->events->create($request->except(['_token']));
 
-        return redirect()->route('events.index');
+        return redirect()->route('events.edit', $event->id);
     }
 
     /**
