@@ -192,4 +192,20 @@ class Event extends Model
             @$this->date->format('d.m.Y')
         ]);
     }
+
+    public function getSectionsAttribute()
+    {
+        if ((string)@$this->attributes['sections'] == '') {
+            return json_encode([
+                [
+                    'category' => "",
+                    'rows' => [
+                        ['product' => "", 'amount' => null]
+                    ],
+                ]
+            ]);
+        } else {
+            return @$this->attributes['sections'];
+        }
+    }
 }
