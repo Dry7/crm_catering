@@ -189,7 +189,7 @@ $(function () {
     /**
      * Set maximum discount
      */
-    $('input#discount').on('keyup', function () {
+    $('input#discount').on('keyup, change', function () {
         console.log($(this).val());
         if (Number($(this).val()) > Number($(this).data('max'))) {
             $(this).val($(this).data('max'));
