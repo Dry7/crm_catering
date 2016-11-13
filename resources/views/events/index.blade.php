@@ -20,15 +20,19 @@
                             Фильтры
                         </div>
                         <div class="col-md-2">
+                            <b>Статус проекта:</b><br />
                             {!! Form::select('filter_status_id', $statuses, null, ['id' => 'filter_status_id', 'size' => 4, 'class' => 'form-control filter', 'multiple' => true, 'title' => 'Выделить несколько элементов можно зажав Ctrl и кликнув на нужные элементы. Снять выделение можно зажав Ctrl и кликнув на элемент.']) !!}
                         </div>
                         <div class="col-md-2">
+                            <b>Компания:</b><br />
                             {!! Form::select('filter_client_id', $clients, null, ['id' => 'filter_client_id', 'size' => 4, 'class' => 'form-control filter', 'multiple' => true, 'title' => 'Выделить несколько элементов можно зажав Ctrl и кликнув на нужные элементы. Снять выделение можно зажав Ctrl и кликнув на элемент.']) !!}
                         </div>
                         <div class="col-md-2">
+                            <b>Направление:</b><br />
                             {!! Form::select('filter_format_id', $formats, null, ['id' => 'filter_format_id', 'size' => 4, 'class' => 'form-control filter', 'multiple' => true, 'title' => 'Выделить несколько элементов можно зажав Ctrl и кликнув на нужные элементы. Снять выделение можно зажав Ctrl и кликнув на элемент.']) !!}
                         </div>
                         <div class="col-md-2">
+                            <b>Место проведения:</b><br />
                             {!! Form::select('filter_place_id', $places, null, ['id' => 'filter_place_id', 'size' => 4, 'class' => 'form-control filter', 'multiple' => true, 'title' => 'Выделить несколько элементов можно зажав Ctrl и кликнув на нужные элементы. Снять выделение можно зажав Ctrl и кликнув на элемент.']) !!}
                         </div>
                         <div class="col-md-2">
