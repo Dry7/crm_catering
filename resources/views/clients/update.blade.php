@@ -9,6 +9,20 @@
 @section('main-content')
     <div class="row">
         <div class="col-md-12">
+            @if(isset($events) and (sizeof($events) > 0))
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Мероприятия</h3>
+                </div>
+                <div class="box-body">
+                    <ul>
+                        @foreach($events as $event)
+                        <li><a href="{{ route('events.edit', $event->id) }}">{{ $event->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
             <div class="box box-primary">
                 {!! Form::open(['route' => ['clients.update', $client->id], 'method' => 'PUT']) !!}
                     @include('clients._form', ['client' => $client, 'is_admin' => $is_admin, 'staff' => $staff])
