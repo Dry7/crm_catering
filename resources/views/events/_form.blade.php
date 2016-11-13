@@ -167,9 +167,13 @@
 
 <div class="box-footer">
     {!! Form::submit('Сохранить', ['class' => 'btn btn-primary']) !!}
+    @if($event->id > 0)
     <button class="btn btn-primary" name="word" type="submit"><i class="fa fa-file-word-o"> Word</i></button>
     <button class="btn btn-success" name="xls" type="submit"><i class="fa fa-file-excel-o"> XLS</i></button>
     <button class="btn btn-danger" name="pdf" type="submit"><i class="fa fa-file-pdf-o"> PDF</i></button>
+    @else
+        Возможность скачать КП станет доступной после сохранения мероприятия
+    @endif
 </div>
 {!! Html::script('js/vue.min.js') !!}
 {!! Html::script('js/menu.js') !!}
