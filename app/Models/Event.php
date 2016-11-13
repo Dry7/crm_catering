@@ -215,4 +215,20 @@ class Event extends Model
                 return '#808080';
         }
     }
+
+    public function getSectionsAttribute()
+    {
+        if ((string)@$this->attributes['sections'] == '') {
+            return json_encode([
+                [
+                    'category' => "",
+                    'rows' => [
+                        ['product' => "", 'amount' => null]
+                    ],
+                ]
+            ]);
+        } else {
+            return @$this->attributes['sections'];
+        }
+    }
 }
