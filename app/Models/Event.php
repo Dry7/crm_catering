@@ -35,7 +35,7 @@ class Event extends Model
     protected $fillable = [
         'id', 'user_id', 'status_id', 'client_id', 'date', 'format_id', 'persons', 'tables',
         'place_id', 'staff', 'meeting', 'main', 'hot_snacks', 'sorbet', 'hot', 'dessert', 'sections',
-        'weight_person', 'tax_id', 'discount', 'template'
+        'weight_person', 'tax_id', 'discount', 'max_discount', 'template'
     ];
 
     /**
