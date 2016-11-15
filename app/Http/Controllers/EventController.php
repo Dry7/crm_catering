@@ -103,7 +103,7 @@ class EventController extends Controller
             ->with('event', $event)
             ->with('staff', $this->staff->orderBy('surname')->orderBy('name')->orderBy('patronymic')->orderBy('username')->lists('full_name', 'id'))
             ->with('is_admin', \Auth::user()->isAdmin())
-            ->with('max_discount', \Auth::user()->isAdmin() ? 100 : $event->max_discount)
+            ->with('max_discount', \Auth::user()->max_discount)
             ->with('statuses', $this->events->getModel()->getStatuses())
             ->with('formats', $this->events->getModel()->getFormats())
             ->with('taxes', $this->events->getModel()->getTaxes())
