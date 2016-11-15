@@ -24,3 +24,5 @@ Route::group(['prefix' => 'events'], function () {
     Route::get('/places',   'ApiController@places');
     Route::post('/save',    'ApiController@save');
 });
+
+Route::get('calendar/events', 'ApiController@events');

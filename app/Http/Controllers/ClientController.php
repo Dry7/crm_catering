@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use App\Repository\ClientRepository;
+use App\Repository\EventRepository;
 use App\Repository\UserRepository;
 use Illuminate\Http\Request;
 
@@ -21,19 +22,22 @@ class ClientController extends Controller
 {
     private $clients;
     private $staff;
+    private $events;
 
     /**
      * Create a new controller instance.
      *
      * @param ClientRepository $clients
      * @param UserRepository $staff
+     * @param EventRepository $events
      */
-    public function __construct(ClientRepository $clients, UserRepository $staff)
+    public function __construct(ClientRepository $clients, UserRepository $staff, EventRepository $events)
     {
         $this->middleware('auth');
 
         $this->clients = $clients;
         $this->staff = $staff;
+        $this->events = $events;
     }
 
     /**
@@ -111,6 +115,7 @@ class ClientController extends Controller
         return view('clients.update')
             ->with('client', $client)
             ->with('staff', $this->staff->orderBy('surname')->orderBy('name')->orderBy('patronymic')->orderBy('username')->lists('full_name', 'id'))
+            ->with('events', $this->events->findWhere(['client_id' => $id]))
             ->with('is_admin', \Auth::user()->isAdmin());
     }
 

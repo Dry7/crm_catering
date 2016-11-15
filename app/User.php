@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'surname', 'name', 'patronymic', 'email', 'password', 'job', 'active', 'work_hours'
+        'username', 'surname', 'name', 'patronymic', 'email', 'password', 'job', 'active', 'work_hours', 'lastvisit_at'
     ];
 
     /**
@@ -25,6 +25,15 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    /**
+     * Dates
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at', 'updated_at', 'lastvisit_at'
     ];
 
     /**
@@ -85,5 +94,17 @@ class User extends Authenticatable
     public function getMaxDiscountAttribute()
     {
         return $this->isAdmin() ? 100 : 10;
+    }
+
+    /**
+     * Get admin emails
+     *
+     * @return array
+     */
+    public static function getAdminEmails()
+    {
+        return self::where('job', 'admin')->get()->map(function ($item) {
+            return $item->email;
+        })->toArray();
     }
 }

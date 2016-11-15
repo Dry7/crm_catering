@@ -10,4 +10,25 @@ abstract class BaseRepository extends OldBaseRepository
     {
         return $this->model;
     }
+
+    public function create(array $attributes)
+    {
+        return parent::create(self::checkNull($attributes));
+    }
+
+    public function update(array $attributes, $id)
+    {
+        return parent::update(self::checkNull($attributes), $id);
+    }
+
+    public static function checkNull($attributes)
+    {
+        foreach ($attributes as $key => $attribute) {
+            if ($attribute === '') {
+                $attributes[$key] = null;
+            }
+        }
+
+        return $attributes;
+    }
 }

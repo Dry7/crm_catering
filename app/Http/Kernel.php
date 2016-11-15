@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\LastVisit;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -16,7 +17,8 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \App\Http\Middleware\WorkHoursStaff::class,
-        \App\Http\Middleware\ActiveStaff::class
+        \App\Http\Middleware\ActiveStaff::class,
+        \App\Http\Middleware\LastVisit::class
     ];
 
     /**

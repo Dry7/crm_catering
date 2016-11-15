@@ -30,6 +30,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     /** Events */
     Route::resource('events', 'EventController');
+
+    /** Calendar */
+    Route::get('calendar', 'CalendarController@index')->name('calendar.index');
 });
 
 /**

@@ -89,6 +89,7 @@ class ClientsTest extends TestCase
 
         $this->actingAs($user)->visit('/clients/create')
             ->see('Создать клиента')
+            ->type('1',             'user_id')
             ->type('name',          'name')
             ->type('+7 (999) 999-99-99', 'phone_work')
             ->type('+7 (888) 888-88-88',  'phone_mobile')
