@@ -80,7 +80,11 @@ class StaffController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $this->users->create($request->except(['_token']));
+        if ($request->file('photography')) {
+            $request['photo'] = $request->file('photography')->store('public/users');
+        }
+
+        $this->users->create($request->except(['_token', 'photography']));
 
         return redirect()->route('staff.index');
     }
@@ -105,7 +109,12 @@ class StaffController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        $this->users->update($request->except(['_token']), $id);
+        if ($request->file('photography')) {
+            $this->users->find($id)->photoDelete();
+            $request['photo'] = $request->file('photography')->store('public/users');
+        }
+
+        $this->users->update($request->except(['_token', 'photography']), $id);
 
         return redirect()->route('staff.index');
     }

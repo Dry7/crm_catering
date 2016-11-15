@@ -42,6 +42,14 @@
             Доступ только в рабочее время
         </label>
     </div>
+    <div class="form-group">
+        {!! Form::label('photography', 'Фотография') !!}
+        @if($user->photo_has)
+            <br />
+            <img src="{{ $user->photo_url }}" class="photo" style="max-width: 200px;" />
+        @endif
+        {!! Form::file('photography') !!}
+    </div>
 </div>
 
 <div class="box-footer">

@@ -71,7 +71,7 @@ class Product extends Model
     /**
      * Get image size
      *
-     * @param integet $max_width
+     * @param integer $max_width
      *
      * @return object
      */

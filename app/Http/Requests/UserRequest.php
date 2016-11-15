@@ -33,6 +33,7 @@ class UserRequest extends FormRequest
             'email' => 'email',
             'active' => 'boolean',
             'work_hours' => 'boolean',
+            'photography' => 'image'
         ];
     }
 }

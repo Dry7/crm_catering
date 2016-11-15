@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
-                {!! Form::open(['route' => ['staff.update', $user->id], 'method' => 'PUT']) !!}
+                {!! Form::open(['route' => ['staff.update', $user->id], 'method' => 'PUT', 'files' => true]) !!}
                     @include('staff._form', ['user' => $user])
                 {!! Form::hidden('id', $user->id) !!}
                 {!! Form::close() !!}

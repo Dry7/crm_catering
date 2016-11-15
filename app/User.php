@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'surname', 'name', 'patronymic', 'email', 'password', 'job', 'active', 'work_hours', 'lastvisit_at'
+        'username', 'surname', 'name', 'patronymic', 'email', 'password', 'job', 'active', 'work_hours', 'lastvisit_at', 'photo'
     ];
 
     /**
@@ -106,5 +107,70 @@ class User extends Authenticatable
         return self::where('job', 'admin')->get()->map(function ($item) {
             return $item->email;
         })->toArray();
+    }
+
+
+    /**
+     * Check photo exists
+     * @return mixed
+     */
+    public function getPhotoHasAttribute()
+    {
+        return Storage::exists($this->attributes['photo']);
+    }
+
+    /**
+     * Get photo url
+     *
+     * @return mixed
+     */
+    public function getPhotoUrlAttribute()
+    {
+        return Storage::url($this->attributes['photo']);
+    }
+
+    /**
+     * Get base64 code of photo
+     *
+     * @return string
+     */
+    public function getPhotoBase64Attribute()
+    {
+        return 'data:image/jpeg;base64,' . base64_encode(Storage::get($this->attributes['photo']));
+    }
+
+    /**
+     * Get image size
+     *
+     * @param integer $max_width
+     *
+     * @return object
+     */
+    public function getPhotoSizeAttribute($max_width = null)
+    {
+        $size = getimagesizefromstring(Storage::get($this->attributes['photo']));
+
+        if ($max_width == null) {
+            $width = $size[0];
+            $height = $size[1];
+        } else {
+            $width = $max_width;
+            $height = $size[1]/$size[0]*$width;
+        }
+
+        return (object)[
+            'width' => $width,
+            'height' => $height
+        ];
+    }
+
+    /**
+     * Delete photo
+     *
+     * @return mixed
+     */
+    public function photoDelete()
+    {
+        return Storage::delete($this->attributes['photo']);
     }
 }
