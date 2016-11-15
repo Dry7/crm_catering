@@ -31,10 +31,7 @@ class AcachaAdminLTELaravelTest extends TestCase
         $user = factory(App\User::class)->create(['active' => 1, 'work_hours' => 0]);
 
         $this->actingAs($user)
-            ->visit('/')
-            ->see('Acacha')
-            ->see('adminlte-laravel')
-            ->see('Pratt')
+            ->visit('/calendar')
             ->see($user->name);
     }
 

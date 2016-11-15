@@ -18,7 +18,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \App\Http\Middleware\WorkHoursStaff::class,
         \App\Http\Middleware\ActiveStaff::class,
-        \App\Http\Middleware\LastVisit::class
+        \App\Http\Middleware\LastVisit::class,
+        \App\Http\Middleware\Logging::class
     ];
 
     /**

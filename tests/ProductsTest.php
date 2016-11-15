@@ -36,7 +36,7 @@ class ProductsTest extends TestCase
     {
         $user = factory(\App\User::class)->create(['job' => 'manager', 'active' => 1, 'work_hours' => 0]);
 
-        $this->actingAs($user)->visit('/products')->dontSee('Меню')->seePageIs('/');
+        $this->actingAs($user)->visit('/products')->seePageIs('/calendar');
     }
 
     /**

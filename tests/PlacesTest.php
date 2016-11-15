@@ -35,7 +35,7 @@ class PlacesTest extends TestCase
     {
         $user = factory(\App\User::class)->create(['job' => 'manager', 'active' => 1, 'work_hours' => 0]);
 
-        $this->actingAs($user)->visit('/places')->dontSee('Vtcnf')->seePageIs('/');
+        $this->actingAs($user)->visit('/places')->seePageIs('/calendar');
     }
 
     /**

@@ -4,7 +4,7 @@ Route::get('/', function () {
     if (\Auth::guest()) {
         return redirect('/login');
     } else {
-        return view('welcome');
+        return redirect()->route('calendar.index');
     }
 });
 
@@ -23,6 +23,9 @@ Route::group(['middleware' => ['auth']], function() {
 
         /** Places */
         Route::resource('places', 'PlaceController');
+
+        /** Logging */
+        Route::get('log', 'LogController@index')->name('log.index');
     });
 
     /** Clients */

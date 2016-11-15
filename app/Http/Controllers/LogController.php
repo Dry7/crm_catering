@@ -13,6 +13,7 @@ use App\Models\Event;
 use App\Repository\CategoryRepository;
 use App\Repository\ClientRepository;
 use App\Repository\EventRepository;
+use App\Repository\LogRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
@@ -24,25 +25,25 @@ use Illuminate\Support\Facades\View;
 use PhpOffice\PhpWord\PhpWord;
 
 /**
- * Class CalendarController
+ * Class LogController
  * @package App\Http\Controllers
  */
-class CalendarController extends Controller
+class LogController extends Controller
 {
-    private $events;
+    private $log;
 
     /**
      * Create a new controller instance.
      *
-     * @param EventRepository $events
+     * @param LogRepository $log
      */
     public function __construct(
-        EventRepository $events
+        LogRepository $log
     )
     {
         $this->middleware('auth');
 
-        $this->events = $events;
+        $this->log = $log;
     }
 
     /**
@@ -52,9 +53,9 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        $events = $this->events->with('client')->with('place')->all();
+        $logs = $this->log->with('user')->orderBy('created_at', 'DESC')->paginate(100);
 
-        return view('calendar.index')
-            ->with('events', $events);
+        return view('log.index')
+            ->with('logs', $logs);
     }
 }

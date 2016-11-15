@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use App\Helpers\DocHelper;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use App\Models\Log;
 use App\Repository\CategoryRepository;
 use App\Repository\ClientRepository;
 use App\Repository\EventRepository;
@@ -254,7 +255,12 @@ class EventController extends Controller
         $event = $this->events->find($id);
         $sections = $event->getSectionsList();
 
-        Excel::create($event->name . '.xls', function ($excel) use ($event, $sections){
+        $user = Auth::user();
+        if (($user->id > 0) and (!$user->isAdmin())) {
+            Log::info($user->id, Log::action(request()), request()->route()->parameters());
+        }
+
+        return Excel::create($event->name . '.xls', function ($excel) use ($event, $sections){
             $excel->sheet('Меню', function($sheet) use ($event, $sections) {
 
                 $time_index = 2;

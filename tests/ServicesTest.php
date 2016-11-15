@@ -35,7 +35,7 @@ class ServicesTest extends TestCase
     {
         $user = factory(\App\User::class)->create(['job' => 'manager', 'active' => 1, 'work_hours' => 0]);
 
-        $this->actingAs($user)->visit('/services')->dontSee('Услуги')->seePageIs('/');
+        $this->actingAs($user)->visit('/services')->dontSee('Услуги')->seePageIs('/calendar');
     }
 
     /**

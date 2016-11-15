@@ -128,3 +128,12 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
         'discount' => $faker->numberBetween(0, 10)
     ];
 });
+
+$factory->define(App\Models\Log::class, function (Faker\Generator $faker) {
+    return [
+        'user_id'    => $faker->numberBetween(1, 10),
+        'event'      => App\Models\Log::getRandEvent(),
+        'element_id' => $faker->numberBetween(1, 10),
+        'element_name' => $faker->name
+    ];
+});
