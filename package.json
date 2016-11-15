@@ -8,7 +8,7 @@
     "admin-lte": "^2.3.6",
     "bootstrap": "^3.3.7",
     "bootstrap-sass": "^3.3.7",
-    "font-awesome": "^4.6.3",
+    "font-awesome": "^4.7",
     "gulp": "^3.9.1",
     "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",
