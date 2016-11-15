@@ -203,16 +203,16 @@ class Event extends Model
     {
         switch ($this->attributes['status_id']) {
             case 3:
-                return '#ff0000';
+                return '#ff9999';
                 break;
             case 2:
             case 4:
-                return '#0000ff';
+                return '#9999ff';
                 break;
             case 1:
             case 5:
             default:
-                return '#808080';
+                return '#cccccc';
         }
     }
 
