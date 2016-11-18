@@ -100,6 +100,8 @@
     </div>
     {!! Form::submit('СохранитьUnit', ['style' => 'display: none;']) !!}
 
+    <h3>Меню</h3>
+
     <script type="text/x-template" id="menu-template">
 
         <div>
