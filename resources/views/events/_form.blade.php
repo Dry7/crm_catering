@@ -16,25 +16,33 @@
                 {!! Form::label('client_id', 'Компания *') !!}
                 {!! Form::select('client_id', $clients, $event->client_id, ['class' => 'form-control select2', 'id' => 'client_id', 'placeholder' => 'Выберите компанию']) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('date', 'Дата *') !!}
-                {!! Form::text('date', $event->date !== null ? $event->date->format('d.m.Y') : '', ['class' => 'form-control datepicker', 'id' => 'date', 'placeholder' => 'Введите дату']) !!}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('date', 'Дата *') !!}
+                        {!! Form::text('date', $event->date !== null ? $event->date->format('d.m.Y') : '', ['class' => 'form-control datepicker', 'id' => 'date', 'placeholder' => 'Введите дату']) !!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('staff', 'Количество STAFF питания') !!}
+                        {!! Form::number('staff', $event->staff, ['class' => 'form-control', 'id' => 'staff', 'placeholder' => 'Введите количество STAFF питания']) !!}
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                {!! Form::label('format_id', 'Формат *') !!}
-                {!! Form::select('format_id', $formats, $event->format_id, ['class' => 'form-control', 'id' => 'format_id', 'placeholder' => 'Выберите формат']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('persons', 'Количество персон') !!}
-                {!! Form::number('persons', $event->persons, ['class' => 'form-control', 'id' => 'persons', 'placeholder' => 'Введите количество персон', 'onChange' => 'demo.persons = Number(this.value)']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('tables', 'Количество столов') !!}
-                {!! Form::number('tables', $event->tables, ['class' => 'form-control', 'id' => 'tables', 'placeholder' => 'Введите количество столов']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('staff', 'Количество STAFF питания') !!}
-                {!! Form::number('staff', $event->staff, ['class' => 'form-control', 'id' => 'staff', 'placeholder' => 'Введите количество STAFF питания']) !!}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('tables', 'Количество столов') !!}
+                        {!! Form::number('tables', $event->tables, ['class' => 'form-control', 'id' => 'tables', 'placeholder' => 'Введите количество столов']) !!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('persons', 'Количество персон') !!}
+                        {!! Form::number('persons', $event->persons, ['class' => 'form-control', 'id' => 'persons', 'placeholder' => 'Введите количество персон', 'onChange' => 'demo.persons = Number(this.value)']) !!}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -43,28 +51,50 @@
                 {!! Form::select('place_id', $places, $event->place_id, ['class' => 'form-control', 'id' => 'place_id', 'placeholder' => 'Выберите место проведение']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('meeting', 'Время встречи гостей') !!}
-                {!! Form::text('meeting', $event->meeting, ['class' => 'form-control time', 'id' => 'meeting']) !!}
+                {!! Form::label('format_id', 'Формат *') !!}
+                {!! Form::select('format_id', $formats, $event->format_id, ['class' => 'form-control', 'id' => 'format_id', 'placeholder' => 'Выберите формат']) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('main', 'Время основного проекта') !!}
-                {!! Form::text('main', $event->main, ['class' => 'form-control time', 'id' => 'main']) !!}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('meeting', 'Время встречи гостей') !!}
+                        {!! Form::text('meeting', $event->meeting, ['class' => 'form-control time', 'id' => 'meeting']) !!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('main', 'Время основного проекта') !!}
+                        {!! Form::text('main', $event->main, ['class' => 'form-control time', 'id' => 'main']) !!}
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                {!! Form::label('hot_snacks', 'Время горячей закуски') !!}
-                {!! Form::text('hot_snacks', $event->hot_snacks, ['class' => 'form-control time', 'id' => 'hot_snacks']) !!}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('hot_snacks', 'Время горячей закуски') !!}
+                        {!! Form::text('hot_snacks', $event->hot_snacks, ['class' => 'form-control time', 'id' => 'hot_snacks']) !!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('sorbet', 'Время сорбет') !!}
+                        {!! Form::text('sorbet', $event->sorbet, ['class' => 'form-control time', 'id' => 'sorbet']) !!}
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                {!! Form::label('sorbet', 'Время сорбет') !!}
-                {!! Form::text('sorbet', $event->sorbet, ['class' => 'form-control time', 'id' => 'sorbet']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('hot', 'Время горячего') !!}
-                {!! Form::text('hot', $event->hot, ['class' => 'form-control time', 'id' => 'hot']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('dessert', 'Время десерта') !!}
-                {!! Form::text('dessert', $event->dessert, ['class' => 'form-control time', 'id' => 'dessert']) !!}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('hot', 'Время горячего') !!}
+                        {!! Form::text('hot', $event->hot, ['class' => 'form-control time', 'id' => 'hot']) !!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {!! Form::label('dessert', 'Время десерта') !!}
+                        {!! Form::text('dessert', $event->dessert, ['class' => 'form-control time', 'id' => 'dessert']) !!}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
