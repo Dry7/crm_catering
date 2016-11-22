@@ -42,6 +42,8 @@ class EventRequest extends FormRequest
             'sections' => 'string',
             'weight_person' => 'boolean',
             'tax_id' => 'integer',
+            'administration' => 'string',
+            'fare' => 'string',
             'template' => 'string'
         ];
     }

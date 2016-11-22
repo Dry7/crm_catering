@@ -35,7 +35,7 @@ class Event extends Model
     protected $fillable = [
         'id', 'user_id', 'status_id', 'client_id', 'date', 'format_id', 'persons', 'tables',
         'place_id', 'staff', 'meeting', 'main', 'hot_snacks', 'sorbet', 'hot', 'dessert', 'sections',
-        'weight_person', 'tax_id', 'discount', 'max_discount', 'template'
+        'weight_person', 'tax_id', 'discount', 'max_discount', 'administration', 'fare', 'template'
     ];
 
     /**
@@ -161,6 +161,26 @@ class Event extends Model
     }
 
     /**
+     * Is administration fill
+     *
+     * @return bool
+     */
+    public function getIsAdministrationAttribute()
+    {
+        return (int)$this->administration > 0;
+    }
+
+    /**
+     * Is fare fill
+     *
+     * @return bool
+     */
+    public function getIsFareAttribute()
+    {
+        return (int)$this->fare > 0;
+    }
+
+    /**
      * Total price
      *
      * @param boolean $person By person
@@ -176,6 +196,32 @@ class Event extends Model
         foreach ($sections as $section) {
             $total += $section->category->total;
         }
+
+        /**
+         * Administration price
+         */
+        $administration = 0;
+        if ($this->is_administration) {
+            if (preg_match('/%/', $this->administration)) {
+                $administration = $total / 100 * (int)$this->administration;
+            } else {
+                $administration = (int)$this->administration;
+            }
+        }
+
+        /**
+         * Fare price
+         */
+        $fare = 0;
+        if ($this->is_fare) {
+            if (preg_match('/%/', $this->fare)) {
+                $fare = $total / 100 * (int)$this->fare;
+            } else {
+                $fare = (int)$this->fare;
+            }
+        }
+
+        $total = $total + $administration + $fare;
 
         return $person ? (int)($total/$this->persons) : $total;
     }

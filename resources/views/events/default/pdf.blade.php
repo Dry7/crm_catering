@@ -165,6 +165,14 @@ h4 {
 
 <p align="center" class="tax">{{ $event->tax }}</p>
 
+@if($event->is_administration)
+    <p align="center" class="administration">Административные расходы включены в стоимость</p>
+@endif
+
+@if($event->is_fare)
+    <p align="center" class="fare">Транспортные расходы включены в стоимость</p>
+@endif
+
 <p align="center" class="copyright">{!! $copyright !!}</p>
 
 </body>
