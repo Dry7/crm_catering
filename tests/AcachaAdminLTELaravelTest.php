@@ -59,7 +59,7 @@ class AcachaAdminLTELaravelTest extends TestCase
             ->type('username', 'username')
             ->type('passw0RD', 'password')
             ->press('Войти')
-            ->seePageIs('/home')
+            ->seePageIs('/calendar')
             ->see($user->name);
     }
 

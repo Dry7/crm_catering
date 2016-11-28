@@ -116,7 +116,7 @@ class User extends Authenticatable
      */
     public function getPhotoHasAttribute()
     {
-        return Storage::exists($this->attributes['photo']);
+        return Storage::exists(@$this->attributes['photo']);
     }
 
     /**
@@ -126,7 +126,7 @@ class User extends Authenticatable
      */
     public function getPhotoUrlAttribute()
     {
-        return Storage::url($this->attributes['photo']);
+        return Storage::url(@$this->attributes['photo']);
     }
 
     /**
@@ -136,7 +136,7 @@ class User extends Authenticatable
      */
     public function getPhotoBase64Attribute()
     {
-        return 'data:image/jpeg;base64,' . base64_encode(Storage::get($this->attributes['photo']));
+        return 'data:image/jpeg;base64,' . base64_encode(Storage::get(@$this->attributes['photo']));
     }
 
     /**
@@ -148,7 +148,7 @@ class User extends Authenticatable
      */
     public function getPhotoSizeAttribute($max_width = null)
     {
-        $size = getimagesizefromstring(Storage::get($this->attributes['photo']));
+        $size = getimagesizefromstring(Storage::get(@$this->attributes['photo']));
 
         if ($max_width == null) {
             $width = $size[0];
@@ -171,6 +171,6 @@ class User extends Authenticatable
      */
     public function photoDelete()
     {
-        return Storage::delete($this->attributes['photo']);
+        return Storage::delete(@$this->attributes['photo']);
     }
 }
