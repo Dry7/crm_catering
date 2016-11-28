@@ -2,3 +2,7 @@
 *.css linguist-vendored
 *.scss linguist-vendored
 resources/views/events/default/doc.blade.php text eol=crlf
+resources/views/events/new_year1/doc.blade.php text eol=crlf
+resources/views/events/new_year2/doc.blade.php text eol=crlf
+resources/views/events/new_year3/doc.blade.php text eol=crlf
+resources/views/events/new_year4/doc.blade.php text eol=crlf

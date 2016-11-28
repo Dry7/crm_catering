@@ -125,7 +125,11 @@ class Event extends Model
     public function getTemplates()
     {
         return [
-            'default' => 'default'
+            'default' => 'default',
+            'new_year1' => 'new_year1',
+            'new_year2' => 'new_year2',
+            'new_year3' => 'new_year3',
+//            'new_year4' => 'new_year4'
         ];
     }
 
