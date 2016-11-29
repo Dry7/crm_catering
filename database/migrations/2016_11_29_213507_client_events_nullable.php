@@ -25,7 +25,7 @@ class ClientEventsNullable extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table){
+        Schema::table('clients', function (Blueprint $table){
             $table->text('events')->nullable(false)->change();
         });
     }
