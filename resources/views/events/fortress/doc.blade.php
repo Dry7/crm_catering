@@ -1265,6 +1265,7 @@ ans-serif;
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
 @cp1251($row->product->name)
+<br>
 @image_doc($row->product->id)
 <o:p=
 ></o:p></span></p>
