@@ -126,10 +126,7 @@ class Event extends Model
     {
         return [
             'default' => 'default',
-            'new_year1' => 'new_year1',
-            'new_year2' => 'new_year2',
-            'new_year3' => 'new_year3',
-//            'new_year4' => 'new_year4'
+            'fortress' => 'Петропаловская крепость'
         ];
     }
 
