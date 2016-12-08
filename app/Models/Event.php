@@ -338,11 +338,11 @@ class Event extends Model
 
     public function getAbsolution($attribute)
     {
-        return preg_match('/%/i', $this->attributes[$attribute]) ? null : $this->attributes[$attribute];
+        return preg_match('/%/i', @$this->attributes[$attribute]) ? null : @$this->attributes[$attribute];
     }
 
     public function getPercents($attribute)
     {
-        return preg_match('/%/i', $this->attributes[$attribute]) ? preg_replace('/%/i', '', $this->attributes[$attribute]) : null;
+        return preg_match('/%/i', @$this->attributes[$attribute]) ? preg_replace('/%/i', '', @$this->attributes[$attribute]) : null;
     }
 }

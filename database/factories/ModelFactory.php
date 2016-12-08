@@ -125,7 +125,13 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
         'weight_person' => $faker->numberBetween(0, 1),
         'tax_id' => $faker->numberBetween(1, 3),
         'template' => 'default',
-        'discount' => $faker->numberBetween(0, 10)
+        'discount' => $faker->numberBetween(0, 10),
+        'service' => $faker->numberBetween(1, 1000),
+        'administration' => $faker->numberBetween(1, 1000),
+        'fare' => $faker->numberBetween(1, 1000),
+        'equipment' => $faker->numberBetween(1, 1000),
+        'mirror_collection' => $faker->numberBetween(1, 1000),
+        'extras' => $faker->numberBetween(1, 1000),
     ];
 });
 
