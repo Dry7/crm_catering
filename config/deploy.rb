@@ -40,7 +40,7 @@ set :composer_install_flags, '--no-interaction --quiet --optimize-autoloader'
 
 set :npm_flags, ''
 
-set :file_permissions_paths, ["bootstrap/cache", "storage", "vendor/niklasravnsborg/mpdf/ttfontdata"]
+set :file_permissions_paths, ["bootstrap/cache", "storage"]
 set :file_permissions_chmod_mode, "0777"
 
 namespace :laravel do
