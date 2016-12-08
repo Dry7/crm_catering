@@ -13,3 +13,7 @@ Homestead.yaml
 /storage/app/public
 /public/js/fullcalendar.min.js
 /public/css/fullcalendar.min.css
+/public/css/blank.gif
+/public/css/fancybox_overlay.png
+/public/css/fancybox_loading.gif
+/public/css/fancybox_sprite.png

@@ -84,6 +84,7 @@ gulp.task('copy', function () {
     gulp.src('node_modules/icheck/skins/square/blue.png').pipe(gulp.dest('public/css'));
     gulp.src('node_modules/X-editable/dist/bootstrap3-editable/img/*').pipe(gulp.dest('public/img'));
     gulp.src('node_modules/fullcalendar/dist/fullcalendar.min.css').pipe(gulp.dest('public/css'));
+    gulp.src('node_modules/jquery-fancybox/source/img/*').pipe(gulp.dest('public/css'));
 });
 
 gulp.task('default', ['css', 'copy', 'js', 'vue', 'fullcalendar']);
