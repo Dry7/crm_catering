@@ -1349,15 +1349,20 @@ table.MsoTableGrid
   @if(isset($row->product->name_en))
 	  / @cp1251($row->product->name_en)
   @endif
+  <br/>
   @image_doc($row->product->id)
 </p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
-  @if($event->weight_person)
-  Стоимость с персоны – @price_person($row, $event->persons) рублей @weight_person($row, $event->persons) гр
-  @else
-  Стоимость – {{ $row->total }} рублей {{ $row->total_weight }} гр
-  @endif
+		@if($event->product_view == 'price')
+        {{ $row->amount }} / {{ $row->total_weight }} гр / {{ $row->total }} <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
+        @elseif($event->product_view == 'delete_price_and_weight')
+
+        @else
+        {{ $row->amount }} / {{ $row->total_weight }} гр
+        @endif
 </p>
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'><o:p>&nbsp;=
 </o:p></p>
@@ -1372,24 +1377,37 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Итого:</p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
-  @if($event->weight_person)
-  Стоимость с персоны – {{ $total }} <span class=3DSpellE>руб</span>
-      @if($event->discount > 0)
-          <br />Скидка - {{ $event->discount }}%
-          <br />Стоимость со скидкой - @discount($total, $event->discount) руб
-      @endif
-  @else
-  Стоимость – {{ $total }} <span class=3DSpellE>руб</span>
+  Стоимость – {{ $total }} <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
         @if($event->discount > 0)
             <br />Скидка - {{ $event->discount }}%
-            <br />Стоимость со скидкой - @discount($total, $event->discount) руб
+            <br />Стоимость со скидкой - @discount($total, $event->discount) <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
         @endif
+		
+  @if($event->weight_person)
+  <br />Стоимость с персоны – {{ $total }} <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
+      @if($event->discount > 0)
+          <br />Скидка - {{ $event->discount }}%
+          <br />Стоимость со скидкой - @discount($total, $event->discount) <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
+      @endif
   @endif
+
 </p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
   @cp1251($event->tax)
 </p>
+
+@if($event->is_service)
+    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Сервис включен в стоимость</p>
+@endif
 
 @if($event->is_administration)
     <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Административные расходы включены в стоимость</p>
@@ -1397,6 +1415,14 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 
 @if($event->is_fare)
     <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Транспортные расходы включены в стоимость</p>
+@endif
+
+@if($event->is_equipment)
+    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Оборудование включено в стоимость</p>
+@endif
+
+@if($event->is_mirror_collection)
+    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Пробочный сбор включен в стоимость</p>
 @endif
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>

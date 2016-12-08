@@ -42,8 +42,12 @@ class EventRequest extends FormRequest
             'sections' => 'string',
             'weight_person' => 'boolean',
             'tax_id' => 'integer',
+            'service' => 'string',
             'administration' => 'string',
             'fare' => 'string',
+            'equipment' => 'string',
+            'mirror_collection' => 'string',
+            'extras' => 'string',
             'template' => 'string'
         ];
     }

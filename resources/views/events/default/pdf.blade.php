@@ -75,11 +75,13 @@ h4 {
         @image($row->product->id)
     </p>
     <p align="center">
-@if($event->weight_person)
-        Стоимость с персоны – @price_person($row, $event->persons) рублей @weight_person($row, $event->persons) гр
-@else
-        Стоимость – {{ $row->total }} рублей {{ $row->total_weight }} гр
-@endif
+        @if($event->product_view == 'price')
+            {{ $row->amount }} / {{ $row->total_weight }} гр / {{ $row->total }} ₱
+        @elseif($event->product_view == 'delete_price_and_weight')
+
+        @else
+            {{ $row->amount }} / {{ $row->total_weight }} гр
+        @endif
     </p>
 </div>
     @endforeach
@@ -88,22 +90,26 @@ h4 {
 
 <p align="center" class="total">Итого:</p>
 <p align="center">
-  @if($event->weight_person)
-  Стоимость с персоны – {{ $total }} руб
-      @if($event->discount > 0)
-          <br />Скидка - {{ $event->discount }}%
-          <br />Стоимость со скидкой - @discount($total, $event->discount) руб
-      @endif
-  @else
-  Стоимость – {{ $total }} руб
+  Стоимость – {{ $total }} ₱
+    @if($event->discount > 0)
+            <br />Скидка - {{ $event->discount }}%
+            <br />Стоимость со скидкой - @discount($total, $event->discount) ₱
+    @endif
+
+    @if($event->weight_person)
+        <br />Стоимость с персоны – {{ $total }} ₱
         @if($event->discount > 0)
             <br />Скидка - {{ $event->discount }}%
-            <br />Стоимость со скидкой - @discount($total, $event->discount) руб
+            <br />Стоимость со скидкой - @discount($total, $event->discount) ₱
         @endif
-  @endif
+    @endif
 </p>
 
 <p align="center" class="tax">{{ $event->tax }}</p>
+
+@if($event->is_service)
+    <p align="center" class="service">Сервис включен в стоимость</p>
+@endif
 
 @if($event->is_administration)
     <p align="center" class="administration">Административные расходы включены в стоимость</p>
@@ -111,6 +117,14 @@ h4 {
 
 @if($event->is_fare)
     <p align="center" class="fare">Транспортные расходы включены в стоимость</p>
+@endif
+
+@if($event->is_equipment)
+    <p align="center" class="equipment">Оборудование включено в стоимость</p>
+@endif
+
+@if($event->is_mirror_collection)
+    <p align="center" class="mirror_collection">Пробочный сбор включен в стоимость</p>
 @endif
 
 <p align="center" class="copyright">{!! $copyright !!}</p>

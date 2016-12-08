@@ -197,8 +197,35 @@ $(function () {
         if (Number($(this).val()) < 0) {
             $(this).val(0);
         }
-    })
+    });
+
+    setAbsolutionAndPercentsEvents('service');
+    setAbsolutionAndPercentsEvents('administration');
+    setAbsolutionAndPercentsEvents('fare');
+    setAbsolutionAndPercentsEvents('equipment');
+    setAbsolutionAndPercentsEvents('mirror_collection');
+    setAbsolutionAndPercentsEvents('extras');
 });
+
+function setAbsolutionAndPercentsEvents(name) {
+    var leftElement = $('#' + name + '_absolution');
+    var rightElement = $('#' + name + '_percents');
+    var hiddenElement = $('#' + name);
+
+    if (!leftElement.length || !rightElement.length || !hiddenElement.length) {
+        return false;
+    }
+
+    leftElement.on('keyup', function () {
+        hiddenElement.val(leftElement.val());
+        rightElement.val('');
+    });
+
+    rightElement.on('keyup', function () {
+        hiddenElement.val(rightElement.val() + '%');
+        leftElement.val('');
+    });
+}
 
 /**
  * Set list filter active

@@ -1268,7 +1268,7 @@ ans-serif;
 @if(isset($row->product->name_en))
 	/ @cp1251($row->product->name_en)
 @endif
-<br>
+<br />
 @image_doc($row->product->id)
 <o:p=
 ></o:p></span></p>
@@ -1280,10 +1280,14 @@ ans-serif;
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-@if($event->weight_person)
-  Стоимость с персоны – @price_person($row, $event->persons) рублей @weight_person($row, $event->persons) гр
+@if($event->product_view == 'price')
+    {{ $row->amount }} / {{ $row->total_weight }} гр / {{ $row->total }} <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
+@elseif($event->product_view == 'delete_price_and_weight')
+
 @else
-  Стоимость – {{ $row->total }} рублей {{ $row->total_weight }} гр
+    {{ $row->amount }} / {{ $row->total_weight }} гр
 @endif
 <o:p=
 ></o:p></span></p>
@@ -1309,18 +1313,27 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-  @if($event->weight_person)
-  Стоимость с персоны – {{ $total }} <span class=3DSpellE>руб</span>
-      @if($event->discount > 0)
-          <br />Скидка - {{ $event->discount }}%
-          <br />Стоимость со скидкой - @discount($total, $event->discount) руб
-      @endif
-  @else
-  Стоимость – {{ $total }} <span class=3DSpellE>руб</span>
+  Стоимость – {{ $total }} <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
         @if($event->discount > 0)
             <br />Скидка - {{ $event->discount }}%
-            <br />Стоимость со скидкой - @discount($total, $event->discount) руб
+            <br />Стоимость со скидкой - @discount($total, $event->discount) <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
         @endif
+
+
+  @if($event->weight_person)
+  <br />Стоимость с персоны – {{ $total }} <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
+      @if($event->discount > 0)
+          <br />Скидка - {{ $event->discount }}%
+          <br />Стоимость со скидкой - @discount($total, $event->discount) <span
+style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
+color:black;background:white'>&#8369;</span>
+      @endif
   @endif
 <o:p=
 ></o:p></span></p>
@@ -1332,6 +1345,16 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
   @cp1251($event->tax)
 <o:p=
 ></o:p></span></p>
+
+@if($event->is_service)
+<p class=3DMsoNormal align=3Dcenter style=3D'text-align:center;line-height=
+:150%'><span
+ style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
+-SA'>
+Сервис включен в стоимость
+<o:p=
+></o:p></span></p>
+@endif
 
 @if($event->is_administration)
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center;line-height=
@@ -1349,6 +1372,26 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
 Транспортные расходы включены в стоимость
+<o:p=
+></o:p></span></p>
+@endif
+
+@if($event->is_equipment)
+<p class=3DMsoNormal align=3Dcenter style=3D'text-align:center;line-height=
+:150%'><span
+ style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
+-SA'>
+Оборудование включено в стоимость
+<o:p=
+></o:p></span></p>
+@endif
+
+@if($event->is_mirror_collection)
+<p class=3DMsoNormal align=3Dcenter style=3D'text-align:center;line-height=
+:150%'><span
+ style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
+-SA'>
+Пробочный сбор включен в стоимость
 <o:p=
 ></o:p></span></p>
 @endif

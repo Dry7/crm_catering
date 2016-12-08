@@ -27,6 +27,11 @@ class Event extends Model
         3 => 'НДС не облагается'
     ];
 
+    private static $product_views = [
+        'price' => 'Показать стоимость каждой закуски',
+        'delete_price_and_weight' => 'Убрать стоимость и вес'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -35,7 +40,8 @@ class Event extends Model
     protected $fillable = [
         'id', 'user_id', 'status_id', 'client_id', 'date', 'format_id', 'persons', 'tables',
         'place_id', 'staff', 'meeting', 'main', 'hot_snacks', 'sorbet', 'hot', 'dessert', 'sections',
-        'weight_person', 'tax_id', 'discount', 'max_discount', 'administration', 'fare', 'template'
+        'weight_person', 'tax_id', 'discount', 'max_discount', 'administration', 'fare', 'template',
+        'product_view', 'service', 'equipment', 'mirror_collection', 'extras'
     ];
 
     /**
@@ -122,6 +128,11 @@ class Event extends Model
         return self::$taxes;
     }
 
+    public function getProductViews()
+    {
+        return self::$product_views;
+    }
+
     public function getTemplates()
     {
         return [
@@ -162,6 +173,16 @@ class Event extends Model
     }
 
     /**
+     * Is service fill
+     *
+     * @return bool
+     */
+    public function getIsServiceAttribute()
+    {
+        return (int)$this->service > 0;
+    }
+
+    /**
      * Is administration fill
      *
      * @return bool
@@ -182,6 +203,36 @@ class Event extends Model
     }
 
     /**
+     * Is equipment fill
+     *
+     * @return bool
+     */
+    public function getIsEquipmentAttribute()
+    {
+        return (int)$this->equipment > 0;
+    }
+
+    /**
+     * Is mirror collection fill
+     *
+     * @return bool
+     */
+    public function getIsMirrorCollectionAttribute()
+    {
+        return (int)$this->mirror_collection > 0;
+    }
+
+    /**
+     * Is extras fill
+     *
+     * @return bool
+     */
+    public function getIsExtrasAttribute()
+    {
+        return (int)$this->extras > 0;
+    }
+
+    /**
      * Total price
      *
      * @param boolean $person By person
@@ -199,30 +250,36 @@ class Event extends Model
         }
 
         /**
+         * Service price
+         */
+        $service = $this->is_service ? preg_match('/%/', $this->service) ? $total / 100 * (int)$this->service : (int)$this->service : 0;
+
+        /**
          * Administration price
          */
-        $administration = 0;
-        if ($this->is_administration) {
-            if (preg_match('/%/', $this->administration)) {
-                $administration = $total / 100 * (int)$this->administration;
-            } else {
-                $administration = (int)$this->administration;
-            }
-        }
+         $administration = $this->is_administration ? preg_match('/%/', $this->administration) ? $total / 100 * (int)$this->administration : (int)$this->administration : 0;
 
         /**
          * Fare price
          */
-        $fare = 0;
-        if ($this->is_fare) {
-            if (preg_match('/%/', $this->fare)) {
-                $fare = $total / 100 * (int)$this->fare;
-            } else {
-                $fare = (int)$this->fare;
-            }
-        }
+         $fare = $this->is_fare ? preg_match('/%/', $this->fare) ? $total / 100 * (int)$this->fare : (int)$this->fare : 0;
 
-        $total = $total + $administration + $fare;
+        /**
+         * Equipment price
+         */
+        $equipment = $this->is_equipment ? preg_match('/%/', $this->equipment) ? $total / 100 * (int)$this->equipment : (int)$this->equipment : 0;
+
+        /**
+         * Mirror collection price
+         */
+        $mirror_collection = $this->is_mirror_collection ? preg_match('/%/', $this->mirror_collection) ? $total / 100 * (int)$this->mirror_collection : (int)$this->mirror_collection : 0;
+
+        /**
+         * Extras price
+         */
+        $extras = $this->is_extras ? preg_match('/%/', $this->extras) ? $total / 100 * (int)$this->extras : (int)$this->extras : 0;
+
+        $total = $total + $service + $administration + $fare + $equipment + $mirror_collection + $extras;
 
         return $person ? (int)($total/$this->persons) : $total;
     }
@@ -277,5 +334,15 @@ class Event extends Model
         } else {
             return @$this->attributes['sections'];
         }
+    }
+
+    public function getAbsolution($attribute)
+    {
+        return preg_match('/%/i', $this->attributes[$attribute]) ? null : $this->attributes[$attribute];
+    }
+
+    public function getPercents($attribute)
+    {
+        return preg_match('/%/i', $this->attributes[$attribute]) ? preg_replace('/%/i', '', $this->attributes[$attribute]) : null;
     }
 }

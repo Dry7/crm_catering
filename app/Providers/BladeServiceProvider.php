@@ -47,7 +47,7 @@ class BladeServiceProvider extends ServiceProvider
         });
 
         Blade::directive('image', function ($expression) {
-            return '<?php $product = App\Models\Product::find(' . $expression . '); if ($product->photo_has) { echo \'<img src="\' . $product->photo_base64 . \'" />\'; } ?>';
+            return '<?php $product = App\Models\Product::find(' . $expression . '); if ($product->photo_has) { echo \'<img src="\' . $product->photo_base64 . \'" style="margin: 0 50px;" />\'; } ?>';
         });
 
         Blade::directive('image_doc', function ($expression) {

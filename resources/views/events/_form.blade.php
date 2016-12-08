@@ -175,25 +175,89 @@
             </div>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-3">
-                {!! Form::label('administration', 'Администрирование') !!}
-                {!! Form::text('administration', $event->administration, ['class' => 'form-control', 'id' => 'administration']) !!}
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('service_absolution', 'Сервис (сумма)') !!}
+                        {!! Form::hidden('service', $event->service, ['id' => 'service']) !!}
+                        {!! Form::text('service_absolution', $event->getAbsolution('service'), ['class' => 'form-control', 'id' => 'service_absolution', 'placeholder' => 'Сервис (сумма)']) !!}
                     </div>
-                    <div class="col-md-9"><br /><br />Примеры значений: 200, 10000, 5%, 30%</div>
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('service_absolution', 'Сервис (проценты)') !!}
+                        {!! Form::text('service_percents', $event->getPercents('service'), ['class' => 'form-control', 'id' => 'service_percents', 'placeholder' => 'Сервис (проценты)']) !!}
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-3">
-                        {!! Form::label('fare', 'Транспортные расходы') !!}
-                        {!! Form::text('fare', $event->fare, ['class' => 'form-control', 'id' => 'fare']) !!}
+                    <div class="col-md-6 col-sm-6">
+                {!! Form::label('administration_absolution', 'Администрирование (сумма)') !!}
+                {!! Form::hidden('administration', $event->administration, ['id' => 'administration']) !!}
+                {!! Form::text('administration_absolution', $event->getAbsolution('administration'), ['class' => 'form-control', 'id' => 'administration_absolution', 'placeholder' => 'Администрирование (сумма)']) !!}
                     </div>
-                    <div class="col-md-9"><br /><br />Примеры значений: 200, 10000, 5%, 30%</div>
+                    <div class="col-md-6 col-sm-6">
+                {!! Form::label('administration_absolution', 'Администрирование (проценты)') !!}
+                {!! Form::text('administration_percents', $event->getPercents('administration'), ['class' => 'form-control', 'id' => 'administration_percents', 'placeholder' => 'Администрирование (проценты)']) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('fare_absolution', 'Транспортные расходы (сумма)') !!}
+                        {!! Form::hidden('fare', $event->fare, ['id' => 'fare']) !!}
+                        {!! Form::text('fare_absolution', $event->getAbsolution('fare'), ['class' => 'form-control', 'id' => 'fare_absolution', 'placeholder' => 'Транспортные расходы (сумма)']) !!}
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('fare_absolution', 'Транспортные расходы (проценты)') !!}
+                        {!! Form::text('fare_percents', $event->getPercents('fare'), ['class' => 'form-control', 'id' => 'fare_percents', 'placeholder' => 'Транспортные расходы (проценты)']) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('equipment_absolution', 'Оборудование (сумма)') !!}
+                        {!! Form::hidden('equipment', $event->equipment, ['id' => 'equipment']) !!}
+                        {!! Form::text('equipment_absolution', $event->getAbsolution('equipment'), ['class' => 'form-control', 'id' => 'equipment_absolution', 'placeholder' => 'Оборудование (сумма)']) !!}
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('equipment_absolution', 'Оборудование (проценты)') !!}
+                        {!! Form::text('equipment_percents', $event->getPercents('equipment'), ['class' => 'form-control', 'id' => 'equipment_percents', 'placeholder' => 'Оборудование (проценты)']) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('mirror_collection_absolution', 'Пробочный сбор (сумма)') !!}
+                        {!! Form::hidden('mirror_collection', $event->mirror_collection, ['id' => 'mirror_collection']) !!}
+                        {!! Form::text('mirror_collection_absolution', $event->getAbsolution('mirror_collection'), ['class' => 'form-control', 'id' => 'mirror_collection_absolution', 'placeholder' => 'Пробочный сбор (сумма)']) !!}
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('mirror_collection_absolution', 'Пробочный сбор (проценты)') !!}
+                        {!! Form::text('mirror_collection_percents', $event->getPercents('mirror_collection'), ['class' => 'form-control', 'id' => 'mirror_collection_percents', 'placeholder' => 'Пробочный сбор (проценты)']) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('extras_absolution', 'Доп. наценка (сумма)') !!}
+                        {!! Form::hidden('extras', $event->extras, ['id' => 'extras']) !!}
+                        {!! Form::text('extras_absolution', $event->getAbsolution('extras'), ['class' => 'form-control', 'id' => 'extras_absolution', 'placeholder' => 'Доп. наценка (сумма)']) !!}
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('extras_absolution', 'Доп. наценка (проценты)') !!}
+                        {!! Form::text('extras_percents', $event->getPercents('extras'), ['class' => 'form-control', 'id' => 'extras_percents', 'placeholder' => 'Доп. наценка (проценты)']) !!}
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 {!! Form::label('discount', 'Скидка') !!}
                 {!! Form::number('discount', $event->discount, ['class' => 'form-control', 'id' => 'discount', 'data-max' => $max_discount]) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('product_view', 'Формат отображения блюд') !!}
+                {!! Form::select('product_view', $product_views, $event->product_view, ['class' => 'form-control', 'id' => 'product_view', 'placeholder' => 'Выберите формат отображения блюд']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('template', 'Шаблон') !!}
