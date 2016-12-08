@@ -76,17 +76,16 @@ p {
 
 <p align="center" class="total">Итого:</p>
 <p align="center">
-    Стоимость – {{ $total }} ₱
+    Стоимость – {{ $event->getTotal() }} ₱
     @if($event->discount > 0)
         <br />Скидка - {{ $event->discount }}%
-        <br />Стоимость со скидкой - @discount($total, $event->discount) ₱
+        <br />Стоимость со скидкой - @discount($event->getTotal(), $event->discount) ₱
     @endif
 
     @if($event->weight_person)
-        <br />Стоимость с персоны – {{ $total }} ₱
+        <br />Стоимость с персоны – {{ $event->getTotal(true) }} ₱
         @if($event->discount > 0)
-            <br />Скидка - {{ $event->discount }}%
-            <br />Стоимость со скидкой - @discount($total, $event->discount) ₱
+            <br />Стоимость со скидкой - @discount($event->getTotal(true), $event->discount) ₱
         @endif
     @endif
 </p>

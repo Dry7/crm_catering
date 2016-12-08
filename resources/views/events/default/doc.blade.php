@@ -1377,23 +1377,22 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Итого:</p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
-  Стоимость – {{ $total }} <span
+  Стоимость – {{ $event->getTotal() }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
         @if($event->discount > 0)
             <br />Скидка - {{ $event->discount }}%
-            <br />Стоимость со скидкой - @discount($total, $event->discount) <span
+            <br />Стоимость со скидкой - @discount($event->getTotal(), $event->discount) <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
         @endif
 		
   @if($event->weight_person)
-  <br />Стоимость с персоны – {{ $total }} <span
+  <br />Стоимость с персоны – {{ $event->getTotal(true) }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
       @if($event->discount > 0)
-          <br />Скидка - {{ $event->discount }}%
-          <br />Стоимость со скидкой - @discount($total, $event->discount) <span
+          <br />Стоимость со скидкой - @discount($event->getTotal(true), $event->discount) <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
       @endif
