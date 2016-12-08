@@ -1265,6 +1265,9 @@ ans-serif;
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
 @cp1251($row->product->name)
+@if(isset($row->product->name_en))
+	/ @cp1251($row->product->name_en)
+@endif
 <br>
 @image_doc($row->product->id)
 <o:p=

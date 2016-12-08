@@ -23,6 +23,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Illuminate\Support\Facades\View;
 use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Writer\PDF\MPDF;
 
 /**
  * Class EventsController
@@ -222,8 +223,6 @@ class EventController extends Controller
      * Download event in PDF format
      *
      * @param $id
-     *
-     * @return Response
      */
     public function pdf($id)
     {
@@ -235,12 +234,15 @@ class EventController extends Controller
             $template = 'events.default.pdf';
         }
 
-        return PDF::loadView($template, [
+
+        $mpdf = new \mPDF();
+        $mpdf->WriteHTML(view($template, [
             'event' => $event,
             'sections' => $event->getSectionsList(),
             'copyright' => Auth::user()->copyright,
             'total' => $event->weight_person ? $event->getTotal(true) : $event->getTotal()
-        ])->download($event->name . '.pdf');
+        ]));
+        $mpdf->Output($event->name . '.pdf', 'D');
     }
 
     /**

@@ -7,15 +7,15 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.3.*",
-        "acacha/admin-lte-template-laravel": "3.*",
+        "acacha/admin-lte-template-laravel": "3.1.11",
         "laravelcollective/html": "5.3.*",
         "barryvdh/laravel-debugbar": "^2.3",
         "doctrine/dbal": "^2.5",
         "prettus/l5-repository": "^2.6",
         "maatwebsite/excel": "~2.1.0",
-        "niklasravnsborg/laravel-pdf": "^1.1",
         "phpoffice/phpword": "v0.13.*",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "mpdf/mpdf": "^6.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

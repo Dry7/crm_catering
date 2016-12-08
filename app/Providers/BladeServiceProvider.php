@@ -23,7 +23,7 @@ class BladeServiceProvider extends ServiceProvider
         });
 
         Blade::directive('date', function ($expression) {
-            return '<?= ' . $expression . '->format(\'d.m.Y\'); ?>';
+            return '<?= ' . $expression . ' ? ' . $expression . '->format(\'d.m.Y\') : \'\'; ?>';
         });
 
         Blade::directive('cp1251', function ($expression) {
@@ -56,6 +56,10 @@ class BladeServiceProvider extends ServiceProvider
               '$size = $product->getPhotoSizeAttribute(400); ' .
               'echo \'<img src=3D"\' . env(\'APP_URL\') . $product->photo_url . \'" width=3D\' . $size->width . \' height=3D\' . $size->height . \' />\';' .
             '} ?>';
+        });
+
+        Blade::directive('image_base64', function ($expression) {
+            return "<?php echo 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('img/$expression'))) ?>";
         });
 
         Blade::directive('discount', function ($expression) {

@@ -13,13 +13,13 @@
                 {!! Form::select('status_id', $statuses, $event->status_id, ['class' => 'form-control', 'id' => 'status_id', 'placeholder' => 'Выберите статус']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('client_id', 'Компания *') !!}
+                {!! Form::label('client_id', 'Компания') !!}
                 {!! Form::select('client_id', $clients, $event->client_id, ['class' => 'form-control select2', 'id' => 'client_id', 'placeholder' => 'Выберите компанию']) !!}
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        {!! Form::label('date', 'Дата *') !!}
+                        {!! Form::label('date', 'Дата') !!}
                         {!! Form::text('date', $event->date !== null ? $event->date->format('d.m.Y') : '', ['class' => 'form-control datepicker', 'id' => 'date', 'placeholder' => 'Введите дату']) !!}
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 {!! Form::select('place_id', $places, $event->place_id, ['class' => 'form-control', 'id' => 'place_id', 'placeholder' => 'Выберите место проведение']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('format_id', 'Формат *') !!}
+                {!! Form::label('format_id', 'Формат') !!}
                 {!! Form::select('format_id', $formats, $event->format_id, ['class' => 'form-control', 'id' => 'format_id', 'placeholder' => 'Выберите формат']) !!}
             </div>
             <div class="row">
@@ -113,6 +113,7 @@
                 <table v-if="true" class="table table-bordered">
                     <thead>
                     <tr>
+                        <th class="photo"></th>
                         <th class="name">Название</th>
                         <th class="amount">Количество порций</th>
                         <th class="weight">Выход, гр. за порцию</th>
@@ -124,6 +125,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="(row, index) in section.rows">
+                        <td style="text-align: center;"><a v-if="row.product.photo_url&&row.product.photo_url!=null" @click="openPhoto(row.product.photo_url)" href="javascript:void(0);"><img v-bind:src="row.product.photo_url" style="width: 100px;" /></a></td>
                         <td class="product">
                             <select class="form-control" @change="changeProduct(row, $event)">
                                 <option value="">Выберите блюдо</option>
@@ -142,7 +144,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td>Всего</td>
+                        <td colspan="2">Всего</td>
                         <td class="amount">@{{totalAmount(section) | total | amount}}</td>
                         <td></td>
                         <td></td>

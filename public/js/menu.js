@@ -134,6 +134,10 @@ Vue.component('menu-grid', {
             }
 
             return r;
+        },
+        openPhoto: function (photo) {
+            console.log(photo);
+            $.fancybox(photo);
         }
     }
 });

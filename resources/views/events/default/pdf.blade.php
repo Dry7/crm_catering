@@ -63,66 +63,6 @@ h4 {
   </tr>
 </table>
 </htmlpageheader>
-<table border="1" cellspacing="0" cellpadding="0" class="event">
-    <tbody>
-        <tr>
-            <td class="name"><p>Тип мероприятия</p></td>
-            <td class="value"><p>{{ $event->format }}</p></td>
-        </tr>
-        <tr>
-            <td class="name"><p>Количество персон</p></td>
-            <td class="value"><p>{{ $event->persons }}</p></td>
-        </tr>
-        <tr>
-            <td class="name"><p>Количество столов</p></td>
-            <td class="value"><p>{{ $event->tables }}</p></td>
-        </tr>
-        <tr>
-            <td class="name"><p>Место проведения</p></td>
-            <td class="value"><p>{{ $event->place->name }}</p></td>
-        </tr>
-        <tr>
-            <td class="name"><p>Количество STAF питания</p></td>
-            <td class="value"><p>{{ $event->staff }}</p></td>
-        </tr>
-@if($event->meeting)
-        <tr>
-            <td class="name"><p>Время встречи гостей</p></td>
-            <td class="value"><p>{{ $event->meeting }}</p></td>
-        </tr>
-@endif
-@if($event->main)
-        <tr>
-            <td class="name"><p>Время основного проекта</p></td>
-            <td class="value"><p>{{ $event->main }}</p></td>
-        </tr>
-@endif
-@if($event->hot_snacks)
-        <tr>
-            <td class="name"><p>Время горячей закуски</p></td>
-            <td class="value"><p>{{ $event->hot_snacks }}</p></td>
-        </tr>
-@endif
-@if($event->sorbet)
-        <tr>
-            <td class="name"><p>Время сорбет</p></td>
-            <td class="value"><p>{{ $event->sorbet }}</p></td>
-        </tr>
-@endif
-@if($event->hot)
-        <tr>
-            <td class="name"><p>Время горячего</p></td>
-            <td class="value"><p>{{ $event->hot }}</p></td>
-        </tr>
-@endif
-@if($event->dessert)
-        <tr>
-            <td class="name"><p>Время десерта</p></td>
-            <td class="value"><p>{{ $event->dessert }}</p></td>
-        </tr>
-@endif
-    </tbody>
-</table>
 <h1 align="center">Меню</h1>
 
 @foreach($sections as $section)
@@ -131,7 +71,7 @@ h4 {
     @foreach($section->rows as $row)
 <div class="product">
     <p align="center">
-        {{ $row->product->name }}
+        {{ $row->product->name }} {{ $row->product->name_en ? ' / ' . $row->product->name_en : '' }}
         @image($row->product->id)
     </p>
     <p align="center">

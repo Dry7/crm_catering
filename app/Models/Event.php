@@ -237,7 +237,7 @@ class Event extends Model
         return implode(' - ', [
             @$this->client->name,
             @$this->place->name,
-            @$this->date->format('d.m.Y')
+            @$this->date ? @$this->date->format('d.m.Y') : ''
         ]);
     }
 

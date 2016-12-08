@@ -13,6 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        ini_set("pcre.backtrack_limit", "23001337");
+        ini_set("pcre.recursion_limit", "23001337");
     }
 
     /**
@@ -22,5 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        ini_set("pcre.backtrack_limit", "23001337");
+        ini_set("pcre.recursion_limit", "23001337");
     }
 }

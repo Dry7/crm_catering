@@ -26,7 +26,15 @@ class Product extends Model
      * @var array
      */
     protected $hidden = [
-        'source', 'name_en', 'created_at', 'updated_at', 'cost', 'markup', 'photo'
+        'source', 'created_at', 'updated_at', 'cost', 'markup', 'photo'
+    ];
+
+    /**
+     * The accessors to append to the model`s array form.
+     * @var array
+     */
+    protected $appends = [
+        'photo_url'
     ];
 
     public function kitchen()
@@ -55,7 +63,7 @@ class Product extends Model
      */
     public function getPhotoUrlAttribute()
     {
-        return Storage::url($this->attributes['photo']);
+        return $this->photo_has ? Storage::url($this->attributes['photo']) : null;
     }
 
     /**

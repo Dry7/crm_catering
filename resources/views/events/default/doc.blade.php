@@ -1346,6 +1346,9 @@ table.MsoTableGrid
     @foreach($section->rows as $row)
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
   @cp1251($row->product->name)
+  @if(isset($row->product->name_en))
+	  / @cp1251($row->product->name_en)
+  @endif
   @image_doc($row->product->id)
 </p>
 

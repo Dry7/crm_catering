@@ -13,6 +13,7 @@ gulp.task('css', function() {
         'node_modules/font-awesome/less/font-awesome.less',
         'node_modules/ionicons/dist/css/ionicons.css',
         'node_modules/bootstrap-datepicker/build/build3.less',
+        'resources/assets/css/jquery.fancybox.css',
         'node_modules/admin-lte/dist/css/skins/_all-skins.css',
         'node_modules/icheck/skins/square/blue.css',
         'vendor/acacha/admin-lte-template-laravel/public/css/toastr.css',
@@ -45,6 +46,8 @@ gulp.task('js', function() {
         'node_modules/jquery-mask-plugin/dist/jquery.mask.js',
         'node_modules/X-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
         'node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.ru.js',
+        'node_modules/jquery-fancybox/lib/jquery.mousewheel-3.0.6.pack.js',
+        'node_modules/jquery-fancybox/source/js/jquery.fancybox.pack.js',
         'public/js/app.js',
         'resources/assets/js/scripts.js'
     ])
