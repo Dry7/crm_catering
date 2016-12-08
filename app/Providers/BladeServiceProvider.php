@@ -27,7 +27,7 @@ class BladeServiceProvider extends ServiceProvider
         });
 
         Blade::directive('cp1251', function ($expression) {
-            return '<?= iconv(\'utf-8\', \'windows-1251\', ' . $expression . '); ?>';
+            return '<?= iconv(\'utf-8\', \'windows-1251\', @' . $expression . '); ?>';
         });
 
         Blade::directive('time', function ($expression) {
