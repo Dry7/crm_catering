@@ -32,5 +32,7 @@
             <li{!! (is_object(\Request::route()) and (\Request::route()->getName() == 'events.index')) ? ' class="active"' : '' !!}><a href="{{ route('events.index') }}"><i class='fa fa-pencil'></i> <span>Мероприятия</span></a></li>
             <li{!! (is_object(\Request::route()) and (\Request::route()->getName() == 'calendar.index')) ? ' class="active"' : '' !!}><a href="{{ route('calendar.index') }}"><i class='fa fa-calendar'></i> <span>Календарь проектов</span></a></li>
         </ul>
+
+        @yield('categories')
     </section>
 </aside>

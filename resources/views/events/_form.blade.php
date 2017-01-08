@@ -102,14 +102,25 @@
 
     <h3>Меню</h3>
 
+    @section('categories')
+        categories
+        <div id="categories">
+            <menu-categories :categories='{{ $categories->toJson() }}' :category='{{ $categories->first()->toJson() }}'></menu-categories>
+        </div>
+        <script type="text/x-template" id="menu-categories-template">
+        <ul>
+            <li v-for="category in categories">
+                <a @click="setCategory(category)" style="color: #000000; font-weight: bold; background-color: #FFFFFF;" v-if="select_category == category">@{{ categoryList(category) + category.name }}</a>
+                <a @click="setCategory(category)" style="color: #FFFFFF;" v-if="select_category != category">@{{ categoryList(category) + category.name }}</a>
+            </li>
+        </ul>
+        </script>
+    @endsection
+
     <script type="text/x-template" id="menu-template">
 
         <div>
-            <div v-for="section in sections" class="section">
-                <select v-model="section.category" class="form-control">
-                    <option value="">Выберите категорию</option>
-                    <option v-for="category in categories" v-bind:value="category">@{{ categoryList(category) + category.name }}</option>
-                </select>
+            Категория - @{{ category ? category.name : '' }}
                 <table v-if="true" class="table table-bordered">
                     <thead>
                     <tr>
@@ -120,25 +131,24 @@
                         <th class="weight_person">Выход, гр. за персону</th>
                         <th class="price">Цена за порцию RUB</th>
                         <th class="total">Общая стоимость</th>
+                        <th class="show_photo">Вывести фото</th>
                         <th class="action"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(row, index) in section.rows">
-                        <td style="text-align: center;"><a v-if="row.product.photo_url&&row.product.photo_url!=null" @click="openPhoto(row.product.photo_url)" href="javascript:void(0);"><img v-bind:src="row.product.photo_url" style="width: 100px;" /></a></td>
-                        <td class="product">
-                            <select class="form-control" @change="changeProduct(row, $event)">
-                                <option value="">Выберите блюдо</option>
-                                <option v-for="product in filteredData(section.category)" v-bind:value="product.id" :key="product.id" :selected="row.product.id == product.id">@{{ product.name }}</option>
-                            </select>
+                    <tr v-for="(product, index) in filteredData(category)">
+                        <td style="text-align: center;">
+                            <a v-if="product.photo_url&&product.photo_url!=null" @click="openPhoto(product.photo_url)" href="javascript:void(0);"><img v-bind:src="product.photo_url" style="width: 100px;" /></a>
                         </td>
+                        <td class="product">@{{ product.name }}</td>
                         <td class="amount">
-                            <input type="number" v-model.number="row.amount" class="form-control">
+                            <input type="number" v-model.number="product.id" class="form-control">
                         </td>
-                        <td>@{{ row.product != "" ? row.product.weight : '' | weight }}</td>
-                        <td>@{{ row.product != "" ? weightPerson(row.product.weight, row.amount) : '' | weight }}</td>
-                        <td>@{{ row.product != "" ? row.product.price : '' | price}}</td>
-                        <td>@{{ row.product != "" ? row.product.price*row.amount : '' | total | price}}</td>
+                        <td>@{{ product != "" ? product.weight : '' | weight }}</td>
+                        <td>@{{ product != "" ? weightPerson(product.weight, 1) : '' | weight }}</td>
+                        <td>@{{ product != "" ? product.price : '' | price}}</td>
+                        <td>@{{ product != "" ? product.price*1 : '' | total | price}}</td>
+                        <td><input type="checkbox" /></td>
                         <td><a href="javascript:void(0);" @click="deleteRow(section, index)" class="btn btn-danger">Удалить</a></td>
                     </tr>
                     </tbody>
@@ -151,12 +161,12 @@
                         <td></td>
                         <td>@{{totalPrice(section) | total | price}}</td>
                         <td></td>
+                        <td></td>
                     </tr>
                     </tfoot>
                 </table>
 
                 <a @click="addRow(section)" class="btn btn-sm btn-success">Добавить поле</a>
-            </div>
             <br />
             <a @click="addSection()" class="btn btn-sm btn-success">Добавить подраздел</a>
             <input type="hidden" name="sections" :value="sectionsJSON">

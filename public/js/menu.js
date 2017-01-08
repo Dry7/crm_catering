@@ -9,10 +9,20 @@ Vue.component('menu-grid', {
         persons: Number,
         weight_person: Boolean,
         tax: Number,
-        template: String
+        template: String,
+        category: Object
     },
     created: function () {
         this.sections = this.init;
+    },
+    mounted: function() {
+        var data = this;
+        bus.$on('set-category', function (category) {
+            console.log('set-category');
+            console.log(category);
+            data.category = category;
+            this.category = category;
+        });
     },
     computed: {
         sectionsJSON: function () {
@@ -66,7 +76,6 @@ Vue.component('menu-grid', {
             var order = 1;
             var data = this.products;
 
-            if (filterKey) {
                 data = data.filter(function (item) {
                     if (filterKey) {
                         if (filterKey.section1 && (item.section1 != filterKey.section1)) {
@@ -83,11 +92,10 @@ Vue.component('menu-grid', {
                         }
                         return true;
                     } else {
-                        return true;
+                        return false;
                     }
                     return filterKey ? Number(item.category) == Number(filterKey) : true;
                 });
-            }
 
             if (sortKey) {
                 data = data.slice().sort(function (a, b) {
@@ -97,16 +105,21 @@ Vue.component('menu-grid', {
                 })
             }
 
+            console.log('asd');
+            console.log(filterKey);
+            console.log(data);
+
             return data;
         },
         totalAmount: function (section) {
-            console.log(JSON.stringify(this.sections));
+            return 0;
             return section.rows.reduce(function (total, row) {
                 var item = parseInt(row.amount);
                 return total + (item > 0 ? item : 0);
             }, 0);
         },
         totalPrice: function (section) {
+            return 0;
             return section.rows.reduce(function (total, row) {
                 var item = row.product != null ? parseInt(row.product.price)*parseInt(row.amount) : 0;
                 return total + (item > 0 ? item : 0);
@@ -142,8 +155,48 @@ Vue.component('menu-grid', {
     }
 });
 
+Vue.component('menu-categories', {
+    template: '#menu-categories-template',
+    replace: true,
+    props: {
+        categories: Array,
+        select_category: Object
+    },
+    methods: {
+        categoryList: function (category) {
+            var level = 0;
+            if (category.section2 !== null) { level++; }
+            if (category.section3 !== null) { level++; }
+            if (category.section4 !== null) { level++; }
+
+            var r = '';
+
+            while (level > 0) {
+                r += '--';
+                level--;
+            }
+
+            return r;
+        },
+        setCategory: function (category) {
+            console.log('setCategory');
+            this.select_category = category;
+            bus.$emit('set-category', category);
+        }
+    }
+});
+
 // bootstrap the demo
-var demo = new Vue({
+var bus = new Vue();
+
+var categories = new Vue({
+    el: '#categories',
+    data: {
+        category: null
+    }
+});
+
+var menu = new Vue({
     el: '#menu',
     data: {
         products: [],
@@ -158,6 +211,7 @@ var demo = new Vue({
         persons: 1,
         weight_person: false,
         tax: 1,
-        template: 'default'
+        template: 'default',
+        category: null
     }
 });
