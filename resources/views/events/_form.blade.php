@@ -270,6 +270,13 @@
                 {!! Form::select('product_view', $product_views, $event->product_view, ['class' => 'form-control', 'id' => 'product_view', 'placeholder' => 'Выберите формат отображения блюд']) !!}
             </div>
             <div class="form-group">
+                {!! Form::label('language', 'Язык') !!}
+                {!! Form::select('language', [
+                    'ru' => 'Русский',
+                    'en' => 'Английский'
+                ], $event->language, ['class' => 'form-control', 'id' => 'language']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('template', 'Шаблон') !!}
                 {!! Form::select('template', $templates, $event->template, ['class' => 'form-control', 'id' => 'template']) !!}
             </div>

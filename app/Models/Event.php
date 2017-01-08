@@ -41,7 +41,7 @@ class Event extends Model
         'id', 'user_id', 'status_id', 'client_id', 'date', 'format_id', 'persons', 'tables',
         'place_id', 'staff', 'meeting', 'main', 'hot_snacks', 'sorbet', 'hot', 'dessert', 'sections',
         'weight_person', 'tax_id', 'discount', 'max_discount', 'administration', 'fare', 'template',
-        'product_view', 'service', 'equipment', 'mirror_collection', 'extras'
+        'product_view', 'service', 'equipment', 'mirror_collection', 'extras', 'language'
     ];
 
     /**
