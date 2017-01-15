@@ -49,7 +49,7 @@ p {
 
 <img src="@image_base64(fortress_first.jpg)" style="width: 100%; margin: -120px 0 -120px 0;" />
 
-<h1 align="center">Меню</h1>
+<h1 align="center">{{ trans('menu.menu') }}</h1>
 
 @foreach($sections as $section)
 <h4 align="center">{{ $section->category->name }}</h4>
@@ -61,11 +61,11 @@ p {
     </p>
     <p align="center">
         @if($event->product_view == 'price')
-        {{ $row->amount }} / {{ $row->total_weight }} гр / {{ $row->total }} ₱
+        {{ $row->amount }} / {{ $row->total_weight }} {{ trans('menu.gr') }} / {{ $row->total }} ₱
         @elseif($event->product_view == 'delete_price_and_weight')
 
         @else
-        {{ $row->amount }} / {{ $row->total_weight }} гр
+        {{ $row->amount }} / {{ $row->total_weight }} {{ trans('menu.gr') }}
         @endif
     </p>
 </div>
@@ -73,18 +73,18 @@ p {
 
 @endforeach
 
-<p align="center" class="total">Итого:</p>
+<p align="center" class="total">{{ trans('menu.total') }}</p>
 <p align="center">
-    Стоимость – {{ $event->getTotal() }} ₱
+    {{ trans('menu.total_price') }} – {{ $event->getTotal() }} ₱
     @if($event->discount > 0)
-        <br />Скидка - {{ $event->discount }}%
-        <br />Стоимость со скидкой - @discount($event->getTotal(), $event->discount) ₱
+        <br />{{ trans('menu.discount') }} - {{ $event->discount }}%
+        <br />{{ trans('menu.price_by_person') }} - @discount($event->getTotal(), $event->discount) ₱
     @endif
 
     @if($event->weight_person)
-        <br />Стоимость с персоны – {{ $event->getTotal(true) }} ₱
+        <br />{{ trans('menu.price_by_person') }} – {{ $event->getTotal(true) }} ₱
         @if($event->discount > 0)
-            <br />Стоимость со скидкой - @discount($event->getTotal(true), $event->discount) ₱
+            <br />{{ trans('menu.price_discount') }} - @discount($event->getTotal(true), $event->discount) ₱
         @endif
     @endif
 </p>
@@ -92,23 +92,23 @@ p {
 <p align="center" class="tax">{{ $event->tax }}</p>
 
 @if($event->is_service)
-    <p align="center" class="service">Сервис включен в стоимость</p>
+    <p align="center" class="service">{{ trans('menu.service') }}</p>
 @endif
 
 @if($event->is_administration)
-    <p align="center" class="administration">Административные расходы включены в стоимость</p>
+    <p align="center" class="administration">{{ trans('menu.administration') }}</p>
 @endif
 
 @if($event->is_fare)
-    <p align="center" class="fare">Транспортные расходы включены в стоимость</p>
+    <p align="center" class="fare">{{ trans('menu.fare') }}</p>
 @endif
 
 @if($event->is_equipment)
-    <p align="center" class="equipment">Оборудование включено в стоимость</p>
+    <p align="center" class="equipment">{{ trans('menu.equipment') }}</p>
 @endif
 
 @if($event->is_mirror_collection)
-    <p align="center" class="mirror_collection">Пробочный сбор включен в стоимость</p>
+    <p align="center" class="mirror_collection">{{ trans('menu.mirror_collection') }}</p>
 @endif
 
 <div class="images">

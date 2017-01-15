@@ -27,6 +27,12 @@ class Event extends Model
         3 => 'НДС не облагается'
     ];
 
+    private static $taxes_en = [
+        1 => 'VAT is included',
+        2 => 'Price without VAT 18%',
+        3 => 'NDS is not appearing'
+    ];
+
     private static $product_views = [
         'price' => 'Показать стоимость каждой закуски',
         'delete_price_and_weight' => 'Убрать стоимость и вес'
@@ -110,7 +116,11 @@ class Event extends Model
 
     public function getTaxAttribute()
     {
-        return @self::$taxes[$this->attributes['tax_id']];
+        if ($this->language == 'en') {
+            return @self::$taxes_en[$this->attributes['tax_id']];
+        } else {
+            return @self::$taxes[$this->attributes['tax_id']];
+        }
     }
 
     public function getStatuses()

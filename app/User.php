@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
@@ -74,12 +75,21 @@ class User extends Authenticatable
 
     public function getCopyrightAttribute()
     {
-        return 'С уважением, ' . $this->getFullNameAttribute(false) . '<br />' .
+        if (App::getLocale() == 'en') {
+            return 'Yours faithfully, ' . $this->getFullNameAttribute(false) . '<br />' .
+            'Lead Project Manager<br />' .
+            'Company «Fusion Service»<br />' .
+            'Phone: +7 (812) 602 05 20<br />' .
+            'e-mail: office@fusion-service.com<br />' .
+            'КЕЙТЕРИНГ.РФ';
+        } else {
+            return 'С уважением, ' . $this->getFullNameAttribute(false) . '<br />' .
             'Ведущий менеджер проекта<br />' .
             'Компания «Fusion Service»<br />' .
             'Тел: +7 (812) 602 05 20<br />' .
             'e-mail: office@fusion-service.com<br />' .
             'КЕЙТЕРИНГ.РФ';
+        }
     }
 
     public function isAdmin()

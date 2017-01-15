@@ -18,6 +18,7 @@ use App\Repository\PlaceRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
@@ -210,6 +211,10 @@ class EventController extends Controller
             $template = 'events.default.doc';
         }
 
+        if ($event->language == 'en') {
+            App::setLocale('en');
+        }
+
         return response(view($template, [
             'event' => $event,
             'sections' => $event->getSectionsList(),
@@ -237,6 +242,9 @@ class EventController extends Controller
             $template = 'events.default.pdf';
         }
 
+        if ($event->language == 'en') {
+            App::setLocale('en');
+        }
 
         $mpdf = new \mPDF();
         $mpdf->WriteHTML(view($template, [

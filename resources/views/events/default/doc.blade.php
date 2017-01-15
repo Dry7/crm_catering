@@ -1336,7 +1336,7 @@ table.MsoTableGrid
 
 <div class=3DWordSection1>
 
-<p class=3DMsoTitle align=3Dcenter style=3D'text-align:center'>Меню</p>
+<p class=3DMsoTitle align=3Dcenter style=3D'text-align:center'>{{ trans('menu.menu') }}</p>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1345,21 +1345,22 @@ table.MsoTableGrid
 
     @foreach($section->rows as $row)
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
-  @cp1251($row->product->name)
-  @if(isset($row->product->name_en))
-	  / @cp1251($row->product->name_en)
-  @endif
+@if($event->language == 'en')
+	@cp1251($row->product->name_en)
+@else
+	@cp1251($row->product->name)
+@endif
 </p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
 		@if($event->product_view == 'price')
-        {{ $row->amount }} / {{ $row->total_weight }} гр / {{ $row->total }} <span
+        {{ $row->amount }} / {{ $row->total_weight }} {{ trans('menu.gr') }} / {{ $row->total }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
         @elseif($event->product_view == 'delete_price_and_weight')
 
         @else
-        {{ $row->amount }} / {{ $row->total_weight }} гр
+        {{ $row->amount }} / {{ $row->total_weight }} {{ trans('menu.gr') }}
         @endif
 </p>
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'><o:p>&nbsp;=
@@ -1372,25 +1373,25 @@ color:black;background:white'>&#8369;</span>
 style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 @endforeach
 
-<p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Итого:</p>
+<p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>{{ trans('menu.total') }}</p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
-  Стоимость – {{ $event->getTotal() }} <span
+  {{ trans('menu.total_price') }} – {{ $event->getTotal() }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
         @if($event->discount > 0)
-            <br />Скидка - {{ $event->discount }}%
-            <br />Стоимость со скидкой - @discount($event->getTotal(), $event->discount) <span
+            <br />{{ trans('menu.discount') }} - {{ $event->discount }}%
+            <br />{{ trans('menu.price_discount') }} - @discount($event->getTotal(), $event->discount) <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
         @endif
 		
   @if($event->weight_person)
-  <br />Стоимость с персоны – {{ $event->getTotal(true) }} <span
+  <br />{{ trans('menu.price_by_person') }} – {{ $event->getTotal(true) }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
       @if($event->discount > 0)
-          <br />Стоимость со скидкой - @discount($event->getTotal(true), $event->discount) <span
+          <br />{{ trans('menu.price_discount') }} - @discount($event->getTotal(true), $event->discount) <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
       @endif
@@ -1403,23 +1404,23 @@ color:black;background:white'>&#8369;</span>
 </p>
 
 @if($event->is_service)
-    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Сервис включен в стоимость</p>
+    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>{{ trans('menu.service') }}</p>
 @endif
 
 @if($event->is_administration)
-    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Административные расходы включены в стоимость</p>
+    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>{{ trans('menu.administration') }}</p>
 @endif
 
 @if($event->is_fare)
-    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Транспортные расходы включены в стоимость</p>
+    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>{{ trans('menu.fare') }}</p>
 @endif
 
 @if($event->is_equipment)
-    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Оборудование включено в стоимость</p>
+    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>{{ trans('menu.equipment') }}</p>
 @endif
 
 @if($event->is_mirror_collection)
-    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Пробочный сбор включен в стоимость</p>
+    <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>{{ trans('menu.mirror_collection') }}</p>
 @endif
 
 @foreach($images as $image)
@@ -1654,9 +1655,9 @@ margin-left:0cm;text-align:center;background:white;vertical-align:baseline'=
 ><span
 class=3DSpellE><span style=3D'font-size:16.0pt;font-family:"Arial",sans-ser=
 if;
-color:#243D66;font-weight:normal'>Кейтеринговая</span></span><span
+color:#243D66;font-weight:normal'>{{ trans('menu.title_cater') }}</span></span><span
 style=3D'font-size:16.0pt;font-family:"Arial",sans-serif;color:#243D66;
-font-weight:normal'> компания<o:p></o:p></span></h2>
+font-weight:normal'> {{ trans('menu.title_comp') }}<o:p></o:p></span></h2>
 
 <p class=3DMsoHeader><o:p>&nbsp;</o:p></p>
 

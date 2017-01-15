@@ -1264,9 +1264,10 @@ ans-serif;
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-@cp1251($row->product->name)
-@if(isset($row->product->name_en))
-	/ @cp1251($row->product->name_en)
+@if($event->language == 'en')
+	@cp1251($row->product->name_en)
+@else
+	@cp1251($row->product->name)
 @endif
 <o:p=
 ></o:p></span></p>
@@ -1279,13 +1280,13 @@ ans-serif;
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
 @if($event->product_view == 'price')
-    {{ $row->amount }} / {{ $row->total_weight }} гр / {{ $row->total }} <span
+    {{ $row->amount }} / {{ $row->total_weight }} {{ trans('menu.gr') }} / {{ $row->total }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
 @elseif($event->product_view == 'delete_price_and_weight')
 
 @else
-    {{ $row->amount }} / {{ $row->total_weight }} гр
+    {{ $row->amount }} / {{ $row->total_weight }} {{ trans('menu.gr') }}
 @endif
 <o:p=
 ></o:p></span></p>
@@ -1303,7 +1304,7 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-Итого:
+{{ trans('menu.total') }}
 <o:p=
 ></o:p></span></p>
 
@@ -1311,23 +1312,23 @@ style=3D'mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-  Стоимость – {{ $event->getTotal() }} <span
+  {{ trans('menu.total_price') }} – {{ $event->getTotal() }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
         @if($event->discount > 0)
-            <br />Скидка - {{ $event->discount }}%
-            <br />Стоимость со скидкой - @discount($event->getTotal(), $event->discount) <span
+            <br />{{ trans('menu.discount') }} - {{ $event->discount }}%
+            <br />{{ trans('menu.price_discount') }} - @discount($event->getTotal(), $event->discount) <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
         @endif
 
 
   @if($event->weight_person)
-  <br />Стоимость с персоны – {{ $event->getTotal(true) }} <span
+  <br />{{ trans('menu.price_by_person') }} – {{ $event->getTotal(true) }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
       @if($event->discount > 0)
-          <br />Стоимость со скидкой - @discount($event->getTotal(true), $event->discount) <span
+          <br />{{ trans('menu.price_discount') }} - @discount($event->getTotal(true), $event->discount) <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
 color:black;background:white'>&#8369;</span>
       @endif
@@ -1348,7 +1349,7 @@ color:black;background:white'>&#8369;</span>
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-Сервис включен в стоимость
+{{ trans('menu.service') }}
 <o:p=
 ></o:p></span></p>
 @endif
@@ -1358,7 +1359,7 @@ color:black;background:white'>&#8369;</span>
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-Административные расходы включены в стоимость
+{{ trans('menu.administration') }}
 <o:p=
 ></o:p></span></p>
 @endif
@@ -1368,7 +1369,7 @@ color:black;background:white'>&#8369;</span>
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-Транспортные расходы включены в стоимость
+{{ trans('menu.fare') }}
 <o:p=
 ></o:p></span></p>
 @endif
@@ -1378,7 +1379,7 @@ color:black;background:white'>&#8369;</span>
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-Оборудование включено в стоимость
+{{ trans('menu.equipment') }}
 <o:p=
 ></o:p></span></p>
 @endif
@@ -1388,7 +1389,7 @@ color:black;background:white'>&#8369;</span>
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
 -SA'>
-Пробочный сбор включен в стоимость
+{{ trans('menu.mirror_collection') }}
 <o:p=
 ></o:p></span></p>
 @endif
