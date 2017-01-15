@@ -199,6 +199,16 @@ $(function () {
         }
     });
 
+    $('#send_kitchen').click(function() {
+        if ($('#send_kitchen').data('show') == '0') {
+            $('.kitchen').show();
+            $("#send_kitchen").data('show', 1);
+        } else {
+            $('#send_kitchen').append('<input type="hidden" name="kitchen" value="1" />');
+            $('#send_kitchen').parents('form').submit();
+        }
+    });
+
     setAbsolutionAndPercentsEvents('service');
     setAbsolutionAndPercentsEvents('administration');
     setAbsolutionAndPercentsEvents('fare');

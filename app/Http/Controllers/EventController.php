@@ -20,6 +20,7 @@ use App\Repository\UserRepository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Illuminate\Support\Facades\View;
@@ -189,9 +190,20 @@ class EventController extends Controller
             return $this->word($id);
         } elseif ($request->exists('pdf')) {
             return $this->pdf($id);
+        } elseif ($request->exists('kitchen')) {
+            $this->toKitchen($id);
+            return redirect()->route('events.index');
         } else {
             return redirect()->route('events.index');
         }
+    }
+
+    public function toKitchen($id)
+    {
+        $event = $this->events->find($id);
+        $data = $this->xls($id, true);
+
+        Mail::to(env('KITCHEN'))->send(new \App\Mail\Kitchen($event, $data['full']));
     }
 
     /**
@@ -261,10 +273,11 @@ class EventController extends Controller
      * Download event in Microsoft Excel format
      *
      * @param $id
+     * @param $send
      *
-     * @return Response
+     * @return Response|string
      */
-    public function xls($id)
+    public function xls($id, $send = false)
     {
         $event = $this->events->find($id);
         $sections = $event->getSectionsList();
@@ -274,7 +287,7 @@ class EventController extends Controller
             Log::info($user->id, Log::action(request()), request()->route()->parameters());
         }
 
-        return Excel::create($event->name . '.xls', function ($excel) use ($event, $sections){
+        $xls = Excel::create($event->name . '.xls', function ($excel) use ($event, $sections){
             $excel->sheet('Меню', function($sheet) use ($event, $sections) {
 
                 $time_index = 2;
@@ -326,16 +339,22 @@ class EventController extends Controller
                     }
                     foreach ($section->rows as $row) {
                         $sheet->row($row_index++, [
-                            $row->product->name,
-                            $row->amount . ' шт.',
-                            $row->product->weight . ' гр.',
-                            $row->total_weight . ' гр.'
+                            @$row->product->name,
+                            @$row->amount . ' шт.',
+                            @$row->product->weight . ' гр.',
+                            @$row->total_weight . ' гр.'
                         ]);
                     }
                     $row_index++;
                 }
             });
-        })->download('xls');
+        });
+
+        if ($send) {
+            return $xls->store('xls', false, true);
+        } else {
+            return $xls->download('xls');
+        }
     }
 
     /**

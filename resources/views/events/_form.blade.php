@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group kitchen">
                         {!! Form::label('staff', 'Количество STAFF питания') !!}
                         {!! Form::number('staff', $event->staff, ['class' => 'form-control', 'id' => 'staff', 'placeholder' => 'Введите количество STAFF питания']) !!}
                     </div>
@@ -32,7 +32,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group kitchen">
                         {!! Form::label('tables', 'Количество столов') !!}
                         {!! Form::number('tables', $event->tables, ['class' => 'form-control', 'id' => 'tables', 'placeholder' => 'Введите количество столов']) !!}
                     </div>
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="form-group kitchen">
                 {!! Form::label('place_id', 'Место проведение') !!}
                 {!! Form::select('place_id', $places, $event->place_id, ['class' => 'form-control', 'id' => 'place_id', 'placeholder' => 'Выберите место проведение']) !!}
             </div>
@@ -56,13 +56,13 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group kitchen">
                         {!! Form::label('meeting', 'Время встречи гостей') !!}
                         {!! Form::text('meeting', $event->meeting, ['class' => 'form-control time', 'id' => 'meeting']) !!}
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group kitchen">
                         {!! Form::label('main', 'Время основного проекта') !!}
                         {!! Form::text('main', $event->main, ['class' => 'form-control time', 'id' => 'main']) !!}
                     </div>
@@ -70,13 +70,13 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group kitchen">
                         {!! Form::label('hot_snacks', 'Время горячей закуски') !!}
                         {!! Form::text('hot_snacks', $event->hot_snacks, ['class' => 'form-control time', 'id' => 'hot_snacks']) !!}
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group kitchen">
                         {!! Form::label('sorbet', 'Время сорбет') !!}
                         {!! Form::text('sorbet', $event->sorbet, ['class' => 'form-control time', 'id' => 'sorbet']) !!}
                     </div>
@@ -84,13 +84,13 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group kitchen">
                         {!! Form::label('hot', 'Время горячего') !!}
                         {!! Form::text('hot', $event->hot, ['class' => 'form-control time', 'id' => 'hot']) !!}
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group kitchen">
                         {!! Form::label('dessert', 'Время десерта') !!}
                         {!! Form::text('dessert', $event->dessert, ['class' => 'form-control time', 'id' => 'dessert']) !!}
                     </div>
@@ -308,6 +308,7 @@
     <button class="btn btn-primary" name="word" type="submit"><i class="fa fa-file-word-o"> Word</i></button>
     <button class="btn btn-success" name="xls" type="submit"><i class="fa fa-file-excel-o"> XLS</i></button>
     <button class="btn btn-danger" name="pdf" type="submit"><i class="fa fa-file-pdf-o"> PDF</i></button>
+    <button class="btn btn-success" id="send_kitchen" name="kitchen" type="button" data-show="0"><i class="fa"> Отправить на кухню</i></button>
     @else
         Возможность скачать КП станет доступной после сохранения мероприятия
     @endif
