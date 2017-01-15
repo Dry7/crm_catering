@@ -6,20 +6,21 @@ Vue.component('menu-grid', {
         sections: Array,
         categories: Array,
         init: Array,
+        init_images: Array,
         persons: Number,
         weight_person: Boolean,
         tax: Number,
         template: String,
-        category: Object
+        category: Object,
+        images: Array
     },
     created: function () {
         this.sections = this.init;
+        this.images = this.init_images;
     },
     mounted: function() {
         var data = this;
         bus.$on('set-category', function (category) {
-            console.log('set-category');
-            console.log(category);
             data.category = category;
             this.category = category;
         });
@@ -27,6 +28,9 @@ Vue.component('menu-grid', {
     computed: {
         sectionsJSON: function () {
             return JSON.stringify(this.sections);
+        },
+        imagesJSON: function () {
+            return JSON.stringify(this.images);
         }
     },
     filters: {
@@ -105,10 +109,6 @@ Vue.component('menu-grid', {
                 })
             }
 
-            console.log('asd');
-            console.log(filterKey);
-            console.log(data);
-
             return data;
         },
         totalAmount: function (section) {
@@ -149,8 +149,89 @@ Vue.component('menu-grid', {
             return r;
         },
         openPhoto: function (photo) {
-            console.log(photo);
             $.fancybox(photo);
+        },
+        changeAmount: function(product, value) {
+            if (!this.isSetCategory(this.category)) {
+                this.sections.push({
+                    category: this.category,
+                    rows: []
+                })
+            }
+
+            category = this.category;
+            self = this;
+            this.sections = this.sections.map(function(section) {
+                if (section.category.name == category.name) {
+                    if (self.isSetProduct(section, product)) {
+                        section.rows = section.rows.map(function (row) {
+                            if (row.product.id == product.id) {
+                                row.amount = value;
+                            }
+                            return row;
+                        });
+                    } else {
+                        section.rows.push({product: product, amount: 1});
+                    }
+                }
+                return section;
+            });
+        },
+        getAmount: function(product) {
+            var amount = 0;
+            this.sections.filter(function (section) {
+                section.rows.filter(function (row) {
+                    if (row.product.id == product.id) {
+                        amount = row.amount;
+                    }
+                });
+            });
+            return amount;
+        },
+        changeChecked: function(product, event) {
+            console.log('this.images');
+            console.log(this.images);
+
+            if (event.target.checked) {
+                this.addChecked(product);
+            } else {
+                this.deleteChecked(product);
+            }
+        },
+        deleteChecked: function(product) {
+            this.images = this.images.filter(function(image) {
+                return image.id != product.id;
+            });
+        },
+        addChecked: function(product) {
+            if (this.images.filter(function(image) {
+                    return image.id == product.id;
+                }) > 0) {
+                this.images = this.images.map(function(image) {
+                    if (image.id == product.id) {
+                        return product;
+                    } else {
+                        return image;
+                    }
+                })
+            } else {
+                this.images.push(product);
+            }
+        },
+        getChecked: function(product) {
+            return this.images.filter(function(image) {
+                    return image.id == product.id;
+                }).length > 0;
+        },
+        isSetCategory: function(category) {
+            return this.sections.filter(function (item) {
+                return category.name == item.category.name;
+            }).length > 0;
+        },
+        isSetProduct: function(section, product) {
+            return section.rows.filter(function (item) {
+                    return item.product && (product.id == item.product.id);
+                }).length > 0;
         }
     }
 });
@@ -179,7 +260,6 @@ Vue.component('menu-categories', {
             return r;
         },
         setCategory: function (category) {
-            console.log('setCategory');
             this.select_category = category;
             bus.$emit('set-category', category);
         }
@@ -204,10 +284,10 @@ var menu = new Vue({
             {
                 category: "",
                 rows: [
-                    {product: "", amount: null}
                 ]
             }
         ],
+        images: [],
         persons: 1,
         weight_person: false,
         tax: 1,

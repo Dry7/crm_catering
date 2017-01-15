@@ -142,14 +142,19 @@
                         </td>
                         <td class="product">@{{ product.name }}</td>
                         <td class="amount">
-                            <input type="number" v-model.number="product.id" class="form-control">
+                            <input type="number" v-bind:value="getAmount(product)" class="form-control" v-on:change="changeAmount(product, $event.target.value)">
                         </td>
                         <td>@{{ product != "" ? product.weight : '' | weight }}</td>
                         <td>@{{ product != "" ? weightPerson(product.weight, 1) : '' | weight }}</td>
                         <td>@{{ product != "" ? product.price : '' | price}}</td>
-                        <td>@{{ product != "" ? product.price*1 : '' | total | price}}</td>
-                        <td><input type="checkbox" /></td>
-                        <td><a href="javascript:void(0);" @click="deleteRow(section, index)" class="btn btn-danger">Удалить</a></td>
+                        <td>@{{ product != "" ? product.price*getAmount(product) : '' | total | price}}</td>
+                        <td>
+                            <input type="checkbox" v-bind:checked="getChecked(product) ? 'checked' : ''" v-on:change="changeChecked(product, $event)" />
+                        </td>
+                        <td>
+                            <a v-if="getAmount(product) == 0" href="javascript:void(0);" @click="changeAmount(product, 1)" class="btn btn-success">Добавить</a>
+                            <a v-if="getAmount(product) > 0" href="javascript:void(0);" @click="changeAmount(product, 0)" class="btn btn-danger">Удалить</a>
+                        </td>
                     </tr>
                     </tbody>
                     <tfoot>
@@ -166,10 +171,8 @@
                     </tfoot>
                 </table>
 
-                <a @click="addRow(section)" class="btn btn-sm btn-success">Добавить поле</a>
-            <br />
-            <a @click="addSection()" class="btn btn-sm btn-success">Добавить подраздел</a>
             <input type="hidden" name="sections" :value="sectionsJSON">
+            <input type="hidden" name="images" :value="imagesJSON">
 
             <br /><br />
             <div class="form-group">
@@ -289,6 +292,7 @@
                 :categories='{{ $categories->toJson() }}'
                 :sections="sections"
                 :init="{{ $event->sections }}"
+                :init_images="{{ $event->images }}"
                 :persons="{{ $event->persons }}"
                 :weight_person="{{ (int)$event->weight_person ? 'true' : 'false' }}"
                 :tax="{{ (int)$event->tax_id }}"
