@@ -105,7 +105,9 @@
     @section('categories')
         categories
         <div id="categories">
+            @if(sizeof($categories) > 0)
             <menu-categories :categories='{{ $categories->toJson() }}' :category='{{ $categories->first()->toJson() }}'></menu-categories>
+            @endif
         </div>
         <script type="text/x-template" id="menu-categories-template">
         <ul>
