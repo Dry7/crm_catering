@@ -345,6 +345,14 @@ class Event extends Model
         }
     }
 
+    public function getImagesList()
+    {
+        if ((string)@$this->attributes['images'] == '') {
+            return [];
+        } else {
+            return @json_decode($this->attributes['images']);
+        }
+    }
     public function getAbsolution($attribute)
     {
         return preg_match('/%/i', @$this->attributes[$attribute]) ? null : @$this->attributes[$attribute];

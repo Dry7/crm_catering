@@ -213,6 +213,7 @@ class EventController extends Controller
         return response(view($template, [
             'event' => $event,
             'sections' => $event->getSectionsList(),
+            'images' => $event->getImagesList(),
             'copyright' => Auth::user()->copyright,
             'total' => $event->weight_person ? $event->getTotal(true) : $event->getTotal()
         ]))
@@ -241,6 +242,7 @@ class EventController extends Controller
         $mpdf->WriteHTML(view($template, [
             'event' => $event,
             'sections' => $event->getSectionsList(),
+            'images' => $event->getImagesList(),
             'copyright' => Auth::user()->copyright,
             'total' => $event->weight_person ? $event->getTotal(true) : $event->getTotal()
         ]));

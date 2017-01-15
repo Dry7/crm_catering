@@ -1349,8 +1349,6 @@ table.MsoTableGrid
   @if(isset($row->product->name_en))
 	  / @cp1251($row->product->name_en)
   @endif
-  <br/>
-  @image_doc($row->product->id)
 </p>
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
@@ -1423,6 +1421,10 @@ color:black;background:white'>&#8369;</span>
 @if($event->is_mirror_collection)
     <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>Пробочный сбор включен в стоимость</p>
 @endif
+
+@foreach($images as $image)
+    @image_doc($image->id)
+@endforeach
 
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
   @cp1251($copyright)

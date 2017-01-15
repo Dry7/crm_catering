@@ -58,7 +58,6 @@ p {
 <div class="product">
     <p align="center">
         {{ $row->product->name }} {{ $row->product->name_en ? ' / ' . $row->product->name_en : '' }}
-        @image($row->product->id)
     </p>
     <p align="center">
         @if($event->product_view == 'price')
@@ -111,6 +110,12 @@ p {
 @if($event->is_mirror_collection)
     <p align="center" class="mirror_collection">Пробочный сбор включен в стоимость</p>
 @endif
+
+<div class="images">
+    @foreach($images as $image)
+        @image($image->id)
+    @endforeach
+</div>
 
 <p align="center" class="copyright">{!! $copyright !!}</p>
 

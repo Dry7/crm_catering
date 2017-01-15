@@ -47,14 +47,14 @@ class BladeServiceProvider extends ServiceProvider
         });
 
         Blade::directive('image', function ($expression) {
-            return '<?php $product = App\Models\Product::find(' . $expression . '); if ($product->photo_has) { echo \'<img src="\' . $product->photo_base64 . \'" style="margin: 0 50px;" />\'; } ?>';
+            return '<?php $product = App\Models\Product::find(' . $expression . '); if ($product->photo_has) { echo \'<img src="\' . $product->photo_base64 . \'" style="margin: 0 50px; width: 20%;" />\'; } ?>';
         });
 
         Blade::directive('image_doc', function ($expression) {
-            return '<?php $product = App\Models\Product::find(' . $expression . '); ' .
-            'if ($product->photo_has) { ' .
-              '$size = $product->getPhotoSizeAttribute(400); ' .
-              'echo \'<img src=3D"\' . env(\'APP_URL\') . $product->photo_url . \'" width=3D\' . $size->width . \' height=3D\' . $size->height . \' />\';' .
+            return '<?php $product = App\Models\Product::find(' . $expression . '); ' . "\n" .
+            'if ($product and $product->photo_has) { ' . "\n" .
+              '$size = $product->getPhotoSizeAttribute(400); ' . "\n" .
+              'echo \'<img src=3D"\' . env(\'APP_URL\') . $product->photo_url . \'" width=3D\' . round($size->width/2) . \' height=3D\' . round($size->height/2) . \' />\';' . "\n" .
             '} ?>';
         });
 
