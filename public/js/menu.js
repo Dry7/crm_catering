@@ -270,6 +270,7 @@ Vue.component('menu-categories', {
         isVisible: function (category) {
             if (this.select_category == null) {
                 return ((category.section1 != null)
+                    && (category.section2 == null)
                     && (category.section3 == null)
                     && (category.section4 == null));
             } else {
