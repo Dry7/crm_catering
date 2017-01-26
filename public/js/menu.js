@@ -275,6 +275,15 @@ Vue.component('menu-categories', {
                     && (category.section4 == null));
             } else {
                 if (
+                    (category.section1 != null) &&
+                    (category.section2 == null) &&
+                    (category.section3 == null) &&
+                    (category.section4 == null)
+                ) {
+                    return true;
+                }
+
+                if (
                     (category.section1 == this.select_category.section1) &&
                     (category.section2 == null) &&
                     (category.section3 == null) &&
