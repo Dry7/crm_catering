@@ -92,7 +92,7 @@ h4 {
     {{ trans('menu.total_price') }} – {{ $event->getTotal() }} ₱
     @if($event->discount > 0)
             <br />{{ trans('menu.discount') }} - {{ $event->discount }}%
-            <br />{{ trans('menu.price_discount') }} - @discount($event->getTotal(), $event->discount) ₱
+            <br />{{ trans('menu.price_discount') }} -  @discount($event->getTotal(), $event->discount) ₱
     @endif
 
     @if($event->weight_person)

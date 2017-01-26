@@ -63,7 +63,7 @@ class BladeServiceProvider extends ServiceProvider
         });
 
         Blade::directive('discount', function ($expression) {
-            list($price, $discount) = explode(',', str_replace(['(', ')', ' '], '', $expression));
+            list($price, $discount) = explode(',', str_replace([' '], '', $expression));
 
             return '<?= ceil(' . $price . ' - ' . $price . '/100*' . $discount . '); ?>';
         });
