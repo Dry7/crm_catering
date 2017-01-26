@@ -262,6 +262,84 @@ Vue.component('menu-categories', {
         setCategory: function (category) {
             this.select_category = category;
             bus.$emit('set-category', category);
+        },
+        clearCategory: function () {
+            this.select_category = null;
+            bus.$emit('set-category', null);
+        },
+        isVisible: function (category) {
+            if (this.select_category == null) {
+                return ((category.section1 != null)
+                    && (category.section3 == null)
+                    && (category.section4 == null));
+            } else {
+                if (
+                    (category.section1 == this.select_category.section1) &&
+                    (category.section2 == null) &&
+                    (category.section3 == null) &&
+                    (category.section4 == null)
+                ) {
+                    return true;
+                }
+                if (
+                    (category.section1 == this.select_category.section1) &&
+                    (category.section2 == this.select_category.section2) &&
+                    (category.section3 == null) &&
+                    (category.section4 == null)
+                ) {
+                    return true;
+                }
+                if (
+                    (category.section1 == this.select_category.section1) &&
+                    (category.section2 == this.select_category.section2) &&
+                    (category.section3 == this.select_category.section3) &&
+                    (category.section4 == null)
+                ) {
+                    return true;
+                }
+                if ((this.select_category.section1 == category.section1)
+                    && (this.select_category.section2 != null)
+                    && (this.select_category.section3 == null)
+                    && (this.select_category.section4 == null)
+                    && (category.section2 != null)
+                    && (category.section3 == null)
+                    && (category.section4 == null)
+                ) {
+                    return true;
+                }
+                if ((this.select_category.section1 == category.section1)
+                    && (this.select_category.section2 == category.section2)
+                    && (this.select_category.section3 != null)
+                    && (this.select_category.section4 == null)
+                    && (category.section3 != null)
+                    && (category.section4 == null)
+                ) {
+                    return true;
+                }
+                if ((this.select_category.section1 == category.section1)
+                    && (this.select_category.section2 == category.section2)
+                    && (this.select_category.section3 == category.section3)
+                    && (this.select_category.section4 != null)
+                    && (category.section4 != null)
+                ) {
+                    return true;
+                }
+            }
+            if (this.select_category == category) {
+                return true;
+            }
+            if ((this.select_category != null) && (this.select_category.section2 == null) && (this.select_category.section3 == null) && (this.select_category.section4 == null)) {
+                return ((category.section1 == this.select_category.section1)
+                    && (category.section2 != null)
+                    && (category.section3 == null)
+                    && (category.section4 == null));
+            }
+            if ((this.select_category != null) && (this.select_category.section2 != null) && (this.select_category.section3 == null) && (this.select_category.section4 == null)) {
+                return ((category.section1 == this.select_category.section1)
+                && (category.section2 == this.select_category.section2)
+                && (category.section3 != this.select_category.section3)
+                && (category.section4 == null));
+            }
         }
     }
 });

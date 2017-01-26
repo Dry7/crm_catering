@@ -111,7 +111,8 @@
         </div>
         <script type="text/x-template" id="menu-categories-template">
         <ul>
-            <li v-for="category in categories">
+            <li><a @click="clearCategory();">Категории</a></li>
+            <li v-for="category in categories" v-if="isVisible(category)">
                 <a @click="setCategory(category)" style="color: #000000; font-weight: bold; background-color: #FFFFFF;" v-if="select_category == category">@{{ categoryList(category) + category.name }}</a>
                 <a @click="setCategory(category)" style="color: #FFFFFF;" v-if="select_category != category">@{{ categoryList(category) + category.name }}</a>
             </li>
