@@ -124,7 +124,7 @@ h4 {
 @if($event->is_mirror_collection)
     <p align="center" class="mirror_collection">{{ trans('menu.mirror_collection') }}</p>
 @endif
-
+<pagebreak>
 <div class="images">
 @foreach($images as $image)
     @image($image->id)
