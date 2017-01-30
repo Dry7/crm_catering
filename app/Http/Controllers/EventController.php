@@ -131,6 +131,10 @@ class EventController extends Controller
             $request['user_id'] = \Auth::user()->id;
         }
 
+        if (!($request['status_id'] > 0)) {
+            $request['status_id'] = 1;
+        }
+
         $event = $this->events->create($request->except(['_token']));
 
         return redirect()->route('events.edit', $event->id);
@@ -182,6 +186,10 @@ class EventController extends Controller
      */
     public function update(EventRequest $request, $id)
     {
+        if (!($request['status_id'] > 0)) {
+            $request['status_id'] = 1;
+        }
+
         $this->events->update($request->except(['_token']), $id);
 
         if ($request->exists('xls')) {
