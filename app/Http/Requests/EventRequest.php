@@ -25,7 +25,7 @@ class EventRequest extends FormRequest
     {
         return [
             'user_id' => 'integer|min:1',
-            'status_id' => 'required|integer|min:1',
+            'status_id' => 'integer|min:1',
             'client_id' => 'integer|min:1',
             'date' => 'date',
             'format_id' => 'integer|min:1',
