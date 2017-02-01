@@ -9,8 +9,8 @@
                 </div>
             @endif
             <div class="form-group">
-                {!! Form::label('status_id', 'Статус') !!}
-                {!! Form::select('status_id', $statuses, $event->status_id, ['class' => 'form-control', 'id' => 'status_id', 'placeholder' => 'Выберите статус']) !!}
+                {!! Form::label('status_id', 'Статус*') !!}
+                {!! Form::select('status_id', $statuses, $event->status_id, ['class' => 'form-control', 'id' => 'status_id', 'placeholder' => 'Выберите статус', 'required' => 'required']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('client_id', 'Компания') !!}
