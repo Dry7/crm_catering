@@ -15,7 +15,6 @@ h4 {
 	padding-top: 30px;
 }
 .product {
-	padding-bottom: 20px;
 }
 .total {
 	padding-bottom: 30px;
@@ -35,6 +34,7 @@ h4 {
 }
 p {
     color: navy;
+    line-height: 60%;
 }
 @page {
     header: page-header;
@@ -49,6 +49,7 @@ p {
 
 <img src="@image_base64(fortress_first.jpg)" style="width: 100%; margin: -120px 0 -120px 0;" />
 
+<div style="width: 100%; padding-left: 50px; padding-right: 50px;">
 <h1 align="center">{{ trans('menu.menu') }}</h1>
 
 @foreach($sections as $section)
@@ -57,7 +58,7 @@ p {
     @foreach($section->rows as $row)
 <div class="product">
     <p align="center">
-        {{ $row->product->name }} {{ $row->product->name_en ? ' / ' . $row->product->name_en : '' }}
+        {{ $event->language == 'en' ? $row->product->name_en : $row->product->name }}
     </p>
     <p align="center">
         @if($event->product_view == 'price')
@@ -118,6 +119,6 @@ p {
 </div>
 
 <p align="center" class="copyright">{!! $copyright !!}</p>
-
+</div>
 </body>
 </html>
