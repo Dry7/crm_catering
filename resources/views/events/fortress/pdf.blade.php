@@ -16,6 +16,8 @@ h4 {
 }
 .product {
 }
+.product p {
+}
 .total {
 	padding-bottom: 30px;
 }
@@ -34,7 +36,6 @@ h4 {
 }
 p {
     color: navy;
-    line-height: 60%;
 }
 @page {
     header: page-header;
@@ -57,10 +58,8 @@ p {
 
     @foreach($section->rows as $row)
 <div class="product">
-    <p align="center">
-        {{ $event->language == 'en' ? $row->product->name_en : $row->product->name }}
-    </p>
-    <p align="center">
+    <p align="center" style="padding-bottom: 0; margin-bottom: 0;">{{ $event->language == 'en' ? $row->product->name_en : $row->product->name }}</p>
+    <p align="center" style="padding-bottom: 0; padding-top: 0; margin-top: 0; margin-bottom: -10px;">
         @if($event->product_view == 'price')
         {{ $row->amount }} / {{ $row->total_weight }} {{ trans('menu.gr') }} / {{ $row->total }} ₱
         @elseif($event->product_view == 'delete_price_and_weight')
