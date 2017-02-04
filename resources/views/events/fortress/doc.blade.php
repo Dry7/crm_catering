@@ -1260,6 +1260,7 @@ ans-serif;
 </span></b></p>
 
     @foreach($section->rows as $row)
+	    @if(!empty($row->product))
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center;line-height=
 :150%'><span
  style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
@@ -1270,15 +1271,7 @@ ans-serif;
 	@cp1251($row->product->name)
 @endif
 <o:p=
-></o:p></span></p>
-
-
-
-
-<p class=3DMsoNormal align=3Dcenter style=3D'text-align:center;line-height=
-:150%'><span
- style=3D'font-family:"Arial",sans-serif;color:navy;mso-fareast-language:AR=
--SA'>
+></o:p> 
 @if($event->product_view == 'price')
     {{ $row->amount }} / {{ $row->total_weight }} @cp1251(trans('menu.gr')) / {{ $row->total }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
@@ -1292,6 +1285,7 @@ color:black;background:white'>&#8369;</span>
 ></o:p></span></p>
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'><o:p>&nbsp;=
 </o:p></p>
+        @endif
     @endforeach
 	
 

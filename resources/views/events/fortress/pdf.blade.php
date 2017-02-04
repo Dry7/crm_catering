@@ -6,6 +6,7 @@ h1 {
 	padding-top: 30px;
 	font-weight: normal;
     color: navy;
+    padding-bottom: -80px;
 }
 h4 {
 	padding-top: 30px;
@@ -57,9 +58,9 @@ p {
 <h4 align="center">{{ $section->category->name }}</h4>
 
     @foreach($section->rows as $row)
+        @if(!empty($row->product))
 <div class="product">
-    <p align="center" style="padding-bottom: 0; margin-bottom: 0;">{{ $event->language == 'en' ? $row->product->name_en : $row->product->name }}</p>
-    <p align="center" style="padding-bottom: 0; padding-top: 0; margin-top: 0; margin-bottom: -10px;">
+    <p align="center" style="padding-bottom: 0; margin-bottom: 0;">{{ $event->language == 'en' ? $row->product->name_en : $row->product->name }}
         @if($event->product_view == 'price')
         {{ $row->amount }} / {{ $row->total_weight }} {{ trans('menu.gr') }} / {{ $row->total }} ₱
         @elseif($event->product_view == 'delete_price_and_weight')
@@ -69,6 +70,7 @@ p {
         @endif
     </p>
 </div>
+        @endif
     @endforeach
 
 @endforeach

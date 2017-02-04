@@ -999,11 +999,6 @@ h1
 	mso-style-qformat:yes;
 	mso-style-link:"Заголовок 1 Знак";
 	mso-style-next:Обычный;
-	margin-top:12.0pt;
-	margin-right:0cm;
-	margin-bottom:0cm;
-	margin-left:0cm;
-	margin-bottom:.0001pt;
 	line-height:107%;
 	mso-pagination:widow-orphan lines-together;
 	page-break-after:avoid;
@@ -1338,21 +1333,18 @@ table.MsoTableGrid
 
 <p class=3DMsoTitle align=3Dcenter style=3D'text-align:center'>@cp1251(trans('menu.menu'))</p>
 
-<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
-
 @foreach($sections as $section)
 <h1 align=3Dcenter style=3D'text-align:center'>@cp1251($section->category->name)</h1>
 
     @foreach($section->rows as $row)
+    	@if(!empty($row->product))
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
 @if($event->language == 'en')
 	@cp1251($row->product->name_en)
 @else
 	@cp1251($row->product->name)
 @endif
-</p>
 
-<p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'>
 		@if($event->product_view == 'price')
         {{ $row->amount }} / {{ $row->total_weight }} @cp1251(trans('menu.gr')) / {{ $row->total }} <span
 style=3D'font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;
@@ -1365,6 +1357,7 @@ color:black;background:white'>&#8369;</span>
 </p>
 <p class=3DMsoNormal align=3Dcenter style=3D'text-align:center'><o:p>&nbsp;=
 </o:p></p>
+        @endif
     @endforeach
 	
 
