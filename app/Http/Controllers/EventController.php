@@ -200,9 +200,9 @@ class EventController extends Controller
             return $this->pdf($id);
         } elseif ($request->exists('kitchen')) {
             $this->toKitchen($id);
-            return redirect()->route('events.index');
+            return redirect()->route('events.edit', $id);
         } else {
-            return redirect()->route('events.index');
+            return redirect()->route('events.edit', $id);
         }
     }
 
