@@ -64,7 +64,7 @@ h4 {
   </tr>
 </table>
 </htmlpageheader>
-<h1 align="center">{{ trans('menu.menu') }}</h1>
+<h1 align="center">{{ trans('menu.menu') }}</h1><br /><br />
 
 @foreach($sections as $section)
 <h4 align="center">{{ $section->category->name }}</h4>

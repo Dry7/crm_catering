@@ -52,7 +52,7 @@ p {
 <img src="@image_base64(fortress_first.jpg)" style="width: 100%; margin: -120px 0 -120px 0;" />
 
 <div style="width: 100%; padding-left: 50px; padding-right: 50px;">
-<h1 align="center">{{ trans('menu.menu') }}</h1>
+<h1 align="center">{{ trans('menu.menu') }}</h1><br /><br />
 
 @foreach($sections as $section)
 <h4 align="center">{{ $section->category->name }}</h4>
