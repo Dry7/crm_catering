@@ -49,12 +49,11 @@
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
- server '52.38.167.230',
-   user: 'ec2-user',
-   roles: %w{web app},
-   ssh_options: {
-     user: 'ec2-user', # overrides user setting above
-     keys: %w(~/.ssh/id_rsa),
-     forward_agent: false,
-     auth_methods: %w(publickey)
-   }
+set :deploy_to, '/home/a/auto972/catering'
+set :tmp_dir, '/home/a/auto972/tmp'
+
+ask(:password, nil, echo: false)
+ server 'vh52.timeweb.ru',
+   user: 'auto972',
+   password: fetch(:password),
+   roles: %w{web app}
