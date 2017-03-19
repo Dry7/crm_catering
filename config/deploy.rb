@@ -36,12 +36,18 @@ append :linked_dirs, 'storage/app/public', 'public/storage'
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
-set :composer_install_flags, '--no-interaction --quiet --optimize-autoloader'
+set :composer_install_flags, '--no-interaction --quiet --optimize-autoloader --no-scripts'
 
 set :npm_flags, ''
 
 set :file_permissions_paths, ["bootstrap/cache", "storage", "vendor/mpdf/mpdf/ttfontdata"]
 set :file_permissions_chmod_mode, "0777"
+
+SSHKit.config.command_map[:composer] = "/opt/php5.6/bin/php /home/a/auto972/catering/shared/composer.phar"
+
+namespace :deploy do
+  after :starting, 'composer:install_executable'
+end
 
 namespace :laravel do
     desc "Run migrations"
