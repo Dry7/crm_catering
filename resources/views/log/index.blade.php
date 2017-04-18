@@ -23,7 +23,7 @@
                         <tbody>
                         @foreach($logs as $log)
                         <tr>
-                            <td>{{ $log->user->full_name }}</td>
+                            <td>{{ $log->user ? $log->user->full_name : '' }}</td>
                             <td>{{ $log->event_name }}</td>
                             <td>{{ $log->element_name }}</td>
                             <td>{{ $log->date }}</td>
