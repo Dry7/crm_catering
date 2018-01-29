@@ -33,6 +33,22 @@
         {!! Form::select('type_id', $types, $product->type_id, ['class' => 'form-control', 'id' => 'type_id', 'placeholder' => 'Выберите тип блюда']) !!}
     </div>
     <div class="form-group">
+        {!! Form::label('section1', 'Раздел 1') !!}
+        {!! Form::text('section1', $product->section1, ['class' => 'form-control', 'id' => 'section1', 'placeholder' => 'Раздел для выпадающего списка 1']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('section2', 'Раздел 2') !!}
+        {!! Form::text('section2', $product->section2, ['class' => 'form-control', 'id' => 'section2', 'placeholder' => 'Раздел для выпадающего списка 2']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('section3', 'Раздел 3') !!}
+        {!! Form::text('section3', $product->section3, ['class' => 'form-control', 'id' => 'section3', 'placeholder' => 'Раздел для выпадающего списка 3']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('section4', 'Раздел 4') !!}
+        {!! Form::text('section4', $product->section4, ['class' => 'form-control', 'id' => 'section4', 'placeholder' => 'Раздел для выпадающего списка 4']) !!}
+    </div>
+    <div class="form-group">
         {!! Form::label('photography', 'Фотография') !!}
         @if($product->photo_has)
             <br />
