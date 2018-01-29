@@ -1,7 +1,7 @@
-# config valid only for current version of Capistrano
-lock '3.6.1'
+# config valid for current version and patch releases of Capistrano
+lock "~> 3.10.1"
 
-set :application, 'catering'
+set :application, "my_app_name"
 set :repo_url, 'git@github.com:Dry7/crm_catering.git'
 
 # Default branch is :master
@@ -11,18 +11,15 @@ set :branch, :develop
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/var/www/catering'
 
-# Default value for :scm is :git
-set :scm, :git
-
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
-# set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: :auto
+# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 
 # Default value for :pty is false
-set :pty, true
+# set :pty, true
 
 # Default value for :linked_files is []
 append :linked_files, '.env'
@@ -33,47 +30,29 @@ append :linked_dirs, 'storage/app/public', 'public/storage'
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
-# Default value for keep_releases is 5
-set :keep_releases, 5
+# Default value for local_user is ENV['USER']
+# set :local_user, -> { `git config user.name`.chomp }
 
-set :composer_install_flags, '--no-interaction --quiet --optimize-autoloader --no-scripts'
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+# Uncomment the following to require manually verifying the host key before first deploy.
+# set :ssh_options, verify_host_key: :secure
 
 set :npm_flags, ''
-
-set :file_permissions_paths, ["bootstrap/cache", "storage", "vendor/mpdf/mpdf/ttfontdata"]
-set :file_permissions_chmod_mode, "0777"
-
-SSHKit.config.command_map[:composer] = "/opt/php5.6/bin/php /home/a/auto972/catering/shared/composer.phar"
-
-namespace :deploy do
-  after :starting, 'composer:install_executable'
-end
 
 namespace :laravel do
     desc "Run migrations"
     task :migrate do
         on roles(:app), in: :sequence, wait: 5 do
             within release_path do
+#                execute :php, "php /home/b/barkekmail/public_html/shared/composer.phar install"
                 execute :php, "artisan migrate --force"
             end
         end
     end
 end
 
-namespace :phpunit do
-    desc "Run tests"
-    task :run do
-        on roles(:app), in: :sequence, wait: 5 do
-            within release_path do
-                execute "phpunit"
-            end
-        end
-    end
-end
-
 namespace :deploy do
-    before :updated, 'gulp'
-    before "deploy:updated", "deploy:set_permissions:chmod"
-
     after :published, "laravel:migrate"
 end
