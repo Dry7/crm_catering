@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.10.1"
+#lock "~> 3.10.1"
 
-set :application, "my_app_name"
+set :application, "Catering"
 set :repo_url, 'git@github.com:Dry7/crm_catering.git'
 
 # Default branch is :master
@@ -34,19 +34,21 @@ append :linked_dirs, 'storage/app/public', 'public/storage'
 # set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
 set :npm_flags, ''
+set :composer_install_flags, '--no-interaction --quiet --optimize-autoloader --no-scripts'
+set :file_permissions_paths, ["bootstrap/cache", "storage"]
+set :file_permissions_chmod_mode, "0777"
 
 namespace :laravel do
     desc "Run migrations"
     task :migrate do
         on roles(:app), in: :sequence, wait: 5 do
             within release_path do
-#                execute :php, "php /home/b/barkekmail/public_html/shared/composer.phar install"
                 execute :php, "artisan migrate --force"
             end
         end
@@ -54,5 +56,7 @@ namespace :laravel do
 end
 
 namespace :deploy do
+    before "deploy:updated", "deploy:set_permissions:chmod"
+
     after :published, "laravel:migrate"
 end

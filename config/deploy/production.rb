@@ -1,8 +1,8 @@
-set :deploy_to, '/home/b/barkekmail/public_html'
-set :tmp_dir, '/home/b/barkekmail/tmp'
-
-ask(:password, nil, echo: false)
- server '77.222.61.238',
-   user: 'barkekmail',
-   password: fetch(:password),
-   roles: %w{web app}
+server '44.225.64.56',
+user: 'ubuntu',
+roles: %w{web app},
+ssh_options: {
+   keys: %w(/home/dry7/aws/coffee.pem),
+   forward_agent: false,
+   auth_methods: %w(publickey)
+}
