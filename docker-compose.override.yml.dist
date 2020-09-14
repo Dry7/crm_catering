@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+    mysql:
+        ports:
+            - 3302:3306
+
+    nginx:
+        ports:
+            - 8383:80
+
+    redis:
+        ports:
+            - 6352:6379

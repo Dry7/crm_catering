@@ -17,3 +17,4 @@ Homestead.yaml
 /public/css/fancybox_overlay.png
 /public/css/fancybox_loading.gif
 /public/css/fancybox_sprite.png
+/docker-compose.override.yml

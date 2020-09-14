@@ -141,7 +141,7 @@ class Product extends Model
      * @return int|null
      */
     public function getSection($group, $y) {
-        $int = @$group{(($y-1)*2)} . @$group{(($y-1)*2+1)};
+        $int = @$group[(($y-1)*2)] . @$group[(($y-1)*2+1)];
         $int = (int)$int;
         return $int > 0 ? $int : null;
     }

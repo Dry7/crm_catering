@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+
+    mysql:
+        build: ./docker/mysql
+        environment:
+            MYSQL_USER: catering
+            MYSQL_PASSWORD: catering
+            MYSQL_ROOT_PASSWORD: catering
+            MYSQL_DATABASE: catering
+
+    php-fpm:
+        build: ./docker/php
+        volumes:
+            - .:/var/www/catering
+        working_dir: /var/www/catering
+        depends_on:
+            - composer
+
+    redis:
+        image: redis:6.0.5-alpine3.12
+
+    nginx:
+        image: nginx:1.17.9-alpine
+        volumes:
+            - .:/var/www/catering
+            - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - mysql
+            - php-fpm
+
+    composer:
+        build: ./docker/php
+        command: composer install
+        volumes:
+            - .:/var/www/catering
+        working_dir: /var/www/catering
+        depends_on:
+            - mysql
+
+    node:
+        image: library/node:11-alpine
+        volumes:
+            - .:/var/www/catering
+        working_dir: /var/www/catering
+        command: /bin/sh -c "npm install"
+        depends_on:
+            - php-fpm
