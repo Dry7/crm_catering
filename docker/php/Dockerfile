@@ -1,4 +1,4 @@
-FROM php:7.4.5-fpm-alpine3.11
+FROM php:7.0-fpm-alpine3.7
 
 RUN apk add --no-cache $PHPIZE_DEPS mysql libxml2-dev \
     && apk add --no-cache libpq icu-dev libzip-dev \
