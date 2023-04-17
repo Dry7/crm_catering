@@ -21,7 +21,7 @@
     "lodash": "^4.16.2",
     "merge-stream": "^1.0.0",
     "vue": "^2.0.1",
-    "vue-resource": "^1.0.3"
+    "vue-resource": "^1.5.3"
   },
   "dependencies": {
     "X-editable": "^1.5.1",
